@@ -1,4 +1,5 @@
 import { Timestamp } from "firebase/firestore";
+import { SelectionRange, StringLiteralLike } from "typescript";
 import { Url } from "url";
 
 export type User = {
@@ -14,7 +15,7 @@ export type Address = {
     city: string;
     state: string;
     country: string;
-    postalcode: string;
+    postalCode: string;
 };
 
 export type Hacker = {
@@ -31,7 +32,7 @@ export type Hacker = {
     gradYear: number;
     gender: string;
     ethnicity: string;
-    race: string;
+    race: Array<string>;
     shirtSize: string;
     roles: Array<string>;
     attendedHackathon: string;
@@ -47,4 +48,49 @@ export type Hacker = {
     agreedMLH: boolean;
     agreedTerms: boolean;
     agreedCommunications: boolean;
+};
+
+export type Mentors = {
+    id: string;
+    timeCreated: Timestamp;
+    firstName: string;
+    lastName: string;
+    email: string;
+    isRemote: boolean;
+    address: Address;
+    school: string;
+    shirtSize: string; 
+    race: Array<string>; 
+    roles: Array<string>; 
+    technologies: Array<string>; 
+    availabilityMentor: string; 
+    attendedHackathon: string; 
+    attendedShellHacks: Array<string>; 
+    heardAboutShellHacks: Array<string>; 
+    interestRespone: string; 
+    linkedin?: string; 
+    github?: string; 
+    website?: string; 
+    isAdult: boolean; 
+    agreedMLH: boolean; 
+    agreedTerms: boolean; 
+    agreedCommunication: boolean; 
+};
+
+export type Volunteers = { 
+     id: string; 
+     timeCreated: Timestamp; 
+     firstName: string; 
+     lastName: string; 
+     email: string; 
+     address: Address; 
+     school: string; 
+     shirtSize: string; 
+     availabilityVolunteer: string; 
+     heardAboutShellhacks: string; 
+     interestResponse: string; 
+     isAdult: boolean; 
+     agreedMLH: boolean; 
+     agreedTerms: boolean; 
+     agreedCommunication: boolean; 
 };
