@@ -1,0 +1,14 @@
+.background {
+    background: var(--purple-gradient);
+    height: 100vh;
+}
+
+.buttonsDiv {
+    width: 25%;
+}
+
+.buttonsRow {
+    margin-top: 16px;
+    display: flex;
+    gap: 16px;
+}

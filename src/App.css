@@ -2,6 +2,18 @@
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
+    font-family: Poppins;
+    --shell-pink: #ff7ada;
+    --shell-tan: #ffe1a0;
+    --shell-blue: #39b7d6;
+    --shell-purple: #3d0072;
+    --pink-tan-gradient: linear-gradient(
+        to right,
+        #ff7ada 0%,
+        44%,
+        #ffe1a0 100%
+    );
+    --purple-gradient: linear-gradient(#28002f, #50409e);
 }
 
 html {
@@ -11,7 +23,9 @@ html {
 
 body {
     margin: 0;
+    font-size: 16px;
     font-size: 1.6rem;
+    line-height: 1.5;
 }
 
 img,

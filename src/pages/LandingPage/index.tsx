@@ -1,10 +1,11 @@
 import "./index.css";
 import React from "react";
+import PageHero from "../../sections/PageHero";
 
 const LandingPage: React.FC = () => {
     return (
         <div>
-            <h1>ShellHacks 2022</h1>
+            <PageHero />
         </div>
     );
 };
