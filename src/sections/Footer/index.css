@@ -15,13 +15,33 @@
 }
 
 .footerText a {
-    color: var(--shell-tan);
     text-decoration: none;
-    transition: all 0.15s;
+    background-color: var(--shell-purple);
+    background: var(--pink-tan-gradient);
+    background-size: 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+    position: relative;
 }
 
-.footerText a:hover {
-    text-decoration: underline var(--shell-tan);
+.footerText a:after {
+    content: "";
+    width: 100%;
+    height: 1.5rem;
+    background-image: var(--pink-tan-gradient);
+    position: absolute;
+    top: 25%;
+    left: 0;
+    filter: blur(1em);
+    opacity: 0;
+    transition: 0.5s all;
+}
+
+.footerText a:hover:after {
+    opacity: 0.5;
 }
 
 .footerSocial {
