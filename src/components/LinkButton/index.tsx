@@ -9,7 +9,7 @@ type ButtonProps = {
 
 const LinkButton: React.FC<ButtonProps> = (props: ButtonProps) => {
     return (
-        <a href={props.url} className="button">
+        <a href={props.url} className="linkButton">
             <div className="buttonBackgroundContainer">
                 <div className="defaultGradient" />
                 <div className="mediumGradient" />

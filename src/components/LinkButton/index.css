@@ -1,4 +1,4 @@
-.button {
+.linkButton {
     border-radius: 12px;
     cursor: pointer;
     display: flex;
@@ -12,7 +12,7 @@
     align-items: center;
 }
 
-.button span {
+.linkButton span {
     align-items: center;
     border-radius: 12px;
     display: flex;
@@ -32,7 +32,7 @@
     transition: 1s all;
 }
 
-.button:hover .buttonBackgroundContainer {
+.linkButton:hover .buttonBackgroundContainer {
     top: -30%;
 }
 
