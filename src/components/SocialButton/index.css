@@ -1,0 +1,26 @@
+.socialButton {
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    isolation: isolate;
+}
+
+.socialButton:before {
+    content: "";
+    border-radius: 50%;
+    background-image: var(--pink-tan-gradient);
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    filter: blur(1em);
+    opacity: 0;
+    transition: 0.5s all;
+}
+
+.socialButton:hover:before {
+    opacity: 0.5;
+}
+
+.socialButton img {
+    width: 50px;
+}
