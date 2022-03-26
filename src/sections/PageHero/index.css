@@ -1,10 +1,39 @@
-.background {
+.pageHeroBackground {
     background: var(--purple-gradient);
     height: 100vh;
 }
 
+.pageHeroMiddle {
+    margin: 0 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5%;
+}
+
+.detailsDiv {
+    width: 50%;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    padding: 0 2%;
+}
+
+.detailsDiv ul {
+    align-items: flex-start;
+}
+
+.detailsDiv li {
+    list-style-type: "🚀";
+    font-size: 3.6rem;
+    padding: 1% 0 1% 2%;
+}
+
 .buttonsDiv {
-    width: 25%;
+    width: 50%;
 }
 
 .buttonsRow {
