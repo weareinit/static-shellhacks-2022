@@ -1,5 +1,7 @@
 import "./index.css";
 import React from "react";
+import { Emoji, EmojiProvider } from "react-apple-emojis";
+import emojiData from "react-apple-emojis/lib/data.json";
 import SocialButton from "../../components/SocialButton";
 import { SocialType } from "../../util/types";
 
@@ -7,7 +9,10 @@ const Footer: React.FC = () => {
     return (
         <section className="footerBackground">
             <div className="footerText">
-                <p>Made with 💛 from Upsilon Pi Epsilon</p>
+                {/* prettier-ignore */}
+                <p>
+                    Made with <EmojiProvider data={emojiData}><Emoji className="yellowHeart" name="yellow-heart"/></EmojiProvider> from Upsilon Pi Epsilon
+                </p>
                 <a
                     href="http://mlh.io/code-of-conduct"
                     target="_blank"

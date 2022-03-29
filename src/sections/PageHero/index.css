@@ -27,9 +27,17 @@
 }
 
 .detailsDiv li {
-    list-style-type: "🚀";
+    list-style: "";
     font-size: 3rem;
     padding: 1% 0 1% 2%;
+    position: relative;
+}
+
+.detailsMarker {
+    position: absolute;
+    top: 18%;
+    left: -6%;
+    width: 3.6rem;
 }
 
 .buttonsDiv {

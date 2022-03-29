@@ -51,3 +51,8 @@
     justify-content: space-around;
     align-items: center;
 }
+
+.yellowHeart {
+    width: 2.4rem;
+    display: inline;
+}
