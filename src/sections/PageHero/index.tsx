@@ -3,10 +3,19 @@ import React from "react";
 import { Emoji, EmojiProvider } from "react-apple-emojis";
 import emojiData from "react-apple-emojis/lib/data.json";
 import LinkButton from "../../components/LinkButton";
+import ShellHacks from "../../svg/ShellHacks.svg";
 
 const PageHero: React.FC = () => {
     return (
         <section className="pageHeroBackground">
+            <div className="pageHeroTop">
+                <img
+                    alt="ShellHacks Logo"
+                    className="pageHeroLogo"
+                    src={ShellHacks}
+                />
+                <h2>FLORIDA'S LARGEST HACKATHON</h2>
+            </div>
             <div className="pageHeroMiddle">
                 <div className="detailsDiv">
                     {/* prettier-ignore */}

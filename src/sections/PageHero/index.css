@@ -3,6 +3,23 @@
     height: 100vh;
 }
 
+.pageHeroTop {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5%;
+}
+
+.pageHeroTop h2 {
+    color: white;
+    font-size: 6.4rem;
+}
+
+.pageHeroLogo {
+    width: 50%;
+}
+
 .pageHeroMiddle {
     margin: 0 10%;
     display: flex;
