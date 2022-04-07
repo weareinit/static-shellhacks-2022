@@ -4,6 +4,7 @@ import { Emoji, EmojiProvider } from "react-apple-emojis";
 import emojiData from "react-apple-emojis/lib/data.json";
 import SocialButton from "../../components/SocialButton";
 import { SocialType } from "../../util/types";
+import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
     return (
