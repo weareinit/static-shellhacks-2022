@@ -1,0 +1,20 @@
+.formWrapper {
+  background: var(--purple-gradient);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formWrapper h2 {
+  text-decoration: none;
+  background-color: var(--shell-purple);
+  background: var(--pink-tan-gradient);
+  background-size: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+  position: relative;
+  font-size: 6.4rem;
+}
