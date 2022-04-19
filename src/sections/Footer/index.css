@@ -1,5 +1,5 @@
 .footerBackground {
-    background-color: var(--shell-purple);
+    background-color: var(--shell-purple-dark);
     display: flex;
     flex-direction: row;
     padding: 2% 10%;

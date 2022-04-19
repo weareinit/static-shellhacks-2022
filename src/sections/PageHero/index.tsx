@@ -3,12 +3,15 @@ import React from "react";
 import { Emoji, EmojiProvider } from "react-apple-emojis";
 import emojiData from "react-apple-emojis/lib/data.json";
 import LinkButton from "../../components/LinkButton";
-import ShellHacks from "../../svg/ShellHacks.svg";
+import ShellHacks from "../../svg/ShellHacks_Filled.svg";
+import City from "../../svg/CityV4.svg";
+import Stars from "../../svg/Stars.svg";
 
 const PageHero: React.FC = () => {
     return (
         <section className="pageHeroBackground">
             <div className="pageHeroTop">
+                <img alt="Stars" className="pageHeroStars" src={Stars} />
                 <img
                     alt="ShellHacks Logo"
                     className="pageHeroLogo"
@@ -40,6 +43,9 @@ const PageHero: React.FC = () => {
                         />
                     </div>
                 </div>
+            </div>
+            <div className="pageHeroCity">
+                <img alt="City Background" src={City} />
             </div>
         </section>
     );

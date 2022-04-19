@@ -1,10 +1,8 @@
 .linkButton {
-    background-image: var(--pink-tan-gradient);
-    border-radius: 12px;
+    border-radius: 20px;
     cursor: pointer;
     display: flex;
     font-size: 3.6rem;
-    padding: 1px;
     text-decoration: none;
     width: 100%;
     position: relative;
@@ -15,23 +13,33 @@
 
 .linkButton span {
     align-items: center;
-    border-radius: 12px;
     display: flex;
     justify-content: center;
-    padding: 4%;
+    padding: 5%;
     position: relative;
     z-index: 10;
     width: 100%;
     transition: 1s ease all;
 }
 
-.buttonBackgroundContainer {
+.buttonOutlinedBackground {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    transition: 1s all;
+    border: 20px solid;
+    border-image: url("../../svg/Border.svg");
+    border-image-slice: 20 20;
+}
+
+.buttonFilledBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--pink-tan-gradient);
 }
 
 .linkButton:hover .filled {
@@ -39,17 +47,9 @@
 }
 
 .filled {
-    background-color: var(--shell-purple);
-    background: var(--purple-gradient) fixed;
-    background-size: 100%;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-background-clip: text;
-    -moz-text-fill-color: transparent;
+    color: var(--shell-purple);
 }
 
 .transparent {
-    background: var(--purple-gradient) fixed;
     color: white;
 }

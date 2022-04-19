@@ -10,11 +10,13 @@ type ButtonProps = {
 const LinkButton: React.FC<ButtonProps> = (props: ButtonProps) => {
     return (
         <a href={props.url} className="linkButton">
-            <div className="buttonBackgroundContainer">
-                <div className="defaultGradient" />
-                <div className="mediumGradient" />
-                <div className="smallGradient" />
-            </div>
+            <div
+                className={
+                    props.filled
+                        ? "buttonFilledBackground"
+                        : "buttonOutlinedBackground"
+                }
+            />
             <span className={props.filled ? "filled" : "transparent"}>
                 {props.text}
             </span>
