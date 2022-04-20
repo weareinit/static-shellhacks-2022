@@ -6,6 +6,7 @@ import LinkButton from "../../components/LinkButton";
 import ShellHacks from "../../svg/ShellHacks_Filled.svg";
 import City from "../../svg/CityV4.svg";
 import Stars from "../../svg/Stars.svg";
+import Plane from "../../svg/PlaneV3.svg";
 
 const PageHero: React.FC = () => {
     return (
@@ -45,7 +46,14 @@ const PageHero: React.FC = () => {
                 </div>
             </div>
             <div className="pageHeroCity">
-                <img alt="City Background" src={City} />
+                <img alt="Plane" className="pageHeroPlane" src={Plane} />
+                <div id="spotlight1" className="pageHeroSpotlight" />
+                <div id="spotlight2" className="pageHeroSpotlight" />
+                <img
+                    alt="City Background"
+                    className="pageHeroCityImage"
+                    src={City}
+                />
             </div>
         </section>
     );
