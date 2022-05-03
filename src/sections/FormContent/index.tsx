@@ -1,4 +1,6 @@
 import { Formik, Form, Field, FormikHelpers } from "formik";
+import { Emoji, EmojiProvider } from "react-apple-emojis";
+import emojiData from "react-apple-emojis/lib/data.json";
 import * as Yup from "yup";
 import LinkButton from "../../components/LinkButton";
 import "./index.css";
@@ -37,6 +39,26 @@ const FormContent: React.FC = () => {
     firstName: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
     lastName: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
     email: Yup.string().email("Invalid email").required("Required"),
+    country: Yup.string().required("Required"),
+    addressLine1: Yup.string().required("Required"),
+    city: Yup.string().required("Required"),
+    state: Yup.string().required("Required"),
+    zipcode: Yup.string()
+      .required()
+      .matches(/^[0-9]+$/, "Must be only digits")
+      .min(5, "Must be exactly 5 digits")
+      .max(5, "Must be exactly 5 digits"),
+    phoneNumber: Yup.string()
+      .required()
+      .matches(/^[0-9]+$/, "Must be only digits")
+      .min(10, "Must be exactly 10 digits")
+      .max(10, "Must be exactly 10 digits"),
+    school: Yup.string().required("Required"),
+    major: Yup.string().required("Required"),
+    gender: Yup.string().required("Required"),
+    ethnicity: Yup.string().required("Required"),
+    race: Yup.string().required("Required"),
+    whyAreYouInterestedInParticipatingInShellhacks: Yup.string().required("Required"),
   });
 
   return (
@@ -55,14 +77,14 @@ const FormContent: React.FC = () => {
           phoneNumber: "",
           school: "",
           major: "",
-          classStanding: "",
-          graduationYear: "",
+          classStanding: "Freshman",
+          graduationYear: "2022",
           gender: "",
           ethnicity: "",
           race: "",
-          tshirtSize: "",
-          whichRoleBestDescribesYou: "",
-          haveYouAttendedAHackathonBefore: "",
+          tshirtSize: "XS",
+          whichRoleBestDescribesYou: "Artist",
+          haveYouAttendedAHackathonBefore: "No",
           haveYouAttendedShellhacksBefore: "",
           howDidYouHearAboutShellhacks: "",
           whyAreYouInterestedInParticipatingInShellhacks: "",
@@ -80,444 +102,566 @@ const FormContent: React.FC = () => {
       >
         {({ errors, touched }) => (
           <Form id="form">
-            <label htmlFor="firstName">First Name</label>
-            <Field className="field" id="firstName" name="firstName" placeholder="John" />
-            {errors.firstName && touched.firstName ? <div className="errors">{errors.firstName}</div> : null}
-
-            <label htmlFor="lastName">Last Name</label>
-            <Field className="field" id="lastName" name="lastName" placeholder="Doe" />
-            {errors.lastName && touched.lastName ? <div className="errors">{errors.lastName}</div> : null}
-
-            <label htmlFor="email">Email</label>
-            <Field className="field" id="email" name="email" placeholder="shell@hacks.com" type="email" />
-            {errors.email && touched.email ? <div className="errors">{errors.email}</div> : null}
-
-            <label htmlFor="country">Country</label>
-            <Field className="field" as="select" name="country" id="country">
-              <option value="United States">United States</option>
-              <option value="Afghanistan">Afghanistan</option>
-              <option value="Albania">Albania</option>
-              <option value="Algeria">Algeria</option>
-              <option value="American Samoa">American Samoa</option>
-              <option value="Andorra">Andorra</option>
-              <option value="Angola">Angola</option>
-              <option value="Anguilla">Anguilla</option>
-              <option value="Antartica">Antarctica</option>
-              <option value="Antigua and Barbuda">Antigua and Barbuda</option>
-              <option value="Argentina">Argentina</option>
-              <option value="Armenia">Armenia</option>
-              <option value="Aruba">Aruba</option>
-              <option value="Australia">Australia</option>
-              <option value="Austria">Austria</option>
-              <option value="Azerbaijan">Azerbaijan</option>
-              <option value="Bahamas">Bahamas</option>
-              <option value="Bahrain">Bahrain</option>
-              <option value="Bangladesh">Bangladesh</option>
-              <option value="Barbados">Barbados</option>
-              <option value="Belarus">Belarus</option>
-              <option value="Belgium">Belgium</option>
-              <option value="Belize">Belize</option>
-              <option value="Benin">Benin</option>
-              <option value="Bermuda">Bermuda</option>
-              <option value="Bhutan">Bhutan</option>
-              <option value="Bolivia">Bolivia</option>
-              <option value="Bosnia and Herzegowina">Bosnia and Herzegowina</option>
-              <option value="Botswana">Botswana</option>
-              <option value="Bouvet Island">Bouvet Island</option>
-              <option value="Brazil">Brazil</option>
-              <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
-              <option value="Brunei Darussalam">Brunei Darussalam</option>
-              <option value="Bulgaria">Bulgaria</option>
-              <option value="Burkina Faso">Burkina Faso</option>
-              <option value="Burundi">Burundi</option>
-              <option value="Cambodia">Cambodia</option>
-              <option value="Cameroon">Cameroon</option>
-              <option value="Canada">Canada</option>
-              <option value="Cape Verde">Cape Verde</option>
-              <option value="Cayman Islands">Cayman Islands</option>
-              <option value="Central African Republic">Central African Republic</option>
-              <option value="Chad">Chad</option>
-              <option value="Chile">Chile</option>
-              <option value="China">China</option>
-              <option value="Christmas Island">Christmas Island</option>
-              <option value="Cocos Islands">Cocos (Keeling) Islands</option>
-              <option value="Colombia">Colombia</option>
-              <option value="Comoros">Comoros</option>
-              <option value="Congo">Congo</option>
-              <option value="Congo">Congo, the Democratic Republic of the</option>
-              <option value="Cook Islands">Cook Islands</option>
-              <option value="Costa Rica">Costa Rica</option>
-              <option value="Cota D'Ivoire">Cote d'Ivoire</option>
-              <option value="Croatia">Croatia (Hrvatska)</option>
-              <option value="Cuba">Cuba</option>
-              <option value="Cyprus">Cyprus</option>
-              <option value="Czech Republic">Czech Republic</option>
-              <option value="Denmark">Denmark</option>
-              <option value="Djibouti">Djibouti</option>
-              <option value="Dominica">Dominica</option>
-              <option value="Dominican Republic">Dominican Republic</option>
-              <option value="East Timor">East Timor</option>
-              <option value="Ecuador">Ecuador</option>
-              <option value="Egypt">Egypt</option>
-              <option value="El Salvador">El Salvador</option>
-              <option value="Equatorial Guinea">Equatorial Guinea</option>
-              <option value="Eritrea">Eritrea</option>
-              <option value="Estonia">Estonia</option>
-              <option value="Ethiopia">Ethiopia</option>
-              <option value="Falkland Islands">Falkland Islands (Malvinas)</option>
-              <option value="Faroe Islands">Faroe Islands</option>
-              <option value="Fiji">Fiji</option>
-              <option value="Finland">Finland</option>
-              <option value="France">France</option>
-              <option value="France Metropolitan">France, Metropolitan</option>
-              <option value="French Guiana">French Guiana</option>
-              <option value="French Polynesia">French Polynesia</option>
-              <option value="French Southern Territories">French Southern Territories</option>
-              <option value="Gabon">Gabon</option>
-              <option value="Gambia">Gambia</option>
-              <option value="Georgia">Georgia</option>
-              <option value="Germany">Germany</option>
-              <option value="Ghana">Ghana</option>
-              <option value="Gibraltar">Gibraltar</option>
-              <option value="Greece">Greece</option>
-              <option value="Greenland">Greenland</option>
-              <option value="Grenada">Grenada</option>
-              <option value="Guadeloupe">Guadeloupe</option>
-              <option value="Guam">Guam</option>
-              <option value="Guatemala">Guatemala</option>
-              <option value="Guinea">Guinea</option>
-              <option value="Guinea-Bissau">Guinea-Bissau</option>
-              <option value="Guyana">Guyana</option>
-              <option value="Haiti">Haiti</option>
-              <option value="Heard and McDonald Islands">Heard and Mc Donald Islands</option>
-              <option value="Holy See">Holy See (Vatican City State)</option>
-              <option value="Honduras">Honduras</option>
-              <option value="Hong Kong">Hong Kong</option>
-              <option value="Hungary">Hungary</option>
-              <option value="Iceland">Iceland</option>
-              <option value="India">India</option>
-              <option value="Indonesia">Indonesia</option>
-              <option value="Iran">Iran (Islamic Republic of)</option>
-              <option value="Iraq">Iraq</option>
-              <option value="Ireland">Ireland</option>
-              <option value="Israel">Israel</option>
-              <option value="Italy">Italy</option>
-              <option value="Jamaica">Jamaica</option>
-              <option value="Japan">Japan</option>
-              <option value="Jordan">Jordan</option>
-              <option value="Kazakhstan">Kazakhstan</option>
-              <option value="Kenya">Kenya</option>
-              <option value="Kiribati">Kiribati</option>
-              <option value="Democratic People's Republic of Korea">Korea, Democratic People's Republic of</option>
-              <option value="Korea">Korea, Republic of</option>
-              <option value="Kuwait">Kuwait</option>
-              <option value="Kyrgyzstan">Kyrgyzstan</option>
-              <option value="Lao">Lao People's Democratic Republic</option>
-              <option value="Latvia">Latvia</option>
-              <option value="Lebanon">Lebanon</option>
-              <option value="Lesotho">Lesotho</option>
-              <option value="Liberia">Liberia</option>
-              <option value="Libyan Arab Jamahiriya">Libyan Arab Jamahiriya</option>
-              <option value="Liechtenstein">Liechtenstein</option>
-              <option value="Lithuania">Lithuania</option>
-              <option value="Luxembourg">Luxembourg</option>
-              <option value="Macau">Macau</option>
-              <option value="Macedonia">Macedonia, The Former Yugoslav Republic of</option>
-              <option value="Madagascar">Madagascar</option>
-              <option value="Malawi">Malawi</option>
-              <option value="Malaysia">Malaysia</option>
-              <option value="Maldives">Maldives</option>
-              <option value="Mali">Mali</option>
-              <option value="Malta">Malta</option>
-              <option value="Marshall Islands">Marshall Islands</option>
-              <option value="Martinique">Martinique</option>
-              <option value="Mauritania">Mauritania</option>
-              <option value="Mauritius">Mauritius</option>
-              <option value="Mayotte">Mayotte</option>
-              <option value="Mexico">Mexico</option>
-              <option value="Micronesia">Micronesia, Federated States of</option>
-              <option value="Moldova">Moldova, Republic of</option>
-              <option value="Monaco">Monaco</option>
-              <option value="Mongolia">Mongolia</option>
-              <option value="Montserrat">Montserrat</option>
-              <option value="Morocco">Morocco</option>
-              <option value="Mozambique">Mozambique</option>
-              <option value="Myanmar">Myanmar</option>
-              <option value="Namibia">Namibia</option>
-              <option value="Nauru">Nauru</option>
-              <option value="Nepal">Nepal</option>
-              <option value="Netherlands">Netherlands</option>
-              <option value="Netherlands Antilles">Netherlands Antilles</option>
-              <option value="New Caledonia">New Caledonia</option>
-              <option value="New Zealand">New Zealand</option>
-              <option value="Nicaragua">Nicaragua</option>
-              <option value="Niger">Niger</option>
-              <option value="Nigeria">Nigeria</option>
-              <option value="Niue">Niue</option>
-              <option value="Norfolk Island">Norfolk Island</option>
-              <option value="Northern Mariana Islands">Northern Mariana Islands</option>
-              <option value="Norway">Norway</option>
-              <option value="Oman">Oman</option>
-              <option value="Pakistan">Pakistan</option>
-              <option value="Palau">Palau</option>
-              <option value="Panama">Panama</option>
-              <option value="Papua New Guinea">Papua New Guinea</option>
-              <option value="Paraguay">Paraguay</option>
-              <option value="Peru">Peru</option>
-              <option value="Philippines">Philippines</option>
-              <option value="Pitcairn">Pitcairn</option>
-              <option value="Poland">Poland</option>
-              <option value="Portugal">Portugal</option>
-              <option value="Puerto Rico">Puerto Rico</option>
-              <option value="Qatar">Qatar</option>
-              <option value="Reunion">Reunion</option>
-              <option value="Romania">Romania</option>
-              <option value="Russia">Russian Federation</option>
-              <option value="Rwanda">Rwanda</option>
-              <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
-              <option value="Saint LUCIA">Saint LUCIA</option>
-              <option value="Saint Vincent">Saint Vincent and the Grenadines</option>
-              <option value="Samoa">Samoa</option>
-              <option value="San Marino">San Marino</option>
-              <option value="Sao Tome and Principe">Sao Tome and Principe</option>
-              <option value="Saudi Arabia">Saudi Arabia</option>
-              <option value="Senegal">Senegal</option>
-              <option value="Seychelles">Seychelles</option>
-              <option value="Sierra">Sierra Leone</option>
-              <option value="Singapore">Singapore</option>
-              <option value="Slovakia">Slovakia (Slovak Republic)</option>
-              <option value="Slovenia">Slovenia</option>
-              <option value="Solomon Islands">Solomon Islands</option>
-              <option value="Somalia">Somalia</option>
-              <option value="South Africa">South Africa</option>
-              <option value="South Georgia">South Georgia and the South Sandwich Islands</option>
-              <option value="Span">Spain</option>
-              <option value="SriLanka">Sri Lanka</option>
-              <option value="St. Helena">St. Helena</option>
-              <option value="St. Pierre and Miguelon">St. Pierre and Miquelon</option>
-              <option value="Sudan">Sudan</option>
-              <option value="Suriname">Suriname</option>
-              <option value="Svalbard">Svalbard and Jan Mayen Islands</option>
-              <option value="Swaziland">Swaziland</option>
-              <option value="Sweden">Sweden</option>
-              <option value="Switzerland">Switzerland</option>
-              <option value="Syria">Syrian Arab Republic</option>
-              <option value="Taiwan">Taiwan, Province of China</option>
-              <option value="Tajikistan">Tajikistan</option>
-              <option value="Tanzania">Tanzania, United Republic of</option>
-              <option value="Thailand">Thailand</option>
-              <option value="Togo">Togo</option>
-              <option value="Tokelau">Tokelau</option>
-              <option value="Tonga">Tonga</option>
-              <option value="Trinidad and Tobago">Trinidad and Tobago</option>
-              <option value="Tunisia">Tunisia</option>
-              <option value="Turkey">Turkey</option>
-              <option value="Turkmenistan">Turkmenistan</option>
-              <option value="Turks and Caicos">Turks and Caicos Islands</option>
-              <option value="Tuvalu">Tuvalu</option>
-              <option value="Uganda">Uganda</option>
-              <option value="Ukraine">Ukraine</option>
-              <option value="United Arab Emirates">United Arab Emirates</option>
-              <option value="United Kingdom">United Kingdom</option>
-              <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
-              <option value="Uruguay">Uruguay</option>
-              <option value="Uzbekistan">Uzbekistan</option>
-              <option value="Vanuatu">Vanuatu</option>
-              <option value="Venezuela">Venezuela</option>
-              <option value="Vietnam">Viet Nam</option>
-              <option value="Virgin Islands (British)">Virgin Islands (British)</option>
-              <option value="Virgin Islands (U.S)">Virgin Islands (U.S.)</option>
-              <option value="Wallis and Futana Islands">Wallis and Futuna Islands</option>
-              <option value="Western Sahara">Western Sahara</option>
-              <option value="Yemen">Yemen</option>
-              <option value="Serbia">Serbia</option>
-              <option value="Zambia">Zambia</option>
-              <option value="Zimbabwe">Zimbabwe</option>
-            </Field>
-
-            <label htmlFor="addressLine1">Address - Line 1</label>
-            <Field className="field" id="addressLine1" name="AddressLine1" placeholder="123 lane street" />
-
-            <label htmlFor="addressLine2">Address - Line 2</label>
-            <Field className="field" id="addressLine2" name="addressLine2" placeholder="Apt number" />
-
-            <label htmlFor="city">City</label>
-            <Field className="field" id="city" name="city" placeholder="Miami" />
-
-            <label htmlFor="state">State</label>
-            <Field className="field" id="state" name="state" placeholder="FL" />
-
-            <label htmlFor="zipcode">Zipcode</label>
-            <Field className="field" id="zipcode" name="zipcode" placeholder="12345" />
-
-            <label htmlFor="phoneNumber">Phone Number</label>
-            <Field className="field" id="phoneNumber" name="phoneNumber" placeholder="305-111-1111" />
-
-            <label htmlFor="school">School</label>
-            <Field className="field" id="school" name="school" placeholder="University name" />
-
-            <label htmlFor="major">Major</label>
-            <Field className="field" id="major" name="major" placeholder="Computer Science" />
-
-            <label htmlFor="classStanding">Class Standing</label>
-            <Field className="field" id="classStanding" name="classStanding" placeholder="dropdown" />
-
-            <label htmlFor="graduationYear">Graduation Year</label>
-            <Field className="field" id="graduationYear" name="graduationYear" placeholder="dropdown" />
-
-            <label htmlFor="gender">Gender</label>
-            <Field className="field" id="gender" name="gender" placeholder="dropdown" />
-
-            <label htmlFor="ethnicity">Ethnicity</label>
-            <Field className="field" id="ethnicity" name="ethnicity" placeholder="dropdown" />
-
-            <label htmlFor="race">Race</label>
-            <Field className="field" id="race" name="race" placeholder="dropdown" />
-
-            <label htmlFor="tshirtSize">T-Shirt Size</label>
-            <Field className="field" id="tshirtSize" name="tshirtSize" placeholder="dropdown" />
-
-            <label htmlFor="whichRoleBestDescribesYou">Which role best describes you?</label>
-            <Field
-              className="field"
-              id="whichRoleBestDescribesYou"
-              name="whichRoleBestDescribesYou"
-              placeholder="dropdown"
-            />
-
-            <label id="radio-group-1">Have you attended a hackathon before?</label>
-            <div className="checkboxGroup" role="group" aria-labelledby="checkbox-group">
-              <label>
-                <Field type="radio" name="haveYouAttendedAHackathonBefore" value="No" />
-                No
+            <EmojiProvider data={emojiData}>
+              <label htmlFor="firstName">
+                <Emoji className="applicationEmoji" name="smiling-face-with-sunglasses" />
+                First Name
               </label>
-              <label>
-                <Field type="radio" name="haveYouAttendedAHackathonBefore" value="Yes, 1-4 hackathons" />
-                Yes, 1-4 hackathons
-              </label>
-              <label>
-                <Field type="radio" name="haveYouAttendedAHackathonBefore" value="Yes, 5+ hackathons" />
-                Yes, 5+ hackathons
-              </label>
-            </div>
+              <Field className="field" id="firstName" name="firstName" placeholder="John" />
+              {errors.firstName && touched.firstName ? <div className="errors">{errors.firstName}</div> : null}
 
-            <label id="checkbox-group-1">Have you attended Shellhacks before?</label>
-            <div className="checkboxGroup" role="group" aria-labelledby="checkbox-group">
-              <label>
-                <Field type="checkbox" name="haveYouAttendedShellhacksBefore" value="Shellhacks 2017" />
-                Shellhacks 2017
+              <label htmlFor="lastName">
+                <Emoji className="applicationEmoji" name="thinking-face" />
+                Last Name
               </label>
-              <label>
-                <Field type="checkbox" name="haveYouAttendedShellhacksBefore" value="Shellhacks 2018" />
-                Shellhacks 2018
-              </label>
-              <label>
-                <Field type="checkbox" name="haveYouAttendedShellhacksBefore" value="Shellhacks 2019" />
-                Shellhacks 2019
-              </label>
-              <label>
-                <Field type="checkbox" name="haveYouAttendedShellhacksBefore" value="Shellhacks 2020" />
-                Shellhacks 2020
-              </label>
-              <label>
-                <Field type="checkbox" name="haveYouAttendedShellhacksBefore" value="Shellhacks 2021" />
-                Shellhacks 2021
-              </label>
-              <label>
-                <Field type="checkbox" name="haveYouAttendedShellhacksBefore" value="This is my first Shellhacks!" />
-                This is my first Shellhacks!
-              </label>
-            </div>
+              <Field className="field" id="lastName" name="lastName" placeholder="Doe" />
+              {errors.lastName && touched.lastName ? <div className="errors">{errors.lastName}</div> : null}
 
-            <label id="checkbox-group-2">How did you hear about Shellhacks?</label>
-            <div className="dividedCheckboxGroup" role="group" aria-labelledby="checkbox-group">
-              <div className="checkboxGroup">
+              <label htmlFor="email">
+                <Emoji className="applicationEmoji" name="love-letter" />
+                Email
+              </label>
+              <Field className="field" id="email" name="email" placeholder="shell@hacks.com" type="email" />
+              {errors.email && touched.email ? <div className="errors">{errors.email}</div> : null}
+
+              <label htmlFor="country">
+                <Emoji className="applicationEmoji" name="globe-showing-americas" />
+                Country
+              </label>
+              <Field className="field" as="select" name="country" id="country">
+                <option value="United States">United States</option>
+                <option value="Afghanistan">Afghanistan</option>
+                <option value="Albania">Albania</option>
+                <option value="Algeria">Algeria</option>
+                <option value="American Samoa">American Samoa</option>
+                <option value="Andorra">Andorra</option>
+                <option value="Angola">Angola</option>
+                <option value="Anguilla">Anguilla</option>
+                <option value="Antartica">Antarctica</option>
+                <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                <option value="Argentina">Argentina</option>
+                <option value="Armenia">Armenia</option>
+                <option value="Aruba">Aruba</option>
+                <option value="Australia">Australia</option>
+                <option value="Austria">Austria</option>
+                <option value="Azerbaijan">Azerbaijan</option>
+                <option value="Bahamas">Bahamas</option>
+                <option value="Bahrain">Bahrain</option>
+                <option value="Bangladesh">Bangladesh</option>
+                <option value="Barbados">Barbados</option>
+                <option value="Belarus">Belarus</option>
+                <option value="Belgium">Belgium</option>
+                <option value="Belize">Belize</option>
+                <option value="Benin">Benin</option>
+                <option value="Bermuda">Bermuda</option>
+                <option value="Bhutan">Bhutan</option>
+                <option value="Bolivia">Bolivia</option>
+                <option value="Bosnia and Herzegowina">Bosnia and Herzegowina</option>
+                <option value="Botswana">Botswana</option>
+                <option value="Bouvet Island">Bouvet Island</option>
+                <option value="Brazil">Brazil</option>
+                <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
+                <option value="Brunei Darussalam">Brunei Darussalam</option>
+                <option value="Bulgaria">Bulgaria</option>
+                <option value="Burkina Faso">Burkina Faso</option>
+                <option value="Burundi">Burundi</option>
+                <option value="Cambodia">Cambodia</option>
+                <option value="Cameroon">Cameroon</option>
+                <option value="Canada">Canada</option>
+                <option value="Cape Verde">Cape Verde</option>
+                <option value="Cayman Islands">Cayman Islands</option>
+                <option value="Central African Republic">Central African Republic</option>
+                <option value="Chad">Chad</option>
+                <option value="Chile">Chile</option>
+                <option value="China">China</option>
+                <option value="Christmas Island">Christmas Island</option>
+                <option value="Cocos Islands">Cocos (Keeling) Islands</option>
+                <option value="Colombia">Colombia</option>
+                <option value="Comoros">Comoros</option>
+                <option value="Congo">Congo</option>
+                <option value="Congo">Congo, the Democratic Republic of the</option>
+                <option value="Cook Islands">Cook Islands</option>
+                <option value="Costa Rica">Costa Rica</option>
+                <option value="Cota D'Ivoire">Cote d'Ivoire</option>
+                <option value="Croatia">Croatia (Hrvatska)</option>
+                <option value="Cuba">Cuba</option>
+                <option value="Cyprus">Cyprus</option>
+                <option value="Czech Republic">Czech Republic</option>
+                <option value="Denmark">Denmark</option>
+                <option value="Djibouti">Djibouti</option>
+                <option value="Dominica">Dominica</option>
+                <option value="Dominican Republic">Dominican Republic</option>
+                <option value="East Timor">East Timor</option>
+                <option value="Ecuador">Ecuador</option>
+                <option value="Egypt">Egypt</option>
+                <option value="El Salvador">El Salvador</option>
+                <option value="Equatorial Guinea">Equatorial Guinea</option>
+                <option value="Eritrea">Eritrea</option>
+                <option value="Estonia">Estonia</option>
+                <option value="Ethiopia">Ethiopia</option>
+                <option value="Falkland Islands">Falkland Islands (Malvinas)</option>
+                <option value="Faroe Islands">Faroe Islands</option>
+                <option value="Fiji">Fiji</option>
+                <option value="Finland">Finland</option>
+                <option value="France">France</option>
+                <option value="France Metropolitan">France, Metropolitan</option>
+                <option value="French Guiana">French Guiana</option>
+                <option value="French Polynesia">French Polynesia</option>
+                <option value="French Southern Territories">French Southern Territories</option>
+                <option value="Gabon">Gabon</option>
+                <option value="Gambia">Gambia</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Germany">Germany</option>
+                <option value="Ghana">Ghana</option>
+                <option value="Gibraltar">Gibraltar</option>
+                <option value="Greece">Greece</option>
+                <option value="Greenland">Greenland</option>
+                <option value="Grenada">Grenada</option>
+                <option value="Guadeloupe">Guadeloupe</option>
+                <option value="Guam">Guam</option>
+                <option value="Guatemala">Guatemala</option>
+                <option value="Guinea">Guinea</option>
+                <option value="Guinea-Bissau">Guinea-Bissau</option>
+                <option value="Guyana">Guyana</option>
+                <option value="Haiti">Haiti</option>
+                <option value="Heard and McDonald Islands">Heard and Mc Donald Islands</option>
+                <option value="Holy See">Holy See (Vatican City State)</option>
+                <option value="Honduras">Honduras</option>
+                <option value="Hong Kong">Hong Kong</option>
+                <option value="Hungary">Hungary</option>
+                <option value="Iceland">Iceland</option>
+                <option value="India">India</option>
+                <option value="Indonesia">Indonesia</option>
+                <option value="Iran">Iran (Islamic Republic of)</option>
+                <option value="Iraq">Iraq</option>
+                <option value="Ireland">Ireland</option>
+                <option value="Israel">Israel</option>
+                <option value="Italy">Italy</option>
+                <option value="Jamaica">Jamaica</option>
+                <option value="Japan">Japan</option>
+                <option value="Jordan">Jordan</option>
+                <option value="Kazakhstan">Kazakhstan</option>
+                <option value="Kenya">Kenya</option>
+                <option value="Kiribati">Kiribati</option>
+                <option value="Democratic People's Republic of Korea">Korea, Democratic People's Republic of</option>
+                <option value="Korea">Korea, Republic of</option>
+                <option value="Kuwait">Kuwait</option>
+                <option value="Kyrgyzstan">Kyrgyzstan</option>
+                <option value="Lao">Lao People's Democratic Republic</option>
+                <option value="Latvia">Latvia</option>
+                <option value="Lebanon">Lebanon</option>
+                <option value="Lesotho">Lesotho</option>
+                <option value="Liberia">Liberia</option>
+                <option value="Libyan Arab Jamahiriya">Libyan Arab Jamahiriya</option>
+                <option value="Liechtenstein">Liechtenstein</option>
+                <option value="Lithuania">Lithuania</option>
+                <option value="Luxembourg">Luxembourg</option>
+                <option value="Macau">Macau</option>
+                <option value="Macedonia">Macedonia, The Former Yugoslav Republic of</option>
+                <option value="Madagascar">Madagascar</option>
+                <option value="Malawi">Malawi</option>
+                <option value="Malaysia">Malaysia</option>
+                <option value="Maldives">Maldives</option>
+                <option value="Mali">Mali</option>
+                <option value="Malta">Malta</option>
+                <option value="Marshall Islands">Marshall Islands</option>
+                <option value="Martinique">Martinique</option>
+                <option value="Mauritania">Mauritania</option>
+                <option value="Mauritius">Mauritius</option>
+                <option value="Mayotte">Mayotte</option>
+                <option value="Mexico">Mexico</option>
+                <option value="Micronesia">Micronesia, Federated States of</option>
+                <option value="Moldova">Moldova, Republic of</option>
+                <option value="Monaco">Monaco</option>
+                <option value="Mongolia">Mongolia</option>
+                <option value="Montserrat">Montserrat</option>
+                <option value="Morocco">Morocco</option>
+                <option value="Mozambique">Mozambique</option>
+                <option value="Myanmar">Myanmar</option>
+                <option value="Namibia">Namibia</option>
+                <option value="Nauru">Nauru</option>
+                <option value="Nepal">Nepal</option>
+                <option value="Netherlands">Netherlands</option>
+                <option value="Netherlands Antilles">Netherlands Antilles</option>
+                <option value="New Caledonia">New Caledonia</option>
+                <option value="New Zealand">New Zealand</option>
+                <option value="Nicaragua">Nicaragua</option>
+                <option value="Niger">Niger</option>
+                <option value="Nigeria">Nigeria</option>
+                <option value="Niue">Niue</option>
+                <option value="Norfolk Island">Norfolk Island</option>
+                <option value="Northern Mariana Islands">Northern Mariana Islands</option>
+                <option value="Norway">Norway</option>
+                <option value="Oman">Oman</option>
+                <option value="Pakistan">Pakistan</option>
+                <option value="Palau">Palau</option>
+                <option value="Panama">Panama</option>
+                <option value="Papua New Guinea">Papua New Guinea</option>
+                <option value="Paraguay">Paraguay</option>
+                <option value="Peru">Peru</option>
+                <option value="Philippines">Philippines</option>
+                <option value="Pitcairn">Pitcairn</option>
+                <option value="Poland">Poland</option>
+                <option value="Portugal">Portugal</option>
+                <option value="Puerto Rico">Puerto Rico</option>
+                <option value="Qatar">Qatar</option>
+                <option value="Reunion">Reunion</option>
+                <option value="Romania">Romania</option>
+                <option value="Russia">Russian Federation</option>
+                <option value="Rwanda">Rwanda</option>
+                <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                <option value="Saint LUCIA">Saint LUCIA</option>
+                <option value="Saint Vincent">Saint Vincent and the Grenadines</option>
+                <option value="Samoa">Samoa</option>
+                <option value="San Marino">San Marino</option>
+                <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                <option value="Saudi Arabia">Saudi Arabia</option>
+                <option value="Senegal">Senegal</option>
+                <option value="Seychelles">Seychelles</option>
+                <option value="Sierra">Sierra Leone</option>
+                <option value="Singapore">Singapore</option>
+                <option value="Slovakia">Slovakia (Slovak Republic)</option>
+                <option value="Slovenia">Slovenia</option>
+                <option value="Solomon Islands">Solomon Islands</option>
+                <option value="Somalia">Somalia</option>
+                <option value="South Africa">South Africa</option>
+                <option value="South Georgia">South Georgia and the South Sandwich Islands</option>
+                <option value="Span">Spain</option>
+                <option value="SriLanka">Sri Lanka</option>
+                <option value="St. Helena">St. Helena</option>
+                <option value="St. Pierre and Miguelon">St. Pierre and Miquelon</option>
+                <option value="Sudan">Sudan</option>
+                <option value="Suriname">Suriname</option>
+                <option value="Svalbard">Svalbard and Jan Mayen Islands</option>
+                <option value="Swaziland">Swaziland</option>
+                <option value="Sweden">Sweden</option>
+                <option value="Switzerland">Switzerland</option>
+                <option value="Syria">Syrian Arab Republic</option>
+                <option value="Taiwan">Taiwan, Province of China</option>
+                <option value="Tajikistan">Tajikistan</option>
+                <option value="Tanzania">Tanzania, United Republic of</option>
+                <option value="Thailand">Thailand</option>
+                <option value="Togo">Togo</option>
+                <option value="Tokelau">Tokelau</option>
+                <option value="Tonga">Tonga</option>
+                <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                <option value="Tunisia">Tunisia</option>
+                <option value="Turkey">Turkey</option>
+                <option value="Turkmenistan">Turkmenistan</option>
+                <option value="Turks and Caicos">Turks and Caicos Islands</option>
+                <option value="Tuvalu">Tuvalu</option>
+                <option value="Uganda">Uganda</option>
+                <option value="Ukraine">Ukraine</option>
+                <option value="United Arab Emirates">United Arab Emirates</option>
+                <option value="United Kingdom">United Kingdom</option>
+                <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
+                <option value="Uruguay">Uruguay</option>
+                <option value="Uzbekistan">Uzbekistan</option>
+                <option value="Vanuatu">Vanuatu</option>
+                <option value="Venezuela">Venezuela</option>
+                <option value="Vietnam">Viet Nam</option>
+                <option value="Virgin Islands (British)">Virgin Islands (British)</option>
+                <option value="Virgin Islands (U.S)">Virgin Islands (U.S.)</option>
+                <option value="Wallis and Futana Islands">Wallis and Futuna Islands</option>
+                <option value="Western Sahara">Western Sahara</option>
+                <option value="Yemen">Yemen</option>
+                <option value="Serbia">Serbia</option>
+                <option value="Zambia">Zambia</option>
+                <option value="Zimbabwe">Zimbabwe</option>
+              </Field>
+
+              <label htmlFor="addressLine1">
+                <Emoji className="applicationEmoji" name="house" />
+                Address - Line 1
+              </label>
+              <Field className="field" id="addressLine1" name="addressLine1" placeholder="123 lane street" />
+              {errors.addressLine1 && touched.addressLine1 ? <div className="errors">{errors.addressLine1}</div> : null}
+
+              <label htmlFor="addressLine2">
+                <Emoji className="applicationEmoji" name="house" />
+                Address - Line 2
+              </label>
+              <Field className="field" id="addressLine2" name="addressLine2" placeholder="Apt number" />
+
+              <label htmlFor="city">
+                <Emoji className="applicationEmoji" name="automobile" />
+                City
+              </label>
+              <Field className="field" id="city" name="city" placeholder="Miami" />
+              {errors.city && touched.city ? <div className="errors">{errors.city}</div> : null}
+
+              <label htmlFor="state">
+                <Emoji className="applicationEmoji" name="round-pushpin" />
+                State
+              </label>
+              <Field className="field" id="state" name="state" placeholder="FL" />
+              {errors.state && touched.state ? <div className="errors">{errors.state}</div> : null}
+
+              <label htmlFor="zipcode">
+                <Emoji className="applicationEmoji" name="zipper-mouth-face" />
+                Zipcode
+              </label>
+              <Field className="field" id="zipcode" name="zipcode" placeholder="12345" />
+              {errors.zipcode && touched.zipcode ? <div className="errors">{errors.zipcode}</div> : null}
+
+              <label htmlFor="phoneNumber">
+                <Emoji className="applicationEmoji" name="telephone-receiver" />
+                Phone Number
+              </label>
+              <Field className="field" id="phoneNumber" name="phoneNumber" placeholder="305-111-1111" />
+              {errors.phoneNumber && touched.phoneNumber ? <div className="errors">{errors.phoneNumber}</div> : null}
+
+              <label htmlFor="school">
+                <Emoji className="applicationEmoji" name="school" />
+                School
+              </label>
+              <Field className="field" id="school" name="school" placeholder="University name" />
+              {errors.school && touched.school ? <div className="errors">{errors.school}</div> : null}
+
+              <label htmlFor="major">
+                <Emoji className="applicationEmoji" name="books" />
+                Major
+              </label>
+              <Field className="field" id="major" name="major" placeholder="Computer Science" />
+              {errors.major && touched.major ? <div className="errors">{errors.major}</div> : null}
+
+              <label htmlFor="classStanding">
+                <Emoji className="applicationEmoji" name="red-apple" />
+                Class Standing
+              </label>
+              <Field className="field" as="select" name="classStanding" id="classStanding">
+                <option value="Freshman">Freshman</option>
+                <option value="Sophomore">Sophomore</option>
+                <option value="Junior">Junior</option>
+                <option value="Senior">Senior</option>
+              </Field>
+
+              <label htmlFor="graduationYear">
+                <Emoji className="applicationEmoji" name="graduation-cap" />
+                Graduation Year
+              </label>
+              <Field className="field" as="select" name="graduationYear" id="graduationYear">
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+              </Field>
+
+              <label htmlFor="gender">
+                <Emoji className="applicationEmoji" name="dolphin" />
+                Gender
+              </label>
+              <Field className="field" id="gender" name="gender" placeholder="Gender" />
+              {errors.gender && touched.gender ? <div className="errors">{errors.gender}</div> : null}
+
+              <label htmlFor="ethnicity">
+                <Emoji className="applicationEmoji" name="penguin" />
+                Ethnicity
+              </label>
+              <Field className="field" id="ethnicity" name="ethnicity" placeholder="Ethnicity" />
+              {errors.ethnicity && touched.ethnicity ? <div className="errors">{errors.ethnicity}</div> : null}
+
+              <label htmlFor="race">
+                <Emoji className="applicationEmoji" name="umbrella-on-ground" />
+                Race
+              </label>
+              <Field className="field" id="race" name="race" placeholder="Race" />
+              {errors.race && touched.race ? <div className="errors">{errors.race}</div> : null}
+
+              <label htmlFor="tshirtSize">
+                <Emoji className="applicationEmoji" name="t-shirt" />
+                T-Shirt Size
+              </label>
+              <Field className="field" as="select" name="tshirtSize" id="tshirtSize">
+                <option value="XS">Extra-Small</option>
+                <option value="S">Small</option>
+                <option value="M">Medium</option>
+                <option value="L">Large</option>
+                <option value="XL">Extra-Large</option>
+              </Field>
+
+              <label htmlFor="whichRoleBestDescribesYou">
+                <Emoji className="applicationEmoji" name="disguised-face" />
+                Which role best describes you?
+              </label>
+              <Field className="field" as="select" name="whichRoleBestDescribesYou" id="whichRoleBestDescribesYou">
+                <option value="Artist">Artist</option>
+                <option value="Back-End Developer">Back-End Developer</option>
+                <option value="Computer Engineer">Computer Engineer</option>
+                <option value="Cybersecurity Professional">Cybersecurity Professional</option>
+                <option value="Data Engineer">Data Engineer</option>
+                <option value="Data Scientist">Data Scientist</option>
+                <option value="Devops Engineer">Devops Engineer</option>
+                <option value="Entrepeneur">Entrepeneur</option>
+                <option value="Front-End Developer">Front-End Developer</option>
+                <option value="Full-Stack Developer">Full-Stack Developer</option>
+                <option value="Game Developer">Game Developer</option>
+                <option value="Graphic Designer">Graphic Designer</option>
+                <option value="IT Specialist">IT Specialist</option>
+                <option value="Machine Learning Engineer">Machine Learning Engineer</option>
+                <option value="Mobile Developer">Mobile Developer</option>
+                <option value="Musician">Musician</option>
+                <option value="Product Manager">Product Manager</option>
+                <option value="Product Designer">Product Designer</option>
+                <option value="Software Engineer">Software Engineer</option>
+                <option value="UI/UX Designer">UI/UX Designer</option>
+                <option value="Web Developer">Web Developer</option>
+              </Field>
+
+              <label id="radio-group-1">
+                <Emoji className="applicationEmoji" name="sun" />
+                Have you attended a hackathon before?
+              </label>
+              <Field
+                className="field"
+                as="select"
+                name="haveYouAttendedAHackathonBefore"
+                id="haveYouAttendedAHackathonBefore"
+              >
+                <option value="No">No</option>
+                <option value="Yes, 1-4 hackathons">Yes, 1-4 hackathons</option>
+                <option value="Yes, 5+ hackathons">Yes, 5+ hackathons</option>
+              </Field>
+
+              <label id="checkbox-group-1">
+                <Emoji className="applicationEmoji" name="palm-tree" />
+                Have you attended Shellhacks before?
+              </label>
+              <div className="checkboxGroup" role="group" aria-labelledby="checkbox-group">
                 <label>
-                  <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="E-mail" />
-                  E-mail
+                  <Field type="checkbox" name="haveYouAttendedShellhacksBefore" value="Shellhacks 2017" />
+                  Shellhacks 2017
                 </label>
                 <label>
-                  <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="Discord" />
-                  Discord
+                  <Field type="checkbox" name="haveYouAttendedShellhacksBefore" value="Shellhacks 2018" />
+                  Shellhacks 2018
                 </label>
                 <label>
-                  <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="Instagram" />
-                  Instagram
+                  <Field type="checkbox" name="haveYouAttendedShellhacksBefore" value="Shellhacks 2019" />
+                  Shellhacks 2019
                 </label>
                 <label>
-                  <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="MLH" />
-                  MLH
+                  <Field type="checkbox" name="haveYouAttendedShellhacksBefore" value="Shellhacks 2020" />
+                  Shellhacks 2020
+                </label>
+                <label>
+                  <Field type="checkbox" name="haveYouAttendedShellhacksBefore" value="Shellhacks 2021" />
+                  Shellhacks 2021
+                </label>
+                <label>
+                  <Field type="checkbox" name="haveYouAttendedShellhacksBefore" value="This is my first Shellhacks!" />
+                  This is my first Shellhacks!
                 </label>
               </div>
-              <div className="checkboxGroup">
-                <label>
-                  <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="Website" />
-                  Website
-                </label>
-                <label>
-                  <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="Facebook" />
-                  Facebook
-                </label>
-                <label>
-                  <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="Twitter" />
-                  Twitter
-                </label>
-                <label>
-                  <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="LinkedIn" />
-                  LinkedIn
-                </label>
+
+              <label id="checkbox-group-2">
+                <Emoji className="applicationEmoji" name="eyes" />
+                How did you hear about Shellhacks?
+              </label>
+              <div className="dividedCheckboxGroup" role="group" aria-labelledby="checkbox-group">
+                <div className="checkboxGroup">
+                  <label>
+                    <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="E-mail" />
+                    E-mail
+                  </label>
+                  <label>
+                    <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="Discord" />
+                    Discord
+                  </label>
+                  <label>
+                    <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="Instagram" />
+                    Instagram
+                  </label>
+                  <label>
+                    <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="MLH" />
+                    MLH
+                  </label>
+                </div>
+                <div className="checkboxGroup">
+                  <label>
+                    <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="Website" />
+                    Website
+                  </label>
+                  <label>
+                    <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="Facebook" />
+                    Facebook
+                  </label>
+                  <label>
+                    <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="Twitter" />
+                    Twitter
+                  </label>
+                  <label>
+                    <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="LinkedIn" />
+                    LinkedIn
+                  </label>
+                </div>
+                <div className="checkboxGroup">
+                  <label>
+                    <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="Reddit" />
+                    Reddit
+                  </label>
+                  <label>
+                    <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="Whatsapp Group" />
+                    Whatsapp Group
+                  </label>
+                  <label>
+                    <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="Friends" />
+                    Friends
+                  </label>
+                  <label>
+                    <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="Professor" />
+                    Professor
+                  </label>
+                </div>
+                <div className="checkboxGroup">
+                  <label>
+                    <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="Employer" />
+                    Employer
+                  </label>
+                  <label>
+                    <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="Other" />
+                    Other
+                  </label>
+                </div>
               </div>
-              <div className="checkboxGroup">
-                <label>
-                  <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="Reddit" />
-                  Reddit
-                </label>
-                <label>
-                  <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="Whatsapp Group" />
-                  Whatsapp Group
-                </label>
-                <label>
-                  <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="Friends" />
-                  Friends
-                </label>
-                <label>
-                  <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="Professor" />
-                  Professor
-                </label>
-              </div>
-              <div className="checkboxGroup">
-                <label>
-                  <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="Employer" />
-                  Employer
-                </label>
-                <label>
-                  <Field type="checkbox" name="howDidYouHearAboutShellhacks" value="Other" />
-                  Other
-                </label>
-              </div>
-            </div>
 
-            <label htmlFor="whyAreYouInterestedInParticipatingInShellhacks">
-              Why are you interested in participating in Shellhacks?
-            </label>
-            <Field
-              id="whyAreYouInterestedInParticipatingInShellhacks"
-              name="whyAreYouInterestedInParticipatingInShellhacks"
-              placeholder="Interests text box..."
-            />
+              <label htmlFor="whyAreYouInterestedInParticipatingInShellhacks">
+                <Emoji className="applicationEmoji" name="face-with-monocle" />
+                Why are you interested in participating in Shellhacks?
+              </label>
+              <Field
+                id="whyAreYouInterestedInParticipatingInShellhacks"
+                name="whyAreYouInterestedInParticipatingInShellhacks"
+                placeholder="Interests text box..."
+              />
+              {errors.whyAreYouInterestedInParticipatingInShellhacks &&
+              touched.whyAreYouInterestedInParticipatingInShellhacks ? (
+                <div className="errors">{errors.whyAreYouInterestedInParticipatingInShellhacks}</div>
+              ) : null}
 
-            <label htmlFor="linkedIn">LinkedIn</label>
-            <Field id="linkedIn" name="linkedIn" placeholder="link" />
+              <label htmlFor="linkedIn">
+                <Emoji className="applicationEmoji" name="briefcase" />
+                LinkedIn
+              </label>
+              <Field id="linkedIn" name="linkedIn" placeholder="link" />
 
-            <label htmlFor="github">Github</label>
-            <Field id="github" name="github" placeholder="link" />
+              <label htmlFor="github">
+                <Emoji className="applicationEmoji" name="laptop" />
+                Github
+              </label>
+              <Field id="github" name="github" placeholder="link" />
 
-            <label htmlFor="website">Website</label>
-            <Field id="website" name="website" placeholder="link" />
+              <label htmlFor="website">
+                <Emoji className="applicationEmoji" name="spider-web" />
+                Website
+              </label>
+              <Field id="website" name="website" placeholder="link" />
 
-            <button id="submitBtn" type="submit">
-              <LinkButton text="Submit" url="/application" filled={true} />
-            </button>
+              <button id="submitBtn" type="submit">
+                <LinkButton text="Submit" url="/application" filled={true} />
+              </button>
+            </EmojiProvider>
           </Form>
         )}
       </Formik>

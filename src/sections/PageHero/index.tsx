@@ -16,12 +16,12 @@ const PageHero: React.FC = () => {
         <div className="detailsDiv">
           {/* prettier-ignore */}
           <EmojiProvider data={emojiData}>
-                        <ul>
-                            <li><Emoji className="detailsMarker" name="rocket"/>September 23-25, 2022</li>
-                            <li><Emoji className="detailsMarker" name="rocket"/>Florida International University</li>
-                            <li><Emoji className="detailsMarker" name="rocket"/>Miami, FL ● In-Person & Virtual!</li>
-                        </ul>
-                    </EmojiProvider>
+            <ul>
+              <li><Emoji className="detailsMarker" name="rocket"/>September 23-25, 2022</li>
+              <li><Emoji className="detailsMarker" name="rocket"/>Florida International University</li>
+              <li><Emoji className="detailsMarker" name="rocket"/>Miami, FL ● In-Person & Virtual!</li>
+            </ul>
+          </EmojiProvider>
         </div>
         <div className="buttonsDiv">
           <LinkButton text="Register Now!" url="/application" filled={true} />
