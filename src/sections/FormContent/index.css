@@ -36,3 +36,12 @@
 .errors {
   color: var(--shell-pink);
 }
+
+.applicationEmoji {
+  width: 2.5rem;
+  margin-right: 1rem;
+}
+
+form label {
+  display: flex;
+}
