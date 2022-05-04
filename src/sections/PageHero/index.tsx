@@ -4,9 +4,10 @@ import { Emoji, EmojiProvider } from "react-apple-emojis";
 import emojiData from "react-apple-emojis/lib/data.json";
 import LinkButton from "../../components/LinkButton";
 import ShellHacks from "../../svg/ShellHacks_Filled.svg";
-import City from "../../svg/CityV4.svg";
+import City from "../../svg/CityV5.svg";
 import Stars from "../../svg/Stars.svg";
-import Plane from "../../svg/PlaneV3.svg";
+import Plane from "../../svg/PlaneV2.svg";
+import Footer from "../Footer";
 
 const PageHero: React.FC = () => {
     return (
@@ -45,8 +46,9 @@ const PageHero: React.FC = () => {
                     </div>
                 </div>
             </div>
+            <Footer />
             <div className="pageHeroCity">
-                <img alt="Plane" className="pageHeroPlane" src={Plane} />
+                {/* <img alt="Plane" className="pageHeroPlane" src={Plane} /> */}
                 <div id="spotlight1" className="pageHeroSpotlight" />
                 <div id="spotlight2" className="pageHeroSpotlight" />
                 <img

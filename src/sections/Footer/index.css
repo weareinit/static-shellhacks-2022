@@ -1,20 +1,25 @@
 .footerBackground {
-    background-color: var(--shell-purple-dark);
     display: flex;
     flex-direction: row;
-    padding: 2% 10%;
-    justify-content: space-between;
+    margin: 0 20%;
 }
 
 .footerText {
+    width: 50%;
     color: white;
     font-size: 2.4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-around;
+}
+
+.footerText p {
+    padding: 3% 0;
 }
 
 .footerText a {
+    font-size: var(--font-size-small);
     text-decoration: none;
     background-color: var(--shell-purple);
     background: var(--pink-tan-gradient);
@@ -45,7 +50,8 @@
 }
 
 .footerSocial {
-    width: 30%;
+    width: 50%;
+    margin-left: 5%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;

@@ -1,5 +1,8 @@
+/* BACKGROUND */
 .pageHeroBackground {
     position: relative;
+    overflow: hidden;
+    min-height: 100vh;
 }
 
 .pageHeroBackground::before {
@@ -20,6 +23,7 @@
     z-index: -10;
 }
 
+/* TOP */
 .pageHeroTop {
     position: relative;
     z-index: 0;
@@ -32,15 +36,15 @@
 
 .pageHeroTop h2 {
     color: white;
-    font-size: 5.6rem;
 }
 
 .pageHeroLogo {
-    width: 40%;
+    width: 25%;
 }
 
+/* MIDDLE */
 .pageHeroMiddle {
-    margin: 0 10%;
+    margin: 0 20%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -66,16 +70,15 @@
 
 .detailsDiv li {
     list-style: "";
-    font-size: 3rem;
+    font-size: var(--font-size-small);
     padding: 1% 0 1% 2%;
     position: relative;
 }
 
 .detailsMarker {
     position: absolute;
-    top: 18%;
-    left: -6%;
-    width: 3.6rem;
+    margin-left: -8%;
+    width: var(--font-size-small);
 }
 
 .buttonsDiv {
@@ -87,6 +90,8 @@
     display: flex;
     gap: 16px;
 }
+
+/* ANIMATIONS */
 
 .pageHeroPlane {
     position: absolute;
@@ -113,23 +118,23 @@
     position: absolute;
     z-index: -50;
     left: 47.5%;
-    top: 50%;
     background-color: rgba(255, 255, 255, 0.2);
-    transform: perspective(1500px) rotateX(-45deg) rotateZ(-45deg);
 }
 
 #spotlight1 {
     width: 40px;
-    height: 1500px;
+    height: 1000px;
     animation: 10s infinite rotate ease-in-out;
     border-radius: 20px;
+    transform-origin: bottom center;
 }
 
 #spotlight2 {
     width: 30px;
-    height: 1500px;
-    animation: 15s infinite rotate ease-in-out;
+    height: 1000px;
+    animation: 16s infinite rotate ease-in-out;
     border-radius: 15px;
+    transform-origin: bottom center;
 }
 
 @keyframes rotate {
@@ -144,4 +149,12 @@
     100% {
         transform: perspective(600px) rotateX(-45deg) rotateZ(-45deg);
     }
+}
+
+/* TABLET VERSION */
+@media screen and (min-width: 600px) {
+}
+
+/* DESKTOP VERSION */
+@media screen and (min-width: 1200px) {
 }

@@ -18,7 +18,7 @@
     padding: 5%;
     z-index: 1;
     width: 100%;
-    transition: 1s ease all;
+    transition: transform 1s ease;
     user-select: none;
 }
 
@@ -49,8 +49,10 @@
 
 .filled {
     color: var(--shell-purple);
+    font-size: clamp(1.6rem, 3vw, 3.6rem);
 }
 
 .transparent {
     color: white;
+    font-size: clamp(1.6rem, 2.5vw, 3.2rem);
 }

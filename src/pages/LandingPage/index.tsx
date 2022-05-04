@@ -7,7 +7,6 @@ const LandingPage: React.FC = () => {
     return (
         <div>
             <PageHero />
-            <Footer />
         </div>
     );
 };
