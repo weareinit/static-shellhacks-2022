@@ -4,8 +4,8 @@
     -webkit-box-sizing: border-box;
 
     font-family: Poppins;
-    --font-size-large: clamp(1.6rem, 3vw, 3.6rem);
-    --font-size-small: clamp(1.2rem, 1.5vw, 2.4rem);
+    --font-size-large: clamp(1.8rem, 3vw, 3.6rem);
+    --font-size-small: clamp(1.6rem, 1.5vw, 2.4rem);
 
     --shell-pink: #ff7ada;
     --shell-tan: #ffe1a0;

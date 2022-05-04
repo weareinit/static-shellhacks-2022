@@ -49,10 +49,10 @@
 
 .filled {
     color: var(--shell-purple);
-    font-size: clamp(1.6rem, 3vw, 3.6rem);
+    font-size: clamp(1.8rem, 3vw, 3.6rem);
 }
 
 .transparent {
     color: white;
-    font-size: clamp(1.6rem, 2.5vw, 3.2rem);
+    font-size: clamp(1.8rem, 2.5vw, 3.2rem);
 }
