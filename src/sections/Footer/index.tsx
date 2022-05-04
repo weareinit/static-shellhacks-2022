@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
             <div className="footerText">
                 {/* prettier-ignore */}
                 <p>
-                    Made with <EmojiProvider data={emojiData}><Emoji className="yellowHeart" name="yellow-heart"/></EmojiProvider> from Upsilon Pi Epsilon
+                    Made with <EmojiProvider data={emojiData}><Emoji className="yellowHeart" name="yellow-heart"/></EmojiProvider> from Upsilon&nbsp;Pi&nbsp;Epsilon
                 </p>
                 <a
                     href="http://mlh.io/code-of-conduct"

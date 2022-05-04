@@ -48,9 +48,9 @@ const PageHero: React.FC = () => {
             </div>
             <Footer />
             <div className="pageHeroCity">
-                {/* <img alt="Plane" className="pageHeroPlane" src={Plane} /> */}
+                {/* <img alt="Plane" className="pageHeroPlane" src={Plane} />
                 <div id="spotlight1" className="pageHeroSpotlight" />
-                <div id="spotlight2" className="pageHeroSpotlight" />
+                <div id="spotlight2" className="pageHeroSpotlight" /> */}
                 <img
                     alt="City Background"
                     className="pageHeroCityImage"
