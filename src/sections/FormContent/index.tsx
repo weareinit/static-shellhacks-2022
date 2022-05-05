@@ -4,37 +4,18 @@ import emojiData from "react-apple-emojis/lib/data.json";
 import * as Yup from "yup";
 import LinkButton from "../../components/LinkButton";
 import "./index.css";
-
-interface Values {
-  firstName: string;
-  lastName: string;
-  email: string;
-  country: string;
-  addressLine1: string;
-  addressLine2: string;
-  city: string;
-  state: string;
-  zipcode: string;
-  phoneNumber: string;
-  school: string;
-  major: string;
-  classStanding: string;
-  graduationYear: string;
-  gender: string;
-  ethnicity: string;
-  race: string;
-  tshirtSize: string;
-  whichRoleBestDescribesYou: string;
-  haveYouAttendedAHackathonBefore: string;
-  haveYouAttendedShellhacksBefore: string;
-  howDidYouHearAboutShellhacks: string;
-  whyAreYouInterestedInParticipatingInShellhacks: string;
-  linkedIn: string;
-  github: string;
-  website: string;
-}
+import addHacker from "../../server/functions/addHacker";
+import { Values } from "../../../util/types";
+import React from "react";
 
 const FormContent: React.FC = () => {
+  const [isRemote, setIsRemote] = React.useState(false);
+  const [isAdult, setIsAdult] = React.useState(false);
+  const [isSharingInfo, setIsSharingInfo] = React.useState(false);
+  const [agreedMLH, setAgreedMLH] = React.useState(false);
+  const [agreedTerms, setAgreedTerms] = React.useState(false);
+  const [agreedCommunications, setAgreedCommunications] = React.useState(false);
+
   const SignupSchema = Yup.object().shape({
     firstName: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
     lastName: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
@@ -78,24 +59,30 @@ const FormContent: React.FC = () => {
           school: "",
           major: "",
           classStanding: "Freshman",
-          graduationYear: "2022",
+          graduationYear: 2022,
           gender: "",
           ethnicity: "",
-          race: "",
+          race: [""],
           tshirtSize: "XS",
-          whichRoleBestDescribesYou: "Artist",
+          whichRoleBestDescribesYou: ["Artist"],
           haveYouAttendedAHackathonBefore: "No",
-          haveYouAttendedShellhacksBefore: "",
-          howDidYouHearAboutShellhacks: "",
+          haveYouAttendedShellhacksBefore: [""],
+          howDidYouHearAboutShellhacks: [""],
           whyAreYouInterestedInParticipatingInShellhacks: "",
           linkedIn: "",
           github: "",
           website: "",
+          isRemote: isRemote,
+          isAdult: isAdult,
+          isSharingInfo: isSharingInfo,
+          agreedMLH: agreedMLH,
+          agreedTerms: agreedTerms,
+          agreedCommunications: agreedCommunications,
         }}
         validationSchema={SignupSchema}
         onSubmit={(values: Values, { setSubmitting }: FormikHelpers<Values>) => {
           setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
+            addHacker(values);
             setSubmitting(false);
           }, 500);
         }}
@@ -657,6 +644,72 @@ const FormContent: React.FC = () => {
                 Website
               </label>
               <Field id="website" name="website" placeholder="link" />
+
+              <label>
+                Will you be participating remotely?
+                <Field
+                  type="checkbox"
+                  name="isRemote"
+                  value={isRemote}
+                  onClick={() => setIsRemote(!isRemote)}
+                  checked={isRemote}
+                />
+              </label>
+
+              <label>
+                I confirm that I am 18 years of age or older
+                <Field
+                  type="checkbox"
+                  name="isAdult"
+                  value={isAdult}
+                  onClick={() => setIsAdult(!isAdult)}
+                  checked={isAdult}
+                />
+              </label>
+
+              <label>
+                I agree for my information to be shared with sponsors
+                <Field
+                  type="checkbox"
+                  name="isSharingInfo"
+                  value={isSharingInfo}
+                  onClick={() => setIsSharingInfo(!isSharingInfo)}
+                  checked={isSharingInfo}
+                />
+              </label>
+
+              <label>
+                MLH Agreement
+                <Field
+                  type="checkbox"
+                  name="agreedMLH"
+                  value={agreedMLH}
+                  onClick={() => setAgreedMLH(!agreedMLH)}
+                  checked={agreedMLH}
+                />
+              </label>
+
+              <label>
+                MLH Terms and Conditions
+                <Field
+                  type="checkbox"
+                  name="agreedTerms"
+                  value={agreedTerms}
+                  onClick={() => setAgreedTerms(!agreedTerms)}
+                  checked={agreedTerms}
+                />
+              </label>
+
+              <label>
+                Communications from MLH
+                <Field
+                  type="checkbox"
+                  name="agreedCommunications"
+                  value={agreedCommunications}
+                  onClick={() => setAgreedCommunications(!agreedCommunications)}
+                  checked={agreedCommunications}
+                />
+              </label>
 
               <button id="submitBtn" type="submit">
                 <LinkButton text="Submit" url="/application" filled={true} />
