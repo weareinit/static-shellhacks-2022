@@ -1,0 +1,47 @@
+.contentBackground {
+  display: flex;
+  flex-direction: column;
+}
+
+#form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contentBackground label {
+  color: white;
+  margin: 1rem 0 1rem 0;
+}
+
+.dividedCheckboxGroup {
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkboxGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.field {
+  width: 90rem;
+}
+
+#submitBtn {
+  background: none;
+  border: none;
+  margin: 2rem 0 2rem 0;
+}
+
+.errors {
+  color: var(--shell-pink);
+}
+
+.applicationEmoji {
+  width: 2.5rem;
+  margin-right: 1rem;
+}
+
+form label {
+  display: flex;
+}
