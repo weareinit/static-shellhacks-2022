@@ -1650,7 +1650,11 @@ const FormContent: React.FC = () => {
                                     console.log("Pressed");
                                 }}
                             >
-                                <h2>Hello</h2>
+                                <LinkButton
+                                    text="Submit"
+                                    url="/application"
+                                    filled={true}
+                                />
                             </button>
                         </EmojiProvider>
                     </Form>
