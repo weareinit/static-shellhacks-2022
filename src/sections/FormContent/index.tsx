@@ -75,7 +75,7 @@ const FormContent: React.FC = () => {
         school: Yup.string().required(REQUIRED_FIELD_ERROR),
         major: Yup.string().required(REQUIRED_FIELD_ERROR),
         gender: Yup.string().required(REQUIRED_FIELD_ERROR),
-        ethinicity: Yup.string().required(REQUIRED_FIELD_ERROR),
+        ethnicity: Yup.string().required(REQUIRED_FIELD_ERROR),
         race: Yup.array().required(REQUIRED_FIELD_ERROR),
         whyAreYouInterestedInParticipatingInShellhacks:
             Yup.string().required(REQUIRED_FIELD_ERROR),
@@ -137,6 +137,7 @@ const FormContent: React.FC = () => {
                     { setSubmitting }: FormikHelpers<HackerValues>
                 ) => {
                     setTimeout(() => {
+                        console.log(values);
                         addHacker(values, user);
                         setSubmitting(false);
                     }, 500);
@@ -233,7 +234,7 @@ const FormContent: React.FC = () => {
                                         return errorMessage;
                                     }}
                                 >
-                                    <option disabled selected value="">
+                                    <option disabled value="">
                                         {SELECT_PLACEHOLDER}
                                     </option>
                                     <option value="United States">
@@ -842,13 +843,12 @@ const FormContent: React.FC = () => {
                                             value == undefined ||
                                             value.length == 0
                                         ) {
-                                            console.log(value);
                                             errorMessage = REQUIRED_FIELD_ERROR;
                                         }
                                         return errorMessage;
                                     }}
                                 >
-                                    <option disabled selected value="">
+                                    <option disabled value="">
                                         {SELECT_PLACEHOLDER}
                                     </option>
                                     <option value="Freshman">Freshman</option>
@@ -887,7 +887,7 @@ const FormContent: React.FC = () => {
                                         return errorMessage;
                                     }}
                                 >
-                                    <option disabled selected value="">
+                                    <option disabled value="">
                                         {SELECT_PLACEHOLDER}
                                     </option>
                                     <option value="2022">2022</option>
@@ -947,7 +947,7 @@ const FormContent: React.FC = () => {
                                         return errorMessage;
                                     }}
                                 >
-                                    <option disabled selected value="">
+                                    <option disabled value="">
                                         {SELECT_PLACEHOLDER}
                                     </option>
                                     <option value="Hispanic or Latinx">
@@ -1057,7 +1057,7 @@ const FormContent: React.FC = () => {
                                         return errorMessage;
                                     }}
                                 >
-                                    <option disabled selected value="">
+                                    <option disabled value="">
                                         {SELECT_PLACEHOLDER}
                                     </option>
                                     <option value="XS">Extra-Small</option>
@@ -1096,7 +1096,7 @@ const FormContent: React.FC = () => {
                                         return errorMessage;
                                     }}
                                 >
-                                    <option disabled selected value="">
+                                    <option disabled value="">
                                         {SELECT_PLACEHOLDER}
                                     </option>
                                     <option value="Artist">Artist</option>
@@ -1191,7 +1191,7 @@ const FormContent: React.FC = () => {
                                         return errorMessage;
                                     }}
                                 >
-                                    <option disabled selected value="">
+                                    <option disabled value="">
                                         {SELECT_PLACEHOLDER}
                                     </option>
                                     <option value="No">No</option>
@@ -1642,12 +1642,15 @@ const FormContent: React.FC = () => {
                                 ) : null}
                             </div>
 
-                            <button id="submitBtn" type="submit">
-                                <LinkButton
-                                    text="Submit"
-                                    url=""
-                                    filled={true}
-                                />
+                            <button
+                                id="submitBtn"
+                                type="submit"
+                                onClick={() => {
+                                    console.log(errors);
+                                    console.log("Pressed");
+                                }}
+                            >
+                                <h2>Hello</h2>
                             </button>
                         </EmojiProvider>
                     </Form>
