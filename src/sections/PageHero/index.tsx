@@ -33,7 +33,11 @@ const PageHero: React.FC = () => {
                     </EmojiProvider>
                 </div>
                 <div className="buttonsDiv">
-                    <LinkButton text="Register Now!" url="" filled={true} />
+                    <LinkButton
+                        text="Register Now!"
+                        url="/application"
+                        filled={true}
+                    />
                     <div className="buttonsRow">
                         <LinkButton
                             text="Discord"

@@ -1,20 +1,37 @@
-.formWrapper {
-  background: var(--purple-gradient);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.applicationPageBackground {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: var(--purple-gradient);
+    display: flex;
 }
 
-.formWrapper h2 {
-  text-decoration: none;
-  background-color: var(--shell-purple);
-  background: var(--pink-tan-gradient);
-  background-size: 100%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-background-clip: text;
-  -moz-text-fill-color: transparent;
-  position: relative;
-  font-size: 6.4rem;
+.applicationPageCity {
+    width: 100%;
+    align-self: flex-end;
+}
+
+.applicationLogo {
+    width: 50%;
+    margin: 5%;
+}
+
+.formWrapper {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10%;
+}
+
+/* LANDSCAPE VERSION */
+@media screen and (min-width: 1024px) {
+    .applicationLogo {
+        width: 30%;
+    }
+
+    .formWrapper {
+        padding: 5% 25%;
+    }
 }
