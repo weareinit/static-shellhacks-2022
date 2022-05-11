@@ -9,6 +9,8 @@ import { HackerValues } from "../../../util/types";
 import React from "react";
 import { auth } from "../../server/firebaseApp";
 import { onAuthStateChanged } from "firebase/auth";
+import ProgressModal from "../../components/ProgressModal";
+import { ProgressState } from "../../components/ProgressModal";
 
 const SELECT_PLACEHOLDER = "-- SELECT AN OPTION --";
 const REQUIRED_FIELD_ERROR = "This field is required.";
@@ -125,6 +127,8 @@ const FormContent: React.FC = () => {
     onAuthStateChanged(auth, (currentUser: any) => {
         setUser(currentUser);
     });
+    const [displayPopup, setDisplayPopup] = React.useState(false);
+    const [errorOccured, setErrorOccured] = React.useState(false);
 
     return (
         <section className="contentBackground">
@@ -136,11 +140,16 @@ const FormContent: React.FC = () => {
                     values: HackerValues,
                     { setSubmitting }: FormikHelpers<HackerValues>
                 ) => {
-                    setTimeout(() => {
-                        console.log(values);
-                        addHacker(values, user);
-                        setSubmitting(false);
-                    }, 500);
+                    setDisplayPopup(true);
+                    addHacker(values, user)
+                        .catch((error) => {
+                            setErrorOccured(true);
+                            setSubmitting(false);
+                        })
+                        .finally(() => {
+                            setSubmitting(false);
+                            // DEFINE SUCCESS BEHAVIOR HERE
+                        });
                 }}
             >
                 {({
@@ -1642,14 +1651,7 @@ const FormContent: React.FC = () => {
                                 ) : null}
                             </div>
 
-                            <button
-                                id="submitBtn"
-                                type="submit"
-                                onClick={() => {
-                                    console.log(errors);
-                                    console.log("Pressed");
-                                }}
-                            >
+                            <button id="submitBtn" type="submit">
                                 <LinkButton
                                     text="Submit"
                                     url="/application"
@@ -1660,6 +1662,15 @@ const FormContent: React.FC = () => {
                     </Form>
                 )}
             </Formik>
+            <ProgressModal
+                trigger={displayPopup}
+                setTrigger={setDisplayPopup}
+                state={
+                    errorOccured
+                        ? ProgressState.FAILED
+                        : ProgressState.PROCESSING
+                }
+            />
         </section>
     );
 };
