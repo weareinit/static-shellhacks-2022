@@ -4,20 +4,32 @@
     justify-content: center;
     align-items: center;
     width: 100vw;
+    height: 100vh;
 }
 
 .login-form {
     display: flex;
     flex-direction: column;
-    width: 25vw;
-    height: min-content;
-    align-items: center;
-    justify-content: space-evenly;
-    background-color: gray;
+    position: relative;
+    z-index: 0;
+    width: 50%;
+}
+
+.login-form::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 105%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    left: -2.5%;
 }
 
 .login-field {
-    width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,24 +38,63 @@
 .login-field label {
     text-align: left;
     align-self: flex-start;
-    font-size: 1.8rem;
+    font-size: var(--font-size-body);
     margin: 3rem 0 2rem 0;
+    color: white;
+}
+
+.login-field input {
+    width: 100%;
+    height: 60px;
+    border: 20px solid;
+    border-image: url("../../svg/Border.svg");
+    border-image-slice: 20 20;
+    border-radius: 24px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    outline: none;
+    color: white;
+    background-color: #3c2066;
+}
+
+.login-field input:placeholder {
+    color: #c7c7c7;
+}
+
+.login-field input:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.submitButton {
+    border: none;
+    background: none;
+    outline: none;
+    font-size: var(--font-size-small);
+    color: var(--shell-purple);
+    padding: 5%;
+    transition: transform 1s ease;
+}
+
+.submitButtonBackground:hover .submitButton {
+    transform: scale(1.1);
+}
+
+.submitButtonBackground {
+    background: var(--pink-tan-gradient);
+    border-radius: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .buttons {
     display: flex;
     justify-content: space-between;
-    width: 50%;
-    margin: 3rem auto 3rem;
-}
-
-#signin,
-#signup,
-#logout {
-    padding: 8px;
-    width: fit-content;
-    color: white;
-    background-color: black;
+    align-self: center;
+    gap: 5%;
+    width: 70%;
+    margin: 4% auto;
 }
 
 #signin:active,

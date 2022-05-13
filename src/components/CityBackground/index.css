@@ -1,0 +1,12 @@
+.cityBackground {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: var(--purple-gradient);
+    display: flex;
+}
+
+.city {
+    width: 100%;
+    align-self: flex-end;
+}

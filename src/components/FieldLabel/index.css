@@ -1,0 +1,23 @@
+.fieldLabel {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+    align-items: center;
+    font-size: var(--font-size-body);
+    color: white;
+}
+
+.fieldLabelTitle {
+    margin: 8px 0;
+}
+
+.fieldLabelDesc {
+    font-size: calc(0.85 * var(--font-size-body));
+    font-weight: 600;
+    color: white;
+}
+
+.fieldLabelEmoji {
+    width: calc(1 * var(--font-size-body));
+    margin-right: 1rem;
+}
