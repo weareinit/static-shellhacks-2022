@@ -5,37 +5,28 @@ import { db } from "../../server/firebaseApp";
 import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
-  // use F9AxRFxYooMD4rdzKaZm as the example fetch
   const [isLoading, setIsLoading] = useState(true);
-  const [userData, setUserData] = useState<any>();
-
-  const redir = useNavigate();
-
+  const [userData, setUserData] = useState<DocumentData | undefined>();
+  const user = getAuth().currentUser;
   useEffect(() => {
-    // Fetch from firebase using auth.currentUser.uid
-    if (getAuth().currentUser == null) {
-      redir("/");
-      // TODO: Check security on this. Not sure if this statement makes this route completely protected.
-    } else {
-      const uid = getAuth().currentUser?.uid.toString();
-      const docRef = doc(db, "hackers", "" + uid); // Pass uid
-      /* 
-        if user is not logged in, redirect them to the user dashboard to protect the route.
-        */
-      const fetchData = async () => {
-        console.log("Page Loading");
-        try {
-          const docSnap = await getDoc(docRef);
-          setUserData(docSnap.data());
+    console.log("Mounting");
+    const docRef = doc(db, "hackers", "" + user?.uid);
+    const fetchData = async () => {
+      console.log("Page Loadding");
+      await getDoc(docRef)
+        .then((rawData) => {
+          const data: DocumentData | undefined = rawData.data();
+          console.log("user data: ");
+          console.log(data);
+          setUserData(data);
           setIsLoading(false);
-          console.log(userData);
-        } catch (error) {
+        })
+        .catch((error) => {
           console.log(error);
-        }
-      };
-      fetchData();
-    }
-  }, []);
+        });
+    };
+    fetchData();
+  }, [user]);
 
   const { firstName, lastName, address, shirtSize } = userData || {};
 
@@ -87,7 +78,8 @@ function Dashboard() {
                 <div className="address-information">
                   <h3>Address</h3>
                   <p>
-                    {streetAddress} {apartment} {postalCode} {city}, {state}
+                    {streetAddress} {apartment} {postalCode} {city}, {state}{" "}
+                    {country}
                   </p>
                 </div>
                 <div
@@ -124,6 +116,11 @@ function Dashboard() {
               </div>
             </div>
           </div>
+        </div>
+      )}{" "}
+      {isLoading && (
+        <div>
+          <h1>Oops unexpected error! Please refresh page!</h1>
         </div>
       )}
     </div>
