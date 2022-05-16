@@ -1,23 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { getAuth } from "firebase/auth";
 import { doc, DocumentData, getDoc } from "firebase/firestore";
-import { db } from "../../server/firebaseApp";
+import { auth, db } from "../../server/firebaseApp";
 import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
   const [isLoading, setIsLoading] = useState(true);
   const [userData, setUserData] = useState<DocumentData | undefined>();
+  const [changingAddress, setChangingAddress] = useState(false);
+
+  const navigate = useNavigate();
+
   const user = getAuth().currentUser;
   useEffect(() => {
-    console.log("Mounting");
+    // ! We need to conduct tests to see if every reload results in a refetch.
+    // console.log("Mounting");
     const docRef = doc(db, "hackers", "" + user?.uid);
     const fetchData = async () => {
-      console.log("Page Loadding");
+      // console.log("Page Loadding");
       await getDoc(docRef)
         .then((rawData) => {
           const data: DocumentData | undefined = rawData.data();
-          console.log("user data: ");
-          console.log(data);
+          // console.log("user data: ");
+          // console.log(data);
           setUserData(data);
           setIsLoading(false);
         })
@@ -29,8 +34,6 @@ function Dashboard() {
   }, [user]);
 
   const { firstName, lastName, address, shirtSize } = userData || {};
-
-  // destructuring the apartment data
   const { apartment, city, country, postalCode, state, streetAddress } =
     address || {};
 
@@ -39,6 +42,14 @@ function Dashboard() {
       {!isLoading && (
         <div>
           <div className="sidebar">
+            <button
+              onClick={async () => {
+                await auth.signOut();
+                navigate("/");
+              }}
+            >
+              Log Out
+            </button>
             <div>
               <h3>Application Status</h3>
               <p>
@@ -77,6 +88,13 @@ function Dashboard() {
               <div className="address-fields">
                 <div className="address-information">
                   <h3>Address</h3>
+                  <button
+                    onClick={() => {
+                      setChangingAddress(true);
+                    }}
+                  >
+                    change address
+                  </button>
                   <p>
                     {streetAddress} {apartment} {postalCode} {city}, {state}{" "}
                     {country}
@@ -113,6 +131,20 @@ function Dashboard() {
                     // ICON Right
                   }
                 </div>
+              </div>
+              <div className="change-address">
+                {changingAddress && (
+                  <div>
+                    Change Address Here
+                    <button
+                      onClick={() => {
+                        setChangingAddress(false);
+                      }}
+                    >
+                      collapse
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
