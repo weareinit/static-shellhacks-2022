@@ -3,6 +3,7 @@ import { getAuth } from "firebase/auth";
 import { doc, DocumentData, getDoc } from "firebase/firestore";
 import { auth, db } from "../../server/firebaseApp";
 import { useNavigate } from "react-router-dom";
+import ChangeAddress from "./formContent";
 
 function Dashboard() {
   const [isLoading, setIsLoading] = useState(true);
@@ -91,6 +92,8 @@ function Dashboard() {
                   <button
                     onClick={() => {
                       setChangingAddress(true);
+                      console.log("Changing Address");
+                      console.log(changingAddress);
                     }}
                   >
                     change address
@@ -135,14 +138,7 @@ function Dashboard() {
               <div className="change-address">
                 {changingAddress && (
                   <div>
-                    Change Address Here
-                    <button
-                      onClick={() => {
-                        setChangingAddress(false);
-                      }}
-                    >
-                      collapse
-                    </button>
+                    <ChangeAddress />
                   </div>
                 )}
               </div>

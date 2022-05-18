@@ -6,17 +6,19 @@ import SignIn from "./pages/SignIn";
 import Dashboard from "./pages/dashboard";
 
 import useAuthListener from "./server/authlistener";
+import { useEffect, useState } from "react";
 
 function App() {
   const { isLoggedIn } = useAuthListener();
-
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/application" element={<ApplicationPage />} />
       <Route path="/signin" element={<SignIn />} />
       {isLoggedIn && <Route path="/dashboard" element={<Dashboard />} />}
-      <Route path="*" element={<Navigate to={"/"} />} />
+      {
+        // TODO: Implement/fix 404 errors
+      }
     </Routes>
   );
 }
