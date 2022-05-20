@@ -35,7 +35,7 @@ const PageHero: React.FC = () => {
                 <div className="buttonsDiv">
                     <LinkButton
                         text="Register Now!"
-                        url="/application"
+                        url="/entry"
                         filled={true}
                     />
                     <div className="buttonsRow">

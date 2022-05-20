@@ -1,6 +1,6 @@
 import React from "react";
 import "./index.css";
-import FormContent from "../../sections/FormContent";
+import HackerForm from "../../sections/HackerForm";
 import ShellHacks from "../../svg/ShellHacks_Filled.svg";
 import City from "../../svg/CityNoShell.svg";
 
@@ -20,7 +20,7 @@ const ApplicationPage: React.FC = () => {
                     className="applicationLogo"
                     src={ShellHacks}
                 />
-                <FormContent />
+                <HackerForm />
             </div>
         </div>
     );

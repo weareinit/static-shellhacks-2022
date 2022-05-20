@@ -39,7 +39,7 @@ const FieldLabel: React.FC<LabelProps> = (props: LabelProps) => {
     );
 };
 
-const FormContent: React.FC = () => {
+const HackerForm: React.FC = () => {
     const [isRemote, setIsRemote] = React.useState(false);
     const [isAdult, setIsAdult] = React.useState(false);
     const [isSharingInfo, setIsSharingInfo] = React.useState(false);
@@ -781,13 +781,13 @@ const FormContent: React.FC = () => {
                                     name="phoneNumber"
                                     emoji="telephone-receiver"
                                     title="Phone Number"
-                                    description="Do we even need this"
+                                    description="We are unlikely to contact you via call. This will be used for shipping if necessary."
                                 />
                                 <Field
                                     className="field"
                                     id="phoneNumber"
                                     name="phoneNumber"
-                                    placeholder="305-111-1111"
+                                    placeholder="3051119999"
                                 />
                                 {errors.phoneNumber && touched.phoneNumber ? (
                                     <div className="errors">
@@ -1675,4 +1675,4 @@ const FormContent: React.FC = () => {
     );
 };
 
-export default FormContent;
+export default HackerForm;

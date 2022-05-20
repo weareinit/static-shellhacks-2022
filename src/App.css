@@ -5,7 +5,7 @@
 
     font-family: Poppins;
     font-weight: 800;
-    --font-size-large: clamp(1.8rem, calc(1.2rem + 1.88vw), 4.8rem);
+    --font-size-large: clamp(2.4rem, calc(1.2rem + 1.88vw), 4.8rem);
     --font-size-medium: clamp(1.6rem, calc(1.2rem + 1.25vw), 3.6rem);
     --font-size-small: clamp(1.6rem, calc(1.4rem + 0.5vw), 2.4rem);
     --font-size-body: clamp(1.6rem, calc(1.5rem + 0.24vw), 1.8rem);
