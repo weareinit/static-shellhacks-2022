@@ -6,7 +6,7 @@ import EntryPage from "./pages/EntryPage";
 import Dashboard from "./pages/dashboard";
 
 import useAuthListener from "./server/authlistener";
-import { useEffect, useState } from "react";
+import PasswordResetPage from "./pages/PasswordResetPage";
 
 const NotFound = () => {
     return (
@@ -29,6 +29,7 @@ function App() {
                     isLoggedIn ? <Navigate to="/dashboard" /> : <EntryPage />
                 }
             />
+            <Route path="/password-reset" element={<PasswordResetPage />} />
 
             {isLoggedIn && <Route path="/dashboard" element={<Dashboard />} />}
             {

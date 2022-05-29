@@ -11,6 +11,9 @@ import { auth } from "../../server/firebaseApp";
 import { onAuthStateChanged } from "firebase/auth";
 import ProgressModal from "../../components/ProgressModal";
 import { ProgressState } from "../../components/ProgressModal";
+import { FirebaseError } from "firebase/app";
+import { useNavigate } from "react-router-dom";
+import { formatError } from "../../util/errors";
 
 const SELECT_PLACEHOLDER = "-- SELECT AN OPTION --";
 const REQUIRED_FIELD_ERROR = "This field is required.";
@@ -128,7 +131,11 @@ const HackerForm: React.FC = () => {
         setUser(currentUser);
     });
     const [displayPopup, setDisplayPopup] = React.useState(false);
-    const [errorOccured, setErrorOccured] = React.useState(false);
+    const [errorMessage, setErrorMessage] = React.useState("");
+    const [popupState, setPopupState] = React.useState(
+        ProgressState.PROCESSING
+    );
+    const navigate = useNavigate();
 
     return (
         <section className="contentBackground">
@@ -140,15 +147,20 @@ const HackerForm: React.FC = () => {
                     values: HackerValues,
                     { setSubmitting }: FormikHelpers<HackerValues>
                 ) => {
+                    setPopupState(ProgressState.PROCESSING);
                     setDisplayPopup(true);
                     addHacker(values, user)
-                        .catch((error) => {
-                            setErrorOccured(true);
+                        .then(() => {
+                            setPopupState(ProgressState.COMPLETE);
                             setSubmitting(false);
+                            setTimeout(() => {
+                                navigate("/dashboard");
+                            }, 5000);
                         })
-                        .finally(() => {
+                        .catch((e: FirebaseError) => {
+                            setPopupState(ProgressState.FAILED);
                             setSubmitting(false);
-                            // DEFINE SUCCESS BEHAVIOR HERE
+                            setErrorMessage(formatError(e));
                         });
                 }}
             >
@@ -1665,11 +1677,9 @@ const HackerForm: React.FC = () => {
             <ProgressModal
                 trigger={displayPopup}
                 setTrigger={setDisplayPopup}
-                state={
-                    errorOccured
-                        ? ProgressState.FAILED
-                        : ProgressState.PROCESSING
-                }
+                state={popupState}
+                failedMessage={errorMessage}
+                completeMessage="Successfully submitted! Attempting to navigate to dashboard."
             />
         </section>
     );

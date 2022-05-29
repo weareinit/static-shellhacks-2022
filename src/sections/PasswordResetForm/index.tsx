@@ -1,29 +1,45 @@
 import "./index.css";
 import React from "react";
 import { auth } from "../../server/firebaseApp";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { confirmPasswordReset } from "firebase/auth";
 import ProgressModal, { ProgressState } from "../../components/ProgressModal";
 import { FirebaseError } from "firebase/app";
+import { useLocation, useNavigate } from "react-router-dom";
 import { formatError } from "../../util/errors";
 
-const LoginForm: React.FC = () => {
-    const [email, setEmail] = React.useState("");
+function useQuery() {
+    const location = useLocation();
+    return new URLSearchParams(location.search);
+}
+
+const PasswordResetForm: React.FC = () => {
     const [password, setPassword] = React.useState("");
     const [error, setError] = React.useState("");
-    const [errorOccured, setErrorOccured] = React.useState(false);
     const [displayPopup, setDisplayPopup] = React.useState(false);
+    const [popupState, setPopupState] = React.useState(
+        ProgressState.PROCESSING
+    );
 
-    const login = async (event: any) => {
+    const navigate = useNavigate();
+    const query = useQuery();
+    const oobCode = query.get("oobCode") ?? "";
+
+    const passwordReset = async (event: any) => {
         event.preventDefault();
-        setErrorOccured(false);
+        setPopupState(ProgressState.PROCESSING);
         setDisplayPopup(true);
-        await signInWithEmailAndPassword(auth, email, password).catch(
-            (e: FirebaseError) => {
+        await confirmPasswordReset(auth, oobCode, password)
+            .then(() => {
+                setPopupState(ProgressState.COMPLETE);
+                setTimeout(() => {
+                    navigate("/entry");
+                }, 5000);
+            })
+            .catch((e: FirebaseError) => {
                 console.log(e.code);
-                setErrorOccured(true);
+                setPopupState(ProgressState.FAILED);
                 setError(formatError(e));
-            }
-        );
+            });
     };
 
     return (
@@ -31,29 +47,14 @@ const LoginForm: React.FC = () => {
             <ProgressModal
                 trigger={displayPopup}
                 setTrigger={setDisplayPopup}
-                state={
-                    errorOccured
-                        ? ProgressState.FAILED
-                        : ProgressState.PROCESSING
-                }
+                state={popupState}
                 failedMessage={error.length != 0 ? error : undefined}
+                completeMessage="Password reset! Attempting to navigate to login page."
             />
             <div className="login-field">
-                <label htmlFor="email" id="email-label">
-                    Email
+                <label htmlFor="password" id="password-label">
+                    New Password
                 </label>
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={email}
-                    onChange={(event) => {
-                        setEmail(event.target.value);
-                    }}
-                />
-            </div>
-            <div className="login-field">
-                <label htmlFor="password">Password</label>
                 <input
                     type="password"
                     id="password"
@@ -69,9 +70,9 @@ const LoginForm: React.FC = () => {
                     <input
                         className="submitButton"
                         type="submit"
-                        value="Login"
+                        value="Reset Password"
                         id="signin"
-                        onClick={login}
+                        onClick={passwordReset}
                     />
                 </div>
             </div>
@@ -79,4 +80,4 @@ const LoginForm: React.FC = () => {
     );
 };
 
-export default LoginForm;
+export default PasswordResetForm;

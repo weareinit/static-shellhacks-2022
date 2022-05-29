@@ -85,7 +85,7 @@ const ProgressModal: React.FC<ProgressModalProps> = (
         <div className="progressModalShadow">
             <div className="progressModalBackground">
                 <ProgressIcon state={props.state} />
-                <div className="progressModalState">{message}</div>
+                <p className="progressModalState">{message}</p>
                 {props.state == ProgressState.COMPLETE ||
                 props.state == ProgressState.FAILED ? (
                     <button

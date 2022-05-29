@@ -40,7 +40,6 @@
     outline: none;
     font-size: var(--font-size-small);
     color: var(--shell-purple);
-    padding: 5%;
     transition: transform 1s ease;
 }
 
@@ -51,16 +50,18 @@
 .submitButtonBackground {
     background: var(--pink-tan-gradient);
     border-radius: 20px;
-    width: 100%;
+    padding: 4%;
+    min-width: 250px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.button {
-    width: 50%;
-    max-width: 250px;
-    margin: 4% auto;
+.buttonDiv {
+    display: flex;
+    margin: 24px auto;
+    justify-content: center;
+    align-items: center;
 }
 
 .currentUserAndLogout {
@@ -76,16 +77,12 @@ label {
     font-size: var(--font-size-body);
 }
 
-.button {
-    width: 100%;
-    margin: 24px auto;
-}
-
 /* LANDSCAPE VERSION */
 @media screen and (min-width: 1024px) {
-    .button {
-        width: 50%;
-        max-width: 275px;
+    .buttonDiv {
         margin: 4% auto;
+    }
+    .submitButtonBackground {
+        padding: 2%;
     }
 }

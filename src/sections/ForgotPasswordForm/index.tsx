@@ -1,29 +1,32 @@
 import "./index.css";
 import React from "react";
 import { auth } from "../../server/firebaseApp";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
 import ProgressModal, { ProgressState } from "../../components/ProgressModal";
 import { FirebaseError } from "firebase/app";
 import { formatError } from "../../util/errors";
 
-const LoginForm: React.FC = () => {
+const ForgotPasswordForm: React.FC = () => {
     const [email, setEmail] = React.useState("");
-    const [password, setPassword] = React.useState("");
     const [error, setError] = React.useState("");
-    const [errorOccured, setErrorOccured] = React.useState(false);
     const [displayPopup, setDisplayPopup] = React.useState(false);
+    const [popupState, setPopupState] = React.useState(
+        ProgressState.PROCESSING
+    );
 
-    const login = async (event: any) => {
+    const forgotPassword = async (event: any) => {
         event.preventDefault();
-        setErrorOccured(false);
+        setPopupState(ProgressState.PROCESSING);
         setDisplayPopup(true);
-        await signInWithEmailAndPassword(auth, email, password).catch(
-            (e: FirebaseError) => {
+        await sendPasswordResetEmail(auth, email)
+            .then(() => {
+                setPopupState(ProgressState.COMPLETE);
+            })
+            .catch((e: FirebaseError) => {
                 console.log(e.code);
-                setErrorOccured(true);
+                setPopupState(ProgressState.FAILED);
                 setError(formatError(e));
-            }
-        );
+            });
     };
 
     return (
@@ -31,12 +34,9 @@ const LoginForm: React.FC = () => {
             <ProgressModal
                 trigger={displayPopup}
                 setTrigger={setDisplayPopup}
-                state={
-                    errorOccured
-                        ? ProgressState.FAILED
-                        : ProgressState.PROCESSING
-                }
+                state={popupState}
                 failedMessage={error.length != 0 ? error : undefined}
+                completeMessage="Password reset sent to email."
             />
             <div className="login-field">
                 <label htmlFor="email" id="email-label">
@@ -52,26 +52,14 @@ const LoginForm: React.FC = () => {
                     }}
                 />
             </div>
-            <div className="login-field">
-                <label htmlFor="password">Password</label>
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={password}
-                    onChange={(event) => {
-                        setPassword(event.target.value);
-                    }}
-                />
-            </div>
             <div className="buttonDiv">
                 <div className="submitButtonBackground">
                     <input
                         className="submitButton"
                         type="submit"
-                        value="Login"
+                        value="Send Password Reset"
                         id="signin"
-                        onClick={login}
+                        onClick={forgotPassword}
                     />
                 </div>
             </div>
@@ -79,4 +67,4 @@ const LoginForm: React.FC = () => {
     );
 };
 
-export default LoginForm;
+export default ForgotPasswordForm;
