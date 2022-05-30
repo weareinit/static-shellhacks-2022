@@ -15,6 +15,8 @@ export function formatError(error: FirebaseError) {
             return "Email already in use. Try again.";
         case AuthErrorCodes.WEAK_PASSWORD:
             return "Password should be at least 6 characters. Try again.";
+        case AuthErrorCodes.INVALID_OOB_CODE:
+            return "The action code is invalid. Try using the link from your email or submitting another forgot password request.";
         default:
             return error.message;
     }
