@@ -2,7 +2,6 @@ import { Formik, Form, Field, FormikHelpers } from "formik";
 import { Emoji, EmojiProvider } from "react-apple-emojis";
 import emojiData from "react-apple-emojis/lib/data.json";
 import * as Yup from "yup";
-import LinkButton from "../../components/LinkButton";
 import "./index.css";
 import addHacker from "../../server/functions/addHacker";
 import { HackerValues } from "../../../util/types";
@@ -155,7 +154,7 @@ const HackerForm: React.FC = () => {
                             setSubmitting(false);
                             setTimeout(() => {
                                 navigate("/dashboard");
-                            }, 5000);
+                            }, 3000);
                         })
                         .catch((e: FirebaseError) => {
                             setPopupState(ProgressState.FAILED);
@@ -1664,11 +1663,12 @@ const HackerForm: React.FC = () => {
                             </div>
 
                             <button id="submitBtn" type="submit">
-                                <LinkButton
-                                    text="Submit"
-                                    url="/application"
-                                    filled={true}
-                                />
+                                <div className="submitButtonBackground">
+                                    <div
+                                        className="submitButton"
+                                        children={"Submit"}
+                                    />
+                                </div>
                             </button>
                         </EmojiProvider>
                     </Form>

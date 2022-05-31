@@ -33,7 +33,7 @@ const PasswordResetForm: React.FC = () => {
                 setPopupState(ProgressState.COMPLETE);
                 setTimeout(() => {
                     navigate("/entry");
-                }, 5000);
+                }, 3000);
             })
             .catch((e: FirebaseError) => {
                 console.log(e.code);
