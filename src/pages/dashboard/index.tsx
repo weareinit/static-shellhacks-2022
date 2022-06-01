@@ -4,39 +4,57 @@ import { doc, DocumentData, getDoc } from "firebase/firestore";
 import { auth, db } from "../../server/firebaseApp";
 import { useNavigate } from "react-router-dom";
 import ChangeAddress from "./formContent";
+import Resume from "./resume";
+
+//
+async function handleAddressChange(newAddress: {}) {}
+
+async function handleResumeChange(file: any) {}
 
 function Dashboard() {
   const [isLoading, setIsLoading] = useState(true);
   const [userData, setUserData] = useState<DocumentData | undefined>();
   const [changingAddress, setChangingAddress] = useState(false);
+  const [hasDocument, setHasDocument] = useState(false); // This is to check if the user has a document in the firestore.
+
+  const { firstName, lastName, address, shirtSize } = userData || {};
+  const { apartment, city, country, postalCode, state, streetAddress } =
+    address || {};
 
   const navigate = useNavigate();
-
   const user = getAuth().currentUser;
+
   useEffect(() => {
-    // ! We need to conduct tests to see if every reload results in a refetch.
-    // console.log("Mounting");
     const docRef = doc(db, "hackers", "" + user?.uid);
+
+    // Defining the fetch data function.
     const fetchData = async () => {
-      // console.log("Page Loadding");
       await getDoc(docRef)
         .then((rawData) => {
           const data: DocumentData | undefined = rawData.data();
-          // console.log("user data: ");
-          // console.log(data);
           setUserData(data);
-          setIsLoading(false);
+          console.log("Component Did Fetch");
         })
         .catch((error) => {
           console.log(error);
         });
     };
-    fetchData();
-  }, [user]);
 
-  const { firstName, lastName, address, shirtSize } = userData || {};
-  const { apartment, city, country, postalCode, state, streetAddress } =
-    address || {};
+    // checking if the document exists in the collection. If it does, then it calls teh fetch data function.
+    const checkIfDocExists = async () => {
+      await getDoc(docRef).then((doc) => {
+        if (doc.exists()) {
+          fetchData(); // if fetch data succeeds, then the data has successfully been fetched.
+          setIsLoading(false);
+          setHasDocument(true);
+        } else {
+          setHasDocument(false);
+        }
+      });
+    };
+
+    checkIfDocExists();
+  }, [user]);
 
   return (
     <div>
@@ -91,7 +109,7 @@ function Dashboard() {
                   <h3>Address</h3>
                   <button
                     onClick={() => {
-                      setChangingAddress(true);
+                      setChangingAddress(!changingAddress);
                       console.log("Changing Address");
                       console.log(changingAddress);
                     }}
@@ -114,32 +132,11 @@ function Dashboard() {
                 <h3>T-Shirt Size</h3>
                 <p>{shirtSize}</p>
               </div>
-              <div className="resume">
-                <h3>Resume (PDF Only):</h3>
-                <button
-                // TODO: make style for button
-                >
-                  Attach File
-                </button>
-                <p
-                // TODO: Change into the file name when user attaches file
-                >
-                  Resume.pdf
-                </p>
-                <div className="icon-container">
-                  {
-                    // ICON Left
-                  }
-                  {
-                    // ICON Right
-                  }
-                </div>
-              </div>
-
+              {
+                // <Resume></Resume>
+              }
               <div className="change-address">
-
-                {
-                  changingAddress && (
+                {changingAddress && (
                   <div>
                     <ChangeAddress />
                   </div>
