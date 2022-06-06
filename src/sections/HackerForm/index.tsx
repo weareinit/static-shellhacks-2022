@@ -2,7 +2,7 @@ import { Formik, Form, Field, FormikHelpers } from "formik";
 import { Emoji, EmojiProvider } from "react-apple-emojis";
 import emojiData from "react-apple-emojis/lib/data.json";
 import * as Yup from "yup";
-import "./index.css";
+import styles from "./index.module.css";
 import addHacker from "../../server/functions/addHacker";
 import { HackerValues } from "../../../util/types";
 import React from "react";
@@ -11,8 +11,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import ProgressModal from "../../components/ProgressModal";
 import { ProgressState } from "../../components/ProgressModal";
 import { FirebaseError } from "firebase/app";
-import { useNavigate } from "react-router-dom";
 import { formatError } from "../../util/errors";
+import { useRouter } from "next/router";
 
 const SELECT_PLACEHOLDER = "-- SELECT AN OPTION --";
 const REQUIRED_FIELD_ERROR = "This field is required.";
@@ -27,16 +27,16 @@ type LabelProps = {
 
 const FieldLabel: React.FC<LabelProps> = (props: LabelProps) => {
     return (
-        <div className="fieldLabel">
+        <div className={styles.fieldLabel}>
             <label
-                className="fieldLabelTitle"
+                className={styles.fieldLabelTitle}
                 htmlFor={props.name}
                 id={props.id}
             >
-                <Emoji className="applicationEmoji" name={props.emoji} />
+                <Emoji className={styles.applicationEmoji} name={props.emoji} />
                 {props.title}
             </label>
-            <p className="fieldLabelDesc">{props.description}</p>
+            <p className={styles.fieldLabelDesc}>{props.description}</p>
         </div>
     );
 };
@@ -134,10 +134,10 @@ const HackerForm: React.FC = () => {
     const [popupState, setPopupState] = React.useState(
         ProgressState.PROCESSING
     );
-    const navigate = useNavigate();
+    const router = useRouter();
 
     return (
-        <section className="contentBackground">
+        <section className={styles.contentBackground}>
             <h2>Hacker Application</h2>
             <Formik
                 initialValues={initialValues}
@@ -153,7 +153,7 @@ const HackerForm: React.FC = () => {
                             setPopupState(ProgressState.COMPLETE);
                             setSubmitting(false);
                             setTimeout(() => {
-                                navigate("/dashboard");
+                                router.push("/dashboard");
                             }, 3000);
                         })
                         .catch((e: FirebaseError) => {
@@ -172,7 +172,7 @@ const HackerForm: React.FC = () => {
                 }) => (
                     <Form id="form">
                         <EmojiProvider data={emojiData}>
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name="firstName"
                                     emoji="smiling-face-with-sunglasses"
@@ -180,19 +180,19 @@ const HackerForm: React.FC = () => {
                                     description="Let's get to know you a bit!"
                                 />
                                 <Field
-                                    className="field"
+                                    className={styles.field}
                                     id="firstName"
                                     name="firstName"
                                     placeholder="John"
                                 />
                                 {errors.firstName && touched.firstName ? (
-                                    <div className="errors">
+                                    <div className={styles.errors}>
                                         {errors.firstName}
                                     </div>
                                 ) : null}
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name="lastName"
                                     emoji="thinking-face"
@@ -200,19 +200,19 @@ const HackerForm: React.FC = () => {
                                     description="Tell us a bit more"
                                 />
                                 <Field
-                                    className="field"
+                                    className={styles.field}
                                     id="lastName"
                                     name="lastName"
                                     placeholder="Doe"
                                 />
                                 {errors.lastName && touched.lastName ? (
-                                    <div className="errors">
+                                    <div className={styles.errors}>
                                         {errors.lastName}
                                     </div>
                                 ) : null}
                             </div>
 
-                            {/* <div className="fieldWrapper">
+                            {/* <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name="email"
                                     emoji="love-letter"
@@ -220,18 +220,18 @@ const HackerForm: React.FC = () => {
                                     description="We won't spam, promise!"
                                 />
                                 <Field
-                                    className="field"
+                                    className={styles.field}
                                     id="email"
                                     name="email"
                                     placeholder="Shell@hacks.com"
                                     type="email"
                                 />
                                 {errors.email && touched.email ? (
-                                    <div className="errors">{errors.email}</div>
+                                    <div className={styles.errors}>{errors.email}</div>
                                 ) : null}
                             </div> */}
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name="country"
                                     emoji="globe-showing-americas"
@@ -239,7 +239,7 @@ const HackerForm: React.FC = () => {
                                     description="Where in the world are you located?"
                                 />
                                 <Field
-                                    className="field select"
+                                    className={`${styles.field} ${styles.select}`}
                                     as="select"
                                     name="country"
                                     id="country"
@@ -690,13 +690,13 @@ const HackerForm: React.FC = () => {
                                     <option value="Zimbabwe">Zimbabwe</option>
                                 </Field>
                                 {errors.country && touched.country ? (
-                                    <div className="errors">
+                                    <div className={styles.errors}>
                                         {errors.country}
                                     </div>
                                 ) : null}
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name="addressLine1"
                                     emoji="house"
@@ -704,19 +704,19 @@ const HackerForm: React.FC = () => {
                                     description="Street address for swag"
                                 />
                                 <Field
-                                    className="field"
+                                    className={styles.field}
                                     id="addressLine1"
                                     name="addressLine1"
                                     placeholder="123 lane street"
                                 />
                                 {errors.addressLine1 && touched.addressLine1 ? (
-                                    <div className="errors">
+                                    <div className={styles.errors}>
                                         {errors.addressLine1}
                                     </div>
                                 ) : null}
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name="addressLine2"
                                     emoji="house"
@@ -724,14 +724,14 @@ const HackerForm: React.FC = () => {
                                     description="Other address designation"
                                 />
                                 <Field
-                                    className="field"
+                                    className={styles.field}
                                     id="addressLine2"
                                     name="addressLine2"
                                     placeholder="Apt number"
                                 />
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name="city"
                                     emoji="automobile"
@@ -739,17 +739,19 @@ const HackerForm: React.FC = () => {
                                     description=""
                                 />
                                 <Field
-                                    className="field"
+                                    className={styles.field}
                                     id="city"
                                     name="city"
                                     placeholder="Miami"
                                 />
                                 {errors.city && touched.city ? (
-                                    <div className="errors">{errors.city}</div>
+                                    <div className={styles.errors}>
+                                        {errors.city}
+                                    </div>
                                 ) : null}
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name="state"
                                     emoji="round-pushpin"
@@ -757,17 +759,19 @@ const HackerForm: React.FC = () => {
                                     description=""
                                 />
                                 <Field
-                                    className="field"
+                                    className={styles.field}
                                     id="state"
                                     name="state"
                                     placeholder="FL"
                                 />
                                 {errors.state && touched.state ? (
-                                    <div className="errors">{errors.state}</div>
+                                    <div className={styles.errors}>
+                                        {errors.state}
+                                    </div>
                                 ) : null}
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name="zipcode"
                                     emoji="zipper-mouth-face"
@@ -775,19 +779,19 @@ const HackerForm: React.FC = () => {
                                     description=""
                                 />
                                 <Field
-                                    className="field"
+                                    className={styles.field}
                                     id="zipcode"
                                     name="zipcode"
                                     placeholder="12345"
                                 />
                                 {errors.zipcode && touched.zipcode ? (
-                                    <div className="errors">
+                                    <div className={styles.errors}>
                                         {errors.zipcode}
                                     </div>
                                 ) : null}
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name="phoneNumber"
                                     emoji="telephone-receiver"
@@ -795,19 +799,19 @@ const HackerForm: React.FC = () => {
                                     description="We are unlikely to contact you via call. This will be used for shipping if necessary."
                                 />
                                 <Field
-                                    className="field"
+                                    className={styles.field}
                                     id="phoneNumber"
                                     name="phoneNumber"
                                     placeholder="3051119999"
                                 />
                                 {errors.phoneNumber && touched.phoneNumber ? (
-                                    <div className="errors">
+                                    <div className={styles.errors}>
                                         {errors.phoneNumber}
                                     </div>
                                 ) : null}
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name="school"
                                     emoji="school"
@@ -815,19 +819,19 @@ const HackerForm: React.FC = () => {
                                     description="Which school do you currently attend?"
                                 />
                                 <Field
-                                    className="field"
+                                    className={styles.field}
                                     id="school"
                                     name="school"
                                     placeholder="University name"
                                 />
                                 {errors.school && touched.school ? (
-                                    <div className="errors">
+                                    <div className={styles.errors}>
                                         {errors.school}
                                     </div>
                                 ) : null}
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name="major"
                                     emoji="books"
@@ -835,17 +839,19 @@ const HackerForm: React.FC = () => {
                                     description="What are you currently studying?"
                                 />
                                 <Field
-                                    className="field"
+                                    className={styles.field}
                                     id="major"
                                     name="major"
                                     placeholder="Computer Science"
                                 />
                                 {errors.major && touched.major ? (
-                                    <div className="errors">{errors.major}</div>
+                                    <div className={styles.errors}>
+                                        {errors.major}
+                                    </div>
                                 ) : null}
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name="classStanding"
                                     emoji="red-apple"
@@ -853,7 +859,7 @@ const HackerForm: React.FC = () => {
                                     description="Where are you in your college career?"
                                 />
                                 <Field
-                                    className="field select"
+                                    className={`${styles.field} ${styles.select}`}
                                     as="select"
                                     name="classStanding"
                                     id="classStanding"
@@ -878,13 +884,13 @@ const HackerForm: React.FC = () => {
                                 </Field>
                                 {errors.classStanding &&
                                 touched.classStanding ? (
-                                    <div className="errors">
+                                    <div className={styles.errors}>
                                         {errors.classStanding}
                                     </div>
                                 ) : null}
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name="graduationYear"
                                     emoji="graduation-cap"
@@ -892,7 +898,7 @@ const HackerForm: React.FC = () => {
                                     description="When are you finishing your degree?"
                                 />
                                 <Field
-                                    className="field select"
+                                    className={`${styles.field} ${styles.select}`}
                                     as="select"
                                     name="graduationYear"
                                     id="graduationYear"
@@ -918,13 +924,13 @@ const HackerForm: React.FC = () => {
                                 </Field>
                                 {errors.graduationYear &&
                                 touched.graduationYear ? (
-                                    <div className="errors">
+                                    <div className={styles.errors}>
                                         {errors.graduationYear}
                                     </div>
                                 ) : null}
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name="gender"
                                     emoji="dolphin"
@@ -932,19 +938,19 @@ const HackerForm: React.FC = () => {
                                     description="For demographic purposes only"
                                 />
                                 <Field
-                                    className="field"
+                                    className={styles.field}
                                     id="gender"
                                     name="gender"
                                     placeholder="Gender"
                                 />
                                 {errors.gender && touched.gender ? (
-                                    <div className="errors">
+                                    <div className={styles.errors}>
                                         {errors.gender}
                                     </div>
                                 ) : null}
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name="ethnicity"
                                     emoji="penguin"
@@ -952,7 +958,7 @@ const HackerForm: React.FC = () => {
                                     description="For demographic purposes only"
                                 />
                                 <Field
-                                    className="field select"
+                                    className={`${styles.field} ${styles.select}`}
                                     as="select"
                                     name="ethnicity"
                                     id="ethnicity"
@@ -981,13 +987,13 @@ const HackerForm: React.FC = () => {
                                     </option>
                                 </Field>
                                 {errors.ethnicity && touched.ethnicity ? (
-                                    <div className="errors">
+                                    <div className={styles.errors}>
                                         {errors.ethnicity}
                                     </div>
                                 ) : null}
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name="race"
                                     emoji="umbrella-on-ground"
@@ -1050,11 +1056,13 @@ const HackerForm: React.FC = () => {
                                     </label>
                                 </div>
                                 {errors.race ? (
-                                    <div className="errors">{errors.race}</div>
+                                    <div className={styles.errors}>
+                                        {errors.race}
+                                    </div>
                                 ) : null}
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name="tshirtSize"
                                     emoji="t-shirt"
@@ -1062,7 +1070,7 @@ const HackerForm: React.FC = () => {
                                     description=""
                                 />
                                 <Field
-                                    className="field select"
+                                    className={`${styles.field} ${styles.select}`}
                                     as="select"
                                     name="tshirtSize"
                                     id="tshirtSize"
@@ -1087,13 +1095,13 @@ const HackerForm: React.FC = () => {
                                     <option value="XL">Extra-Large</option>
                                 </Field>
                                 {errors.tshirtSize && touched.tshirtSize ? (
-                                    <div className="errors">
+                                    <div className={styles.errors}>
                                         {errors.tshirtSize}
                                     </div>
                                 ) : null}
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name="whichRoleBestDescribesYou"
                                     emoji="disguised-face"
@@ -1101,7 +1109,7 @@ const HackerForm: React.FC = () => {
                                     description=""
                                 />
                                 <Field
-                                    className="field select"
+                                    className={`${styles.field} ${styles.select}`}
                                     as="select"
                                     name="whichRoleBestDescribesYou"
                                     id="whichRoleBestDescribesYou"
@@ -1181,13 +1189,13 @@ const HackerForm: React.FC = () => {
                                 </Field>
                                 {errors.whichRoleBestDescribesYou &&
                                 touched.whichRoleBestDescribesYou ? (
-                                    <div className="errors">
+                                    <div className={styles.errors}>
                                         {errors.whichRoleBestDescribesYou}
                                     </div>
                                 ) : null}
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name=""
                                     emoji="sun"
@@ -1196,7 +1204,7 @@ const HackerForm: React.FC = () => {
                                     id="radio-group-1"
                                 />
                                 <Field
-                                    className="field select"
+                                    className={`${styles.field} ${styles.select}`}
                                     as="select"
                                     name="haveYouAttendedAHackathonBefore"
                                     id="haveYouAttendedAHackathonBefore"
@@ -1224,13 +1232,13 @@ const HackerForm: React.FC = () => {
                                 </Field>
                                 {errors.haveYouAttendedAHackathonBefore &&
                                 touched.haveYouAttendedAHackathonBefore ? (
-                                    <div className="errors">
+                                    <div className={styles.errors}>
                                         {errors.haveYouAttendedAHackathonBefore}
                                     </div>
                                 ) : null}
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name=""
                                     emoji="palm-tree"
@@ -1294,7 +1302,7 @@ const HackerForm: React.FC = () => {
                                 </div>
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name=""
                                     emoji="eyes"
@@ -1430,7 +1438,7 @@ const HackerForm: React.FC = () => {
                                 </div>
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name="whyAreYouInterestedInParticipatingInShellhacks"
                                     emoji="face-with-monocle"
@@ -1438,7 +1446,7 @@ const HackerForm: React.FC = () => {
                                     description="This is your chance to tell us more about you and why we should select you!"
                                 />
                                 <div
-                                    className="field inputDiv"
+                                    className={`${styles.field} ${styles.inputDiv}`}
                                     id="whyAreYouInterestedInParticipatingInShellhacks"
                                     contentEditable="true"
                                     placeholder="I want to participate because..."
@@ -1451,7 +1459,7 @@ const HackerForm: React.FC = () => {
                                 />
                                 {errors.whyAreYouInterestedInParticipatingInShellhacks &&
                                 touched.whyAreYouInterestedInParticipatingInShellhacks ? (
-                                    <div className="errors">
+                                    <div className={styles.errors}>
                                         {
                                             errors.whyAreYouInterestedInParticipatingInShellhacks
                                         }
@@ -1459,7 +1467,7 @@ const HackerForm: React.FC = () => {
                                 ) : null}
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name="file"
                                     emoji="memo"
@@ -1484,11 +1492,13 @@ const HackerForm: React.FC = () => {
                                     accept=".pdf"
                                 />
                                 {errors.file ? (
-                                    <div className="errors">{errors.file}</div>
+                                    <div className={styles.errors}>
+                                        {errors.file}
+                                    </div>
                                 ) : null}
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name="linkedIn"
                                     emoji="briefcase"
@@ -1496,14 +1506,14 @@ const HackerForm: React.FC = () => {
                                     description="Link to your LinkedIn profile"
                                 />
                                 <Field
-                                    className="field"
+                                    className={styles.field}
                                     id="linkedIn"
                                     name="linkedIn"
                                     placeholder="link"
                                 />
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name="github"
                                     emoji="laptop"
@@ -1511,14 +1521,14 @@ const HackerForm: React.FC = () => {
                                     description="Link to your Github profile"
                                 />
                                 <Field
-                                    className="field"
+                                    className={styles.field}
                                     id="github"
                                     name="github"
                                     placeholder="link"
                                 />
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name="website"
                                     emoji="spider-web"
@@ -1526,14 +1536,14 @@ const HackerForm: React.FC = () => {
                                     description="Link to your Website"
                                 />
                                 <Field
-                                    className="field"
+                                    className={styles.field}
                                     id="website"
                                     name="website"
                                     placeholder="link"
                                 />
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name=""
                                     emoji="globe-with-meridians"
@@ -1549,7 +1559,7 @@ const HackerForm: React.FC = () => {
                                 />
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name=""
                                     emoji="no-one-under-eighteen"
@@ -1564,13 +1574,13 @@ const HackerForm: React.FC = () => {
                                     checked={isAdult}
                                 />
                                 {errors.isAdult && touched.isAdult ? (
-                                    <div className="errors">
+                                    <div className={styles.errors}>
                                         {errors.isAdult}
                                     </div>
                                 ) : null}
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name=""
                                     emoji="thumbs-up"
@@ -1588,13 +1598,13 @@ const HackerForm: React.FC = () => {
                                 />
                                 {errors.isSharingInfo &&
                                 touched.isSharingInfo ? (
-                                    <div className="errors">
+                                    <div className={styles.errors}>
                                         {errors.isSharingInfo}
                                     </div>
                                 ) : null}
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name=""
                                     emoji="handshake"
@@ -1609,13 +1619,13 @@ const HackerForm: React.FC = () => {
                                     checked={agreedMLH}
                                 />
                                 {errors.agreedMLH && touched.agreedMLH ? (
-                                    <div className="errors">
+                                    <div className={styles.errors}>
                                         {errors.agreedMLH}
                                     </div>
                                 ) : null}
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name=""
                                     emoji="scroll"
@@ -1630,13 +1640,13 @@ const HackerForm: React.FC = () => {
                                     checked={agreedTerms}
                                 />
                                 {errors.agreedTerms && touched.agreedTerms ? (
-                                    <div className="errors">
+                                    <div className={styles.errors}>
                                         {errors.agreedTerms}
                                     </div>
                                 ) : null}
                             </div>
 
-                            <div className="fieldWrapper">
+                            <div className={styles.fieldWrapper}>
                                 <FieldLabel
                                     name=""
                                     emoji="envelope"
@@ -1656,16 +1666,20 @@ const HackerForm: React.FC = () => {
                                 />
                                 {errors.agreedCommunications &&
                                 touched.agreedCommunications ? (
-                                    <div className="errors">
+                                    <div className={styles.errors}>
                                         {errors.agreedCommunications}
                                     </div>
                                 ) : null}
                             </div>
 
-                            <button id="submitBtn" type="submit">
-                                <div className="submitButtonBackground">
+                            <button
+                                id="submitBtn"
+                                className={styles.submitButton}
+                                type="submit"
+                            >
+                                <div className={styles.submitButtonBackground}>
                                     <div
-                                        className="submitButton"
+                                        className={styles.submitButtonText}
                                         children={"Submit"}
                                     />
                                 </div>

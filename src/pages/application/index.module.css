@@ -3,12 +3,14 @@
     width: 100%;
     height: 100vh;
     background: var(--purple-gradient);
-    display: flex;
+    display: block;
 }
 
 .applicationPageCity {
+    position: absolute;
     width: 100%;
     align-self: flex-end;
+    top: -20% !important;
 }
 
 .applicationLogo {

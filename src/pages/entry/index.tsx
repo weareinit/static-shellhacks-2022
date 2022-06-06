@@ -1,4 +1,4 @@
-import "./index.css";
+import styles from "./index.module.css";
 import React from "react";
 import CityBackground from "../../components/CityBackground";
 import LoginForm from "../../sections/LoginForm";
@@ -22,10 +22,10 @@ const EntryPage: React.FC = () => {
             title = "Welcome Back!";
             subtitle = (
                 <div>
-                    <p className="entrySubtitle">
+                    <p className={styles.entrySubtitle}>
                         Don't have an account?{" "}
                         <span
-                            className="entrySubtitleButton"
+                            className={styles.entrySubtitleButton}
                             onClick={() => {
                                 setEntryState(EntryState.SIGNUP);
                             }}
@@ -33,10 +33,10 @@ const EntryPage: React.FC = () => {
                             Sign up here!
                         </span>
                     </p>
-                    <p className="entrySubtitle">
+                    <p className={styles.entrySubtitle}>
                         Forgot Password?{" "}
                         <span
-                            className="entrySubtitleButton"
+                            className={styles.entrySubtitleButton}
                             onClick={() => {
                                 setEntryState(EntryState.PASSWORD_RESET);
                             }}
@@ -51,10 +51,10 @@ const EntryPage: React.FC = () => {
         case EntryState.SIGNUP:
             title = "Sign Up!";
             subtitle = (
-                <p className="entrySubtitle">
+                <p className={styles.entrySubtitle}>
                     Already have an account?{" "}
                     <span
-                        className="entrySubtitleButton"
+                        className={styles.entrySubtitleButton}
                         onClick={() => {
                             setEntryState(EntryState.LOGIN);
                         }}
@@ -68,9 +68,9 @@ const EntryPage: React.FC = () => {
         case EntryState.PASSWORD_RESET:
             title = "Reset Password";
             subtitle = (
-                <p className="entrySubtitle">
+                <p className={styles.entrySubtitle}>
                     <span
-                        className="entrySubtitleButton"
+                        className={styles.entrySubtitleButton}
                         onClick={() => {
                             setEntryState(EntryState.LOGIN);
                         }}
@@ -84,10 +84,10 @@ const EntryPage: React.FC = () => {
         default:
             title = "Sign Up!";
             subtitle = (
-                <p className="entrySubtitle">
+                <p className={styles.entrySubtitle}>
                     Already have an account?{" "}
                     <span
-                        className="entrySubtitleButton"
+                        className={styles.entrySubtitleButton}
                         onClick={() => {
                             setEntryState(EntryState.LOGIN);
                         }}
@@ -101,10 +101,10 @@ const EntryPage: React.FC = () => {
     }
 
     return (
-        <div className="entryPageBackground">
+        <div className={styles.entryPageBackground}>
             <CityBackground />
-            <div className="entryBlock">
-                <h2 className="entryTitle">{title}</h2>
+            <div className={styles.entryBlock}>
+                <h2 className={styles.entryTitle}>{title}</h2>
                 {subtitle}
                 {body}
             </div>

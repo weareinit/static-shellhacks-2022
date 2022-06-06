@@ -1,4 +1,4 @@
-import "./index.css";
+import styles from "./index.module.css";
 import React from "react";
 import { auth } from "../../server/firebaseApp";
 import { sendPasswordResetEmail } from "firebase/auth";
@@ -38,7 +38,7 @@ const ForgotPasswordForm: React.FC = () => {
                 failedMessage={error.length != 0 ? error : undefined}
                 completeMessage="Password reset sent to email."
             />
-            <div className="login-field">
+            <div className={styles.forgotPasswordField}>
                 <label htmlFor="email" id="email-label">
                     Email
                 </label>
@@ -52,10 +52,10 @@ const ForgotPasswordForm: React.FC = () => {
                     }}
                 />
             </div>
-            <div className="buttonDiv">
-                <div className="submitButtonBackground">
+            <div className={styles.buttonDiv}>
+                <div className={styles.submitButtonBackground}>
                     <input
-                        className="submitButton"
+                        className={styles.submitButton}
                         type="submit"
                         value="Send Password Reset"
                         id="signin"

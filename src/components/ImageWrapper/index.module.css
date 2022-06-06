@@ -1,0 +1,54 @@
+.image > span {
+    box-sizing: initial !important;
+    display: initial !important;
+    overflow: initial !important;
+    width: initial !important;
+    height: initial !important;
+    background: initial !important;
+    opacity: initial !important;
+    border: initial !important;
+    margin: initial !important;
+    padding: initial !important;
+    position: initial !important;
+    max-width: initial !important;
+}
+
+.image > span > img {
+    box-sizing: initial !important;
+    display: initial !important;
+    overflow: initial !important;
+    width: initial !important;
+    height: initial !important;
+    position: initial !important;
+    max-width: initial !important;
+}
+
+.image > span > span {
+    box-sizing: initial !important;
+    display: initial !important;
+    overflow: initial !important;
+    width: initial !important;
+    height: initial !important;
+    background: initial !important;
+    opacity: initial !important;
+    border: initial !important;
+    margin: initial !important;
+    padding: initial !important;
+    position: initial !important;
+    max-width: initial !important;
+}
+
+.image > span > span > img {
+    box-sizing: initial !important;
+    display: initial !important;
+    overflow: initial !important;
+    width: initial !important;
+    height: initial !important;
+    background: initial !important;
+    opacity: initial !important;
+    border: initial !important;
+    margin: initial !important;
+    padding: initial !important;
+    position: initial !important;
+    max-width: initial !important;
+}

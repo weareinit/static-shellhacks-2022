@@ -1,0 +1,84 @@
+.passwordResetField {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.passwordResetField label {
+    text-align: left;
+    align-self: flex-start;
+    font-size: var(--font-size-body);
+    margin: 3rem 0 2rem 0;
+    color: white;
+}
+
+.passwordResetField input {
+    width: 100%;
+    height: 60px;
+    border: 20px solid;
+    border-image: url("../../svg/Border.svg");
+    border-image-slice: 20 20;
+    border-radius: 24px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    outline: none;
+    color: white;
+    background-color: #3c2066;
+}
+
+.passwordResetField input:placeholder {
+    color: #c7c7c7;
+}
+
+.passwordResetField input:focus {
+    background-color: var(--shell-purple);
+}
+
+.submitButton {
+    border: none;
+    background: none;
+    outline: none;
+    font-size: var(--font-size-small);
+    color: var(--shell-purple);
+    transition: transform 1s ease;
+}
+
+.submitButtonBackground:hover .submitButton {
+    transform: scale(1.1);
+}
+
+.submitButtonBackground {
+    background: var(--pink-tan-gradient);
+    border-radius: 20px;
+    padding: 4%;
+    min-width: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonDiv {
+    display: flex;
+    margin: 24px auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.currentUserAndLogout {
+    margin: 5rem auto 3rem;
+    text-align: center;
+}
+
+.currentUser {
+    margin-bottom: 1rem;
+}
+
+/* LANDSCAPE VERSION */
+@media screen and (min-width: 1024px) {
+    .buttonDiv {
+        margin: 4% auto;
+    }
+    .submitButtonBackground {
+        padding: 2%;
+    }
+}

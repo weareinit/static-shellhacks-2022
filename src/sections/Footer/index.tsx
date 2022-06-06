@@ -1,18 +1,17 @@
-import "./index.css";
+import styles from "./index.module.css";
 import React from "react";
 import { Emoji, EmojiProvider } from "react-apple-emojis";
 import emojiData from "react-apple-emojis/lib/data.json";
 import SocialButton from "../../components/SocialButton";
 import { SocialType } from "../../util/types";
-import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
     return (
-        <section className="footerBackground">
-            <div className="footerText">
+        <section className={styles.footerBackground}>
+            <div className={styles.footerText}>
                 {/* prettier-ignore */}
                 <p>
-                    Made with <EmojiProvider data={emojiData}><Emoji className="yellowHeart" name="yellow-heart"/></EmojiProvider> from Upsilon&nbsp;Pi&nbsp;Epsilon
+                    Made with <EmojiProvider data={emojiData}><Emoji className={styles.yellowHeart} name="yellow-heart"/></EmojiProvider> from Upsilon&nbsp;Pi&nbsp;Epsilon
                 </p>
                 <a
                     href="http://mlh.io/code-of-conduct"
@@ -22,7 +21,7 @@ const Footer: React.FC = () => {
                     MLH Code of Conduct
                 </a>
             </div>
-            <div className="footerSocial">
+            <div className={styles.footerSocial}>
                 <SocialButton type={SocialType.FACEBOOK} />
                 <SocialButton type={SocialType.TWITTER} />
                 <SocialButton type={SocialType.INSTAGRAM} />

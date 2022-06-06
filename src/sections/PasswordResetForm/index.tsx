@@ -1,16 +1,11 @@
-import "./index.css";
+import styles from "./index.module.css";
 import React from "react";
 import { auth } from "../../server/firebaseApp";
 import { confirmPasswordReset } from "firebase/auth";
 import ProgressModal, { ProgressState } from "../../components/ProgressModal";
 import { FirebaseError } from "firebase/app";
-import { useLocation, useNavigate } from "react-router-dom";
 import { formatError } from "../../util/errors";
-
-function useQuery() {
-    const location = useLocation();
-    return new URLSearchParams(location.search);
-}
+import { useRouter } from "next/router";
 
 const PasswordResetForm: React.FC = () => {
     const [password, setPassword] = React.useState("");
@@ -20,9 +15,9 @@ const PasswordResetForm: React.FC = () => {
         ProgressState.PROCESSING
     );
 
-    const navigate = useNavigate();
-    const query = useQuery();
-    const oobCode = query.get("oobCode") ?? "";
+    const router = useRouter();
+    const query = router.query;
+    const oobCode = query["oobCode"]?.toString() ?? "";
 
     const passwordReset = async (event: any) => {
         event.preventDefault();
@@ -32,7 +27,7 @@ const PasswordResetForm: React.FC = () => {
             .then(() => {
                 setPopupState(ProgressState.COMPLETE);
                 setTimeout(() => {
-                    navigate("/entry");
+                    router.push("/entry");
                 }, 3000);
             })
             .catch((e: FirebaseError) => {
@@ -51,7 +46,7 @@ const PasswordResetForm: React.FC = () => {
                 failedMessage={error.length != 0 ? error : undefined}
                 completeMessage="Password reset! Attempting to navigate to login page."
             />
-            <div className="login-field">
+            <div className={styles.passwordResetField}>
                 <label htmlFor="password" id="password-label">
                     New Password
                 </label>
@@ -65,10 +60,10 @@ const PasswordResetForm: React.FC = () => {
                     }}
                 />
             </div>
-            <div className="buttonDiv">
-                <div className="submitButtonBackground">
+            <div className={styles.buttonDiv}>
+                <div className={styles.submitButtonBackground}>
                     <input
-                        className="submitButton"
+                        className={styles.submitButton}
                         type="submit"
                         value="Reset Password"
                         id="signin"

@@ -1,4 +1,4 @@
-import "./index.css";
+import styles from "./index.module.css";
 import React from "react";
 import X_Symbol from "../../svg/X_Symbol.svg";
 import Error_Symbol from "../../svg/Error_Symbol.svg";
@@ -28,27 +28,12 @@ const ProgressIcon: React.FC<ProgressIconProps> = (
 ) => {
     switch (props.state) {
         case ProgressState.COMPLETE:
-            return (
-                <img
-                    className="progressModalIcon"
-                    src={Success_Symbol}
-                    alt="Success Symbol"
-                />
-            );
+            return <Success_Symbol className={styles.progressModalIcon} />;
         case ProgressState.FAILED:
-            return (
-                <img
-                    className="progressModalIcon"
-                    src={Error_Symbol}
-                    alt="Error Symbol"
-                />
-            );
+            return <Error_Symbol className={styles.progressModalIcon} />;
         default:
             return (
-                <svg
-                    className="progressModalIcon progressModalLoader"
-                    viewBox="0 0 50 50"
-                >
+                <svg className={styles.progressModalLoader} viewBox="0 0 50 50">
                     <circle
                         className="circle"
                         cx="25"
@@ -82,19 +67,19 @@ const ProgressModal: React.FC<ProgressModalProps> = (
     }
 
     return props.trigger ? (
-        <div className="progressModalShadow">
-            <div className="progressModalBackground">
+        <div className={styles.progressModalShadow}>
+            <div className={styles.progressModalBackground}>
                 <ProgressIcon state={props.state} />
-                <p className="progressModalState">{message}</p>
+                <p className={styles.progressModalState}>{message}</p>
                 {props.state == ProgressState.COMPLETE ||
                 props.state == ProgressState.FAILED ? (
                     <button
-                        className="progressModalButton"
+                        className={styles.progressModalButton}
                         onClick={() => {
                             props.setTrigger(false);
                         }}
                     >
-                        <img src={X_Symbol} alt="X Symbol" />
+                        <X_Symbol />
                     </button>
                 ) : null}
             </div>

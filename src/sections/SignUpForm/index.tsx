@@ -1,4 +1,4 @@
-import "./index.css";
+import styles from "./index.module.css";
 import React from "react";
 import { auth } from "../../server/firebaseApp";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -38,7 +38,7 @@ const SignUpForm: React.FC = () => {
                 }
                 failedMessage={error.length != 0 ? error : undefined}
             />
-            <div className="login-field">
+            <div className={styles.signUpField}>
                 <label htmlFor="email" id="email-label">
                     Email
                 </label>
@@ -52,7 +52,7 @@ const SignUpForm: React.FC = () => {
                     }}
                 />
             </div>
-            <div className="login-field">
+            <div className={styles.signUpField}>
                 <label htmlFor="password">Password</label>
                 <input
                     type="password"
@@ -64,10 +64,10 @@ const SignUpForm: React.FC = () => {
                     }}
                 />
             </div>
-            <div className="buttonDiv">
-                <div className="submitButtonBackground">
+            <div className={styles.buttonDiv}>
+                <div className={styles.submitButtonBackground}>
                     <input
-                        className="submitButton"
+                        className={styles.submitButton}
                         type="submit"
                         value="Sign Up"
                         id="signup"

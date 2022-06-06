@@ -1,4 +1,5 @@
 import { Emoji } from "react-apple-emojis";
+import "./index.module.css";
 
 type LabelProps = {
     name: string;

@@ -55,3 +55,35 @@ h2 {
 p {
     font-size: var(--font-size-small);
 }
+
+input[type="checkbox"] {
+    margin: 3vw 1vw;
+    width: calc(1.1 * var(--font-size-body));
+    height: calc(1.1 * var(--font-size-body));
+    cursor: pointer;
+}
+
+option {
+    color: black;
+}
+
+option:disabled {
+    background-color: gray;
+}
+
+form label {
+    display: flex;
+    align-items: center;
+    font-size: var(--font-size-body);
+}
+
+input[type="file"] {
+    color: white;
+}
+
+/* LANDSCAPE VERSION */
+@media screen and (min-width: 1024px) {
+    input[type="checkbox"] {
+        margin: 0.5vw;
+    }
+}

@@ -1,22 +1,22 @@
-import "./index.css";
+import styles from "./index.module.css";
 import React from "react";
 import CityBackground from "../../components/CityBackground";
 import PasswordResetForm from "../../sections/PasswordResetForm";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/router";
 
 const PasswordResetPage: React.FC = () => {
-    const navigate = useNavigate();
+    const router = useRouter();
     return (
-        <div className="resetPageBackground">
+        <div className={styles.resetPageBackground}>
             <CityBackground />
-            <div className="resetBlock">
-                <h2 className="resetTitle">Reset Password</h2>
-                <p className="resetSubtitle">
+            <div className={styles.resetBlock}>
+                <h2 className={styles.resetTitle}>Reset Password</h2>
+                <p className={styles.resetSubtitle}>
                     To go back to the sign up/login page{" "}
                     <span
-                        className="resetSubtitleButton"
+                        className={styles.resetSubtitleButton}
                         onClick={() => {
-                            navigate("/entry");
+                            router.push("/entry");
                         }}
                     >
                         click here.

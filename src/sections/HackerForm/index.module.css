@@ -54,13 +54,6 @@
     font-weight: 600;
 }
 
-input[type="checkbox"] {
-    margin: 3vw 1vw;
-    width: calc(1.1 * var(--font-size-body));
-    height: calc(1.1 * var(--font-size-body));
-    cursor: pointer;
-}
-
 .fieldLabel {
     display: flex;
     flex-direction: column;
@@ -131,15 +124,7 @@ input[type="checkbox"] {
     background-image: url(../../svg/ArrowUp.svg);
 }
 
-option {
-    color: black;
-}
-
-option:disabled {
-    background-color: gray;
-}
-
-#submitBtn {
+.submitButton {
     border: none;
     background: none;
     outline: none;
@@ -147,6 +132,29 @@ option:disabled {
     max-width: 400px;
     margin: 2% 0;
     align-self: center;
+}
+
+.submitButtonText {
+    border: none;
+    background: none;
+    outline: none;
+    font-size: var(--font-size-small);
+    color: var(--shell-purple);
+    transition: transform 1s ease;
+}
+
+.submitButtonBackground:hover .submitButtonText {
+    transform: scale(1.1);
+}
+
+.submitButtonBackground {
+    background: var(--pink-tan-gradient);
+    border-radius: 20px;
+    padding: 4%;
+    min-width: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .errors {
@@ -160,18 +168,8 @@ option:disabled {
     margin-right: 1rem;
 }
 
-form label {
-    display: flex;
-    align-items: center;
-    font-size: var(--font-size-body);
-}
-
 .fieldWrapper {
     margin: 4% 0;
-}
-
-input[type="file"] {
-    color: white;
 }
 
 /* Firefox Specific */
@@ -185,10 +183,6 @@ input[type="file"] {
 @media screen and (min-width: 1024px) {
     .dividedCheckboxGroup {
         flex-direction: row;
-    }
-
-    input[type="checkbox"] {
-        margin: 0.5vw;
     }
 
     .fieldWrapper {

@@ -1,10 +1,11 @@
-import "./index.css";
+import styles from "./index.module.css";
 import React from "react";
 import { auth } from "../../server/firebaseApp";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import ProgressModal, { ProgressState } from "../../components/ProgressModal";
 import { FirebaseError } from "firebase/app";
 import { formatError } from "../../util/errors";
+import { useRouter } from "next/router";
 
 const LoginForm: React.FC = () => {
     const [email, setEmail] = React.useState("");
@@ -13,17 +14,21 @@ const LoginForm: React.FC = () => {
     const [errorOccured, setErrorOccured] = React.useState(false);
     const [displayPopup, setDisplayPopup] = React.useState(false);
 
+    const router = useRouter();
+
     const login = async (event: any) => {
         event.preventDefault();
         setErrorOccured(false);
         setDisplayPopup(true);
-        await signInWithEmailAndPassword(auth, email, password).catch(
-            (e: FirebaseError) => {
+        await signInWithEmailAndPassword(auth, email, password)
+            .then(() => {
+                router.push("/dashboard");
+            })
+            .catch((e: FirebaseError) => {
                 console.log(e.code);
                 setErrorOccured(true);
                 setError(formatError(e));
-            }
-        );
+            });
     };
 
     return (
@@ -38,7 +43,7 @@ const LoginForm: React.FC = () => {
                 }
                 failedMessage={error.length != 0 ? error : undefined}
             />
-            <div className="login-field">
+            <div className={styles.loginField}>
                 <label htmlFor="email" id="email-label">
                     Email
                 </label>
@@ -52,7 +57,7 @@ const LoginForm: React.FC = () => {
                     }}
                 />
             </div>
-            <div className="login-field">
+            <div className={styles.loginField}>
                 <label htmlFor="password">Password</label>
                 <input
                     type="password"
@@ -64,10 +69,10 @@ const LoginForm: React.FC = () => {
                     }}
                 />
             </div>
-            <div className="buttonDiv">
-                <div className="submitButtonBackground">
+            <div className={styles.buttonDiv}>
+                <div className={styles.submitButtonBackground}>
                     <input
-                        className="submitButton"
+                        className={styles.submitButton}
                         type="submit"
                         value="Login"
                         id="signin"

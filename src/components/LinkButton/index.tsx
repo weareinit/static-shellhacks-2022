@@ -1,5 +1,6 @@
-import "./index.css";
+import styles from "./index.module.css";
 import React from "react";
+import Link from "next/link";
 
 type ButtonProps = {
     text: string;
@@ -9,18 +10,24 @@ type ButtonProps = {
 
 const LinkButton: React.FC<ButtonProps> = (props: ButtonProps) => {
     return (
-        <a href={props.url} className="linkButton">
-            <div
-                className={
-                    props.filled
-                        ? "buttonFilledBackground"
-                        : "buttonOutlinedBackground"
-                }
-            />
-            <span className={props.filled ? "filled" : "transparent"}>
-                {props.text}
-            </span>
-        </a>
+        <Link href={props.url}>
+            <div className={styles.linkButton}>
+                <div
+                    className={
+                        props.filled
+                            ? styles.buttonFilledBackground
+                            : styles.buttonOutlinedBackground
+                    }
+                />
+                <span
+                    className={
+                        props.filled ? styles.filled : styles.transparent
+                    }
+                >
+                    {props.text}
+                </span>
+            </div>
+        </Link>
     );
 };
 
