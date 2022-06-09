@@ -1,0 +1,162 @@
+.background {
+    background: var(--purple-gradient);
+    min-height: 100vh;
+    height: 100%;
+    overflow-y: hidden;
+}
+
+.dashboardWrapper {
+    position: relative;
+    z-index: 1;
+    display: flex;
+}
+
+.dashboardWrapper::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    top: -20%;
+    left: 0;
+    background: url("../../svg/Stars.svg");
+}
+
+.logo {
+    margin: 5%;
+    cursor: pointer;
+    max-width: 400px;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    margin: 0 2%;
+    width: 25%;
+}
+
+.sidebarItem {
+    margin: 5% 0;
+    color: white;
+    border: 20px solid;
+    border-image: url("../../svg/Border.svg");
+    border-image-slice: 20 20;
+}
+
+.sidebarTitle {
+    font-size: var(--font-size-medium);
+}
+
+.sidebarText {
+    font-size: var(--font-size-medium);
+    font-weight: 500;
+}
+
+.sidebarList {
+    font-size: var(--font-size-small);
+}
+
+.link {
+    text-decoration: none;
+    background: var(--pink-tan-gradient);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+    position: relative;
+}
+
+.link::before {
+    content: "";
+    position: absolute;
+    width: 0%;
+    left: 0;
+    top: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--pink-tan-gradient);
+    transition: width 0.3s ease-in-out;
+}
+
+.link:hover::before {
+    width: 100%;
+}
+
+.logoutButton {
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    font-size: var(--font-size-small);
+    color: var(--shell-purple);
+    transition: transform 1s ease;
+}
+
+.logoutButtonBackground {
+    background: var(--pink-tan-gradient);
+    border-radius: 20px;
+    padding: 4%;
+    min-width: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.logoutButtonBackground:hover .logoutButton {
+    transform: scale(1.1);
+}
+
+.logout {
+    margin: 5% 0;
+}
+
+.applicationView {
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+    position: relative;
+    z-index: 0;
+    color: white;
+    margin: 5%;
+    width: 75%;
+}
+
+.applicationView::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 105%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    left: -2.5%;
+}
+
+.applicationField {
+    margin: 2% 0;
+}
+
+.applicationFieldText {
+    font-weight: 400;
+}
+
+.editButton {
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    border: 20px solid;
+    border-image: url("../../svg/Border.svg");
+    border-image-slice: 20 20;
+}
+
+/* Firefox Specific */
+@-moz-document url-prefix() {
+    .applicationView::before {
+        background: rgba(0, 0, 0, 0.7);
+    }
+}

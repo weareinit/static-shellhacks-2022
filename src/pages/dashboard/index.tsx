@@ -5,6 +5,10 @@ import { auth, db } from "../../server/firebaseApp";
 import ChangeAddress from "./formContent";
 import Resume from "./resume";
 import { useRouter } from "next/router";
+import styles from "./index.module.css";
+import SidebarItem from "./sibebarItem";
+import ShellHacks_Filled from "../../svg/ShellHacks_Filled.svg";
+import Stars from "../../svg/Stars.svg";
 
 //
 async function handleAddressChange(newAddress: {}) {}
@@ -59,55 +63,96 @@ function Dashboard() {
     return (
         <div>
             {!isLoading && (
-                <div>
-                    <div className="sidebar">
-                        <button
-                            onClick={async () => {
-                                await auth.signOut();
-                                router.push("/");
-                            }}
-                        >
-                            Log Out
-                        </button>
-                        <div>
-                            <h3>Application Status</h3>
-                            <p>
-                                APPLIED!
-                                {
-                                    // Applied if document exists in firebase
-                                }
-                            </p>
-                        </div>
+                <div className={styles.background}>
+                    <div className={styles.dashboardWrapper}>
+                        <div className={styles.sidebar}>
+                            <ShellHacks_Filled
+                                className={styles.logo}
+                                onClick={() => {
+                                    router.push("/");
+                                }}
+                            />
 
-                        <div>
-                            <h3>Hacker Guide</h3>
-                            <p>COMING SOON</p>
-                        </div>
-
-                        <div>
-                            <h3>QR Code for Check-In</h3>
-                            <p>NULL</p>
-                        </div>
-
-                        <div>
-                            <h3>Contact Us</h3>
-                            <p>OUR INFO HERE</p>
-                        </div>
-                    </div>
-
-                    <div className="application-information">
-                        <h2>Application Information View</h2>
-                        <div className="information-view">
-                            <div className="fullname">
-                                <h3>Full Name:</h3>
-                                <p>
-                                    {firstName} {lastName}
+                            <SidebarItem title="Application Status">
+                                <p
+                                    className={`${styles.sidebarText} ${styles.applicationStatus}`}
+                                >
+                                    APPLIED!
+                                    {
+                                        // Applied if document exists in firebase
+                                    }
                                 </p>
+                            </SidebarItem>
+
+                            <SidebarItem title="Hacker Guide">
+                                <p className={styles.sidebarText}>
+                                    COMING SOON
+                                </p>
+                            </SidebarItem>
+
+                            {/* <SidebarItem title="Check-In QR Code"></SidebarItem> */}
+
+                            <SidebarItem title="Contact Us">
+                                <ul className={styles.sidebarList}>
+                                    <li>
+                                        <a
+                                            className={styles.link}
+                                            href="https://discord.gg/upefiu"
+                                        >
+                                            Discord
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            className={styles.link}
+                                            href="mailto:Upe@fiu.edu?subject=ShellHacks 2022 Participant Inquiry"
+                                        >
+                                            E-Mail
+                                        </a>
+                                    </li>
+                                </ul>
+                                <p className={styles.sidebarText}></p>
+                            </SidebarItem>
+
+                            <div
+                                className={`${styles.logoutButtonBackground} ${styles.logout}`}
+                            >
+                                <button
+                                    className={styles.logoutButton}
+                                    onClick={async () => {
+                                        await auth.signOut();
+                                        router.push("/");
+                                    }}
+                                >
+                                    Log Out
+                                </button>
                             </div>
-                            <div className="address-fields">
-                                <div className="address-information">
-                                    <h3>Address</h3>
+                        </div>
+
+                        <div className={styles.applicationView}>
+                            <h2>Application Information</h2>
+                            <div className="information-view">
+                                <div className={styles.applicationField}>
+                                    <p>Full Name:</p>
+                                    <p className={styles.applicationFieldText}>
+                                        {firstName} {lastName}
+                                    </p>
+                                </div>
+                                <div className={styles.applicationField}>
+                                    <div className="address-information">
+                                        <p>Address:</p>
+                                        <p
+                                            className={
+                                                styles.applicationFieldText
+                                            }
+                                        >
+                                            {streetAddress} {apartment}{" "}
+                                            {postalCode} {city}, {state}{" "}
+                                            {country}
+                                        </p>
+                                    </div>
                                     <button
+                                        className={styles.editButton}
                                         onClick={() => {
                                             setChangingAddress(
                                                 !changingAddress
@@ -118,31 +163,23 @@ function Dashboard() {
                                     >
                                         change address
                                     </button>
-                                    <p>
-                                        {streetAddress} {apartment} {postalCode}{" "}
-                                        {city}, {state} {country}
+                                </div>
+                                <div className={styles.applicationField}>
+                                    <p>T-Shirt Size:</p>
+                                    <p className={styles.applicationFieldText}>
+                                        {shirtSize}
                                     </p>
                                 </div>
-                                <div
-                                    className="address-button"
-                                    // TODO: Change the styling
-                                >
-                                    <button>Edit</button>
+                                {
+                                    // <Resume></Resume>
+                                }
+                                <div className="change-address">
+                                    {changingAddress && (
+                                        <div>
+                                            <ChangeAddress />
+                                        </div>
+                                    )}
                                 </div>
-                            </div>
-                            <div className="tshirt-size">
-                                <h3>T-Shirt Size</h3>
-                                <p>{shirtSize}</p>
-                            </div>
-                            {
-                                // <Resume></Resume>
-                            }
-                            <div className="change-address">
-                                {changingAddress && (
-                                    <div>
-                                        <ChangeAddress />
-                                    </div>
-                                )}
                             </div>
                         </div>
                     </div>

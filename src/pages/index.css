@@ -52,6 +52,11 @@ h2 {
     font-size: var(--font-size-large);
 }
 
+h3 {
+    margin: 2% 0;
+    font-size: var(--font-size-medium);
+}
+
 p {
     font-size: var(--font-size-small);
 }
