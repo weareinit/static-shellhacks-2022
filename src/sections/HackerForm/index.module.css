@@ -58,6 +58,7 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 12px;
+    font-size: var(--font-size-small);
 }
 
 .fieldLabelTitle {
@@ -65,7 +66,7 @@
 }
 
 .fieldLabelDesc {
-    font-size: calc(0.85 * var(--font-size-body));
+    font-size: var(--font-size-body);
     font-weight: 600;
     color: white;
 }

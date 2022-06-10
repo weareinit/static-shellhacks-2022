@@ -9,6 +9,7 @@ import styles from "./index.module.css";
 import SidebarItem from "./sibebarItem";
 import ShellHacks_Filled from "../../svg/ShellHacks_Filled.svg";
 import Stars from "../../svg/Stars.svg";
+import Edit from "../../svg/Edit.svg";
 
 //
 async function handleAddressChange(newAddress: {}) {}
@@ -26,38 +27,41 @@ function Dashboard() {
         address || {};
 
     const router = useRouter();
-    const user = getAuth().currentUser;
+    const user = auth.currentUser;
+    console.log(auth.currentUser?.email);
 
     useEffect(() => {
-        const docRef = doc(db, "hackers", "" + user?.uid);
+        if (user) {
+            const docRef = doc(db, "hackers", "" + user?.uid);
 
-        // Defining the fetch data function.
-        const fetchData = async () => {
-            await getDoc(docRef)
-                .then((rawData) => {
-                    const data: DocumentData | undefined = rawData.data();
-                    setUserData(data);
-                    console.log("Component Did Fetch");
-                })
-                .catch((error) => {
-                    console.log(error);
+            // Defining the fetch data function.
+            const fetchData = async () => {
+                await getDoc(docRef)
+                    .then((rawData) => {
+                        const data: DocumentData | undefined = rawData.data();
+                        setUserData(data);
+                        console.log("Component Did Fetch");
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            };
+
+            // checking if the document exists in the collection. If it does, then it calls teh fetch data function.
+            const checkIfDocExists = async () => {
+                await getDoc(docRef).then((doc) => {
+                    if (doc.exists()) {
+                        fetchData(); // if fetch data succeeds, then the data has successfully been fetched.
+                        setIsLoading(false);
+                        setHasDocument(true);
+                    } else {
+                        setHasDocument(false);
+                    }
                 });
-        };
+            };
 
-        // checking if the document exists in the collection. If it does, then it calls teh fetch data function.
-        const checkIfDocExists = async () => {
-            await getDoc(docRef).then((doc) => {
-                if (doc.exists()) {
-                    fetchData(); // if fetch data succeeds, then the data has successfully been fetched.
-                    setIsLoading(false);
-                    setHasDocument(true);
-                } else {
-                    setHasDocument(false);
-                }
-            });
-        };
-
-        checkIfDocExists();
+            checkIfDocExists();
+        }
     }, [user]);
 
     return (
@@ -93,25 +97,27 @@ function Dashboard() {
                             {/* <SidebarItem title="Check-In QR Code"></SidebarItem> */}
 
                             <SidebarItem title="Contact Us">
-                                <ul className={styles.sidebarList}>
-                                    <li>
+                                <div className={styles.linkDiv}>
+                                    <p>
+                                        •{" "}
                                         <a
                                             className={styles.link}
                                             href="https://discord.gg/upefiu"
                                         >
                                             Discord
                                         </a>
-                                    </li>
-                                    <li>
+                                    </p>
+
+                                    <p>
+                                        •{" "}
                                         <a
                                             className={styles.link}
                                             href="mailto:Upe@fiu.edu?subject=ShellHacks 2022 Participant Inquiry"
                                         >
                                             E-Mail
                                         </a>
-                                    </li>
-                                </ul>
-                                <p className={styles.sidebarText}></p>
+                                    </p>
+                                </div>
                             </SidebarItem>
 
                             <div
@@ -128,7 +134,6 @@ function Dashboard() {
                                 </button>
                             </div>
                         </div>
-
                         <div className={styles.applicationView}>
                             <h2>Application Information</h2>
                             <div className="information-view">
@@ -138,31 +143,35 @@ function Dashboard() {
                                         {firstName} {lastName}
                                     </p>
                                 </div>
-                                <div className={styles.applicationField}>
+                                <div
+                                    className={`${styles.applicationField} ${styles.addressField}`}
+                                >
                                     <div className="address-information">
                                         <p>Address:</p>
                                         <p
-                                            className={
-                                                styles.applicationFieldText
-                                            }
+                                            className={`${styles.applicationFieldText} ${styles.addressFieldText}`}
                                         >
                                             {streetAddress} {apartment}{" "}
                                             {postalCode} {city}, {state}{" "}
                                             {country}
+                                            <button
+                                                className={styles.editButton}
+                                                onClick={() => {
+                                                    setChangingAddress(
+                                                        !changingAddress
+                                                    );
+                                                    console.log(
+                                                        "Changing Address"
+                                                    );
+                                                    console.log(
+                                                        changingAddress
+                                                    );
+                                                }}
+                                            >
+                                                <Edit />
+                                            </button>
                                         </p>
                                     </div>
-                                    <button
-                                        className={styles.editButton}
-                                        onClick={() => {
-                                            setChangingAddress(
-                                                !changingAddress
-                                            );
-                                            console.log("Changing Address");
-                                            console.log(changingAddress);
-                                        }}
-                                    >
-                                        change address
-                                    </button>
                                 </div>
                                 <div className={styles.applicationField}>
                                     <p>T-Shirt Size:</p>
@@ -173,15 +182,12 @@ function Dashboard() {
                                 {
                                     // <Resume></Resume>
                                 }
-                                <div className="change-address">
-                                    {changingAddress && (
-                                        <div>
-                                            <ChangeAddress />
-                                        </div>
-                                    )}
-                                </div>
                             </div>
                         </div>
+                        <ChangeAddress
+                            trigger={changingAddress}
+                            setTrigger={setChangingAddress}
+                        />
                     </div>
                 </div>
             )}

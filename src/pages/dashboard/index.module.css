@@ -9,17 +9,7 @@
     position: relative;
     z-index: 1;
     display: flex;
-}
-
-.dashboardWrapper::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    top: -20%;
-    left: 0;
-    background: url("../../svg/Stars.svg");
+    flex-direction: column;
 }
 
 .logo {
@@ -31,12 +21,14 @@
 .sidebar {
     display: flex;
     flex-direction: column;
-    margin: 0 2%;
-    width: 25%;
+    align-items: center;
+    margin: 10% 10% 0 10%;
 }
 
 .sidebarItem {
-    margin: 5% 0;
+    order: 2;
+    width: 100%;
+    margin: 2% 0;
     color: white;
     border: 20px solid;
     border-image: url("../../svg/Border.svg");
@@ -49,14 +41,16 @@
 
 .sidebarText {
     font-size: var(--font-size-medium);
-    font-weight: 500;
+    font-weight: 600;
 }
 
-.sidebarList {
-    font-size: var(--font-size-small);
+.linkDiv {
+    display: flex;
+    gap: 5%;
 }
 
 .link {
+    font-size: var(--font-size-small);
     text-decoration: none;
     background: var(--pink-tan-gradient);
     background-clip: text;
@@ -108,6 +102,9 @@
 
 .logout {
     margin: 5% 0;
+    order: 1;
+    width: 100%;
+    max-width: 400px;
 }
 
 .applicationView {
@@ -117,8 +114,7 @@
     position: relative;
     z-index: 0;
     color: white;
-    margin: 5%;
-    width: 75%;
+    margin: 0 10% 10% 10%;
 }
 
 .applicationView::before {
@@ -136,11 +132,20 @@
 }
 
 .applicationField {
-    margin: 2% 0;
+    margin: 5% 0;
 }
 
 .applicationFieldText {
-    font-weight: 400;
+    font-weight: 500;
+}
+
+.addressField {
+    display: flex;
+    flex-direction: row;
+}
+
+.addressFieldText {
+    display: inline;
 }
 
 .editButton {
@@ -149,14 +154,66 @@
     outline: none;
     cursor: pointer;
     color: white;
-    border: 20px solid;
-    border-image: url("../../svg/Border.svg");
-    border-image-slice: 20 20;
+    font-size: var(--font-size-body);
+    margin: 0 2%;
 }
 
 /* Firefox Specific */
 @-moz-document url-prefix() {
     .applicationView::before {
         background: rgba(0, 0, 0, 0.7);
+    }
+}
+
+/* LANDSCAPE VERSION */
+@media screen and (min-width: 1024px) {
+    .dashboardWrapper {
+        flex-direction: row;
+    }
+
+    .dashboardWrapper::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        top: -40%;
+        left: 0;
+        background: url("../../../public/Stars.svg") no-repeat;
+        background-size: cover;
+    }
+
+    .sidebar {
+        display: flex;
+        flex-direction: column;
+        margin: 1% 2%;
+        width: 25%;
+    }
+
+    .sidebarItem {
+        margin: 5% 0;
+        color: white;
+        border: 20px solid;
+        border-image: url("../../svg/Border.svg");
+        border-image-slice: 20 20;
+    }
+
+    .linkDiv {
+        flex-direction: column;
+    }
+
+    .applicationView {
+        display: flex;
+        flex-direction: column;
+        padding: 2%;
+        position: relative;
+        z-index: 0;
+        color: white;
+        margin: 5%;
+        width: 75%;
+    }
+
+    .applicationField {
+        margin: 2% 0;
     }
 }

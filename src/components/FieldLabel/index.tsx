@@ -1,5 +1,5 @@
 import { Emoji } from "react-apple-emojis";
-import "./index.module.css";
+import styles from "./index.module.css";
 
 type LabelProps = {
     name: string;
@@ -12,16 +12,16 @@ type LabelProps = {
 // MUST USE WITHIN EMOJIPROVIDER FOR EMOJI TO APPEAR
 const FieldLabel: React.FC<LabelProps> = (props: LabelProps) => {
     return (
-        <div className="fieldLabel">
+        <div className={styles.fieldLabel}>
             <label
-                className="fieldLabelTitle"
+                className={styles.fieldLabelTitle}
                 htmlFor={props.name}
                 id={props.id}
             >
-                <Emoji className="fieldLabelEmoji" name={props.emoji} />
+                <Emoji className={styles.fieldLabelEmoji} name={props.emoji} />
                 {props.title}
             </label>
-            <p className="fieldLabelDesc">{props.description}</p>
+            <p className={styles.fieldLabelDesc}>{props.description}</p>
         </div>
     );
 };
