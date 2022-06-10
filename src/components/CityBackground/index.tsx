@@ -6,12 +6,14 @@ import Image from "next/image";
 const CityBackground: React.FC = () => {
     return (
         <div className={styles.cityBackground}>
-            <Image
-                src={CityPNG}
-                loading="eager"
-                layout="responsive"
-                className={styles.city}
-            />
+            <div className={styles.cityDiv}>
+                <Image
+                    src={CityPNG}
+                    loading="eager"
+                    layout="responsive"
+                    className={styles.city}
+                />
+            </div>
         </div>
     );
 };
