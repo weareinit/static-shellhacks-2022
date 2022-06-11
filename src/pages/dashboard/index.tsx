@@ -33,7 +33,7 @@ function Dashboard() {
 
     useEffect(() => {
         if (render) {
-            const docRef = doc(db, "hackers", "" + user?.uid);
+            const docRef = doc(db, "hackers", "" + user.id);
 
             // Defining the fetch data function.
             const fetchData = async () => {
