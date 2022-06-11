@@ -1,5 +1,7 @@
 import styles from "./index.module.css";
 import React from "react";
+import { auth } from "../../server/firebaseApp";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import ProgressModal, { ProgressState } from "../../components/ProgressModal";
 import { FirebaseError } from "firebase/app";
 import { formatError } from "../../util/errors";
@@ -23,7 +25,7 @@ const LoginForm: React.FC = () => {
       .then(() => {
         router.push("/dashboard");
       })
-      .catch((e: FirebaseError) => {
+      .catch((e) => {
         console.log(e.code);
         setErrorOccured(true);
         setError(formatError(e));
