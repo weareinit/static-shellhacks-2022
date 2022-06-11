@@ -10,6 +10,7 @@ import SidebarItem from "./sibebarItem";
 import ShellHacks_Filled from "../../svg/ShellHacks_Filled.svg";
 import Stars from "../../svg/Stars.svg";
 import Edit from "../../svg/Edit.svg";
+import { useAuthUser, withAuthUser } from "next-firebase-auth";
 
 //
 async function handleAddressChange(newAddress: {}) {}
@@ -21,18 +22,18 @@ function Dashboard() {
     const [userData, setUserData] = useState<DocumentData | undefined>();
     const [changingAddress, setChangingAddress] = useState(false);
     const [hasDocument, setHasDocument] = useState(false); // This is to check if the user has a document in the firestore.
+    const [render, setRender] = useState(false);
 
     const { firstName, lastName, address, shirtSize } = userData || {};
     const { apartment, city, country, postalCode, state, streetAddress } =
         address || {};
 
     const router = useRouter();
-    const user = auth.currentUser;
-    console.log(auth.currentUser?.email);
+    const user = useAuthUser();
 
     useEffect(() => {
-        if (user) {
-            const docRef = doc(db, "hackers", "" + user?.uid);
+        if (render) {
+            const docRef = doc(db, "hackers", "" + user.id);
 
             // Defining the fetch data function.
             const fetchData = async () => {
@@ -61,6 +62,10 @@ function Dashboard() {
             };
 
             checkIfDocExists();
+        }
+
+        if (!render) {
+            setRender(true);
         }
     }, [user]);
 
@@ -200,7 +205,7 @@ function Dashboard() {
     );
 }
 
-export default Dashboard;
+export default withAuthUser()(Dashboard);
 
 /* 
 
