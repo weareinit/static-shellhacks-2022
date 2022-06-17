@@ -1,6 +1,4 @@
 import { Timestamp } from "firebase/firestore";
-import { SelectionRange, StringLiteralLike } from "typescript";
-import { Url } from "url";
 
 export type User = {
     firstName: string;
@@ -42,6 +40,7 @@ export type Hacker = {
     github?: string;
     website?: string;
     resumePath: string;
+    resumeName: string;
     isAdult: boolean;
     isSharingInfo: boolean;
     agreedMLH: boolean;

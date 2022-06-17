@@ -3,12 +3,13 @@ import { Address, Hacker, HackerValues } from "../../../util/types";
 import { collection, doc, setDoc } from "firebase/firestore";
 import addResume from "./addResume";
 import { User } from "firebase/auth";
+import { string } from "prop-types";
 
 async function addHacker(
     values: HackerValues,
     currentUser: User
 ): Promise<void> {
-    const resumePath = await addResume(values.file, currentUser);
+    const { url, name } = await addResume(values.file, currentUser.uid);
     const userAddress: Address = {
         streetAddress: values.addressLine1,
         apartment: values.addressLine2,
@@ -36,7 +37,8 @@ async function addHacker(
         attendedShellHacks: values.haveYouAttendedShellhacksBefore,
         heardAboutShellHacks: values.howDidYouHearAboutShellhacks,
         interestResponse: values.whyAreYouInterestedInParticipatingInShellhacks,
-        resumePath: resumePath,
+        resumePath: url,
+        resumeName: name,
         linkedin: values.linkedIn,
         github: values.github,
         website: values.website,

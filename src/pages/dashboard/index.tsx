@@ -1,7 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { getAuth } from "firebase/auth";
-import { doc, DocumentData, getDoc } from "firebase/firestore";
-import { auth, db } from "../../server/firebaseApp";
+import React, { useCallback, useEffect, useState } from "react";
 import ChangeAddress from "./formContent";
 import Resume from "./resume";
 import { useRouter } from "next/router";
@@ -10,64 +7,107 @@ import SidebarItem from "./sibebarItem";
 import ShellHacks_Filled from "../../svg/ShellHacks_Filled.svg";
 import Stars from "../../svg/Stars.svg";
 import Edit from "../../svg/Edit.svg";
+import Download from "../../svg/Download.svg";
 import { useAuthUser, withAuthUser } from "next-firebase-auth";
+import { Hacker } from "../../../util/types";
+import { formatError } from "../../util/errors";
+import { FirebaseError } from "firebase/app";
+import getHacker from "../../server/functions/getHacker";
+import { signOut } from "firebase/auth";
+import { auth } from "../../server/firebaseApp";
+import updateResume from "../../server/functions/updateResume";
+import ProgressModal, { ProgressState } from "../../components/ProgressModal";
 
-//
-async function handleAddressChange(newAddress: {}) {}
-
-async function handleResumeChange(file: any) {}
+const enum ApplicationStatus {
+    NOT_APPLIED,
+    APPLIED,
+    ACCEPTED,
+    CONFIRMED,
+}
 
 function Dashboard() {
     const [isLoading, setIsLoading] = useState(true);
-    const [userData, setUserData] = useState<DocumentData | undefined>();
     const [changingAddress, setChangingAddress] = useState(false);
-    const [hasDocument, setHasDocument] = useState(false); // This is to check if the user has a document in the firestore.
-    const [render, setRender] = useState(false);
+    const [changingResume, setChangingResume] = useState(false);
+    const [file, setFile] = useState<File | null>(null);
+    const [data, setData] = useState<Hacker | null>(null);
+    const [applicationStatus, setApplicationStatus] = useState(
+        ApplicationStatus.NOT_APPLIED
+    );
+    const [displayPopup, setDisplayPopup] = useState(false);
+    const [popupState, setPopupState] = useState(ProgressState.PROCESSING);
+    const [errorMessage, setErrorMessage] = useState("");
 
-    const { firstName, lastName, address, shirtSize } = userData || {};
+    const { firstName, lastName, address, shirtSize, resumePath, resumeName } =
+        data || {};
     const { apartment, city, country, postalCode, state, streetAddress } =
         address || {};
 
     const router = useRouter();
     const user = useAuthUser();
 
+    const logout = async () => {
+        //const token = await user.getIdToken();
+        // fetch("api/logout", {
+        //     headers: [["Authorization", token ?? ""]],
+        // })
+        //     .then((res) => {
+        //         if (res.status === 200) router.push("/");
+        //     })
+        //     .catch((e) => {
+        //         console.log(e);
+        //     });
+        signOut(auth).then(() => {
+            router.push("/");
+        });
+    };
+
     useEffect(() => {
-        if (render) {
-            const docRef = doc(db, "hackers", "" + user.id);
-
-            // Defining the fetch data function.
-            const fetchData = async () => {
-                await getDoc(docRef)
-                    .then((rawData) => {
-                        const data: DocumentData | undefined = rawData.data();
-                        setUserData(data);
-                        console.log("Component Did Fetch");
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-            };
-
-            // checking if the document exists in the collection. If it does, then it calls teh fetch data function.
-            const checkIfDocExists = async () => {
-                await getDoc(docRef).then((doc) => {
-                    if (doc.exists()) {
-                        fetchData(); // if fetch data succeeds, then the data has successfully been fetched.
-                        setIsLoading(false);
-                        setHasDocument(true);
-                    } else {
-                        setHasDocument(false);
+        setIsLoading(true);
+        if (user.id != null) {
+            console.log(user);
+            getHacker(user.id)
+                .then((hacker: Hacker | null) => {
+                    if (hacker != undefined) {
+                        setApplicationStatus(ApplicationStatus.APPLIED);
+                        setData(hacker);
                     }
+                    setIsLoading(false);
+                })
+                .catch((e: FirebaseError) => {
+                    console.log(formatError(e));
                 });
-            };
-
-            checkIfDocExists();
-        }
-
-        if (!render) {
-            setRender(true);
         }
     }, [user]);
+
+    const handleSuccess = useCallback(() => {
+        if (user.id != null) {
+            console.log(user);
+            getHacker(user.id)
+                .then((hacker: Hacker | null) => {
+                    if (hacker != undefined) {
+                        setApplicationStatus(ApplicationStatus.APPLIED);
+                        setData(hacker);
+                    }
+                    setIsLoading(false);
+                })
+                .catch((e: FirebaseError) => {
+                    console.log(formatError(e));
+                });
+        }
+    }, [user, getHacker]);
+
+    let applicationStatusText = "NOT APPLIED";
+    switch (applicationStatus) {
+        case ApplicationStatus.APPLIED:
+            applicationStatusText = "APPLIED";
+            break;
+        case ApplicationStatus.ACCEPTED:
+            applicationStatusText = "ACCEPTED";
+            break;
+        case ApplicationStatus.CONFIRMED:
+            applicationStatusText = "CONFIRMED";
+    }
 
     return (
         <div>
@@ -86,10 +126,7 @@ function Dashboard() {
                                 <p
                                     className={`${styles.sidebarText} ${styles.applicationStatus}`}
                                 >
-                                    APPLIED!
-                                    {
-                                        // Applied if document exists in firebase
-                                    }
+                                    {applicationStatusText}
                                 </p>
                             </SidebarItem>
 
@@ -130,10 +167,7 @@ function Dashboard() {
                             >
                                 <button
                                     className={styles.logoutButton}
-                                    onClick={async () => {
-                                        await auth.signOut();
-                                        router.push("/");
-                                    }}
+                                    onClick={logout}
                                 >
                                     Log Out
                                 </button>
@@ -156,20 +190,16 @@ function Dashboard() {
                                         <p
                                             className={`${styles.applicationFieldText} ${styles.addressFieldText}`}
                                         >
-                                            {streetAddress} {apartment}{" "}
-                                            {postalCode} {city}, {state}{" "}
-                                            {country}
+                                            {streetAddress}
+                                            {apartment
+                                                ? " " + apartment
+                                                : ""}, {city}, {state} {country}
+                                            , {postalCode}
                                             <button
                                                 className={styles.editButton}
                                                 onClick={() => {
                                                     setChangingAddress(
                                                         !changingAddress
-                                                    );
-                                                    console.log(
-                                                        "Changing Address"
-                                                    );
-                                                    console.log(
-                                                        changingAddress
                                                     );
                                                 }}
                                             >
@@ -184,14 +214,119 @@ function Dashboard() {
                                         {shirtSize}
                                     </p>
                                 </div>
-                                {
-                                    // <Resume></Resume>
-                                }
+                                <div className={styles.applicationField}>
+                                    <p>Resume:</p>
+                                    <p className={styles.applicationFieldText}>
+                                        {resumeName}
+                                    </p>
+                                    <div className={styles.resumeButtons}>
+                                        <a
+                                            href={resumePath}
+                                            target="_blank"
+                                            rel="noreferrer noopener"
+                                        >
+                                            <Download
+                                                className={styles.editButton}
+                                            />
+                                        </a>
+                                        <button
+                                            className={styles.editButton}
+                                            onClick={() => {
+                                                setChangingResume(
+                                                    !changingResume
+                                                );
+                                            }}
+                                        >
+                                            <Edit />
+                                        </button>
+                                    </div>
+                                    {changingResume && (
+                                        <div className={styles.resumeSection}>
+                                            <input
+                                                id="file"
+                                                name="file"
+                                                type="file"
+                                                onChange={(
+                                                    event: React.ChangeEvent<HTMLInputElement>
+                                                ) => {
+                                                    if (
+                                                        event.currentTarget
+                                                            .files
+                                                    ) {
+                                                        setFile(
+                                                            event.currentTarget
+                                                                .files[0]
+                                                        );
+                                                    }
+                                                }}
+                                                accept=".pdf"
+                                                className={styles.file}
+                                            />
+                                            <div
+                                                className={`${styles.submitButtonBackground} ${styles.submit}`}
+                                            >
+                                                <button
+                                                    className={
+                                                        styles.submitButton
+                                                    }
+                                                    onClick={() => {
+                                                        if (
+                                                            file != null &&
+                                                            user.id != null
+                                                        ) {
+                                                            setDisplayPopup(
+                                                                true
+                                                            );
+                                                            setPopupState(
+                                                                ProgressState.PROCESSING
+                                                            );
+                                                            updateResume(
+                                                                file,
+                                                                user.id
+                                                            )
+                                                                .then(() => {
+                                                                    setDisplayPopup(
+                                                                        false
+                                                                    );
+                                                                    handleSuccess();
+                                                                })
+                                                                .catch((e) => {
+                                                                    console.log(
+                                                                        e
+                                                                    );
+                                                                    setDisplayPopup(
+                                                                        true
+                                                                    );
+                                                                    setPopupState(
+                                                                        ProgressState.FAILED
+                                                                    );
+                                                                    setErrorMessage(
+                                                                        formatError(
+                                                                            e
+                                                                        )
+                                                                    );
+                                                                });
+                                                        }
+                                                    }}
+                                                >
+                                                    Submit
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
                         <ChangeAddress
                             trigger={changingAddress}
                             setTrigger={setChangingAddress}
+                            handleSuccess={handleSuccess}
+                        />
+                        <ProgressModal
+                            trigger={displayPopup}
+                            setTrigger={setDisplayPopup}
+                            state={popupState}
+                            failedMessage={errorMessage}
                         />
                     </div>
                 </div>
