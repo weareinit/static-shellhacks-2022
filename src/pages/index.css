@@ -23,6 +23,9 @@
     );
     --purple-gradient: linear-gradient(#28002f, #50409e);
 
+    --glass-background: rgba(255, 255, 255, 0.1);
+    --dark-background: rgba(0, 0, 0, 0.7);
+
     margin: 0;
 }
 

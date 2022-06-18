@@ -3,12 +3,15 @@ import { Address, Hacker, HackerValues } from "../../../util/types";
 import { collection, doc, setDoc } from "firebase/firestore";
 import addResume from "./addResume";
 import { User } from "firebase/auth";
-import { string } from "prop-types";
+import hasApplied from "./hasApplied";
+import { FirebaseError } from "firebase/app";
 
 async function addHacker(
     values: HackerValues,
     currentUser: User
 ): Promise<void> {
+    if (await hasApplied(currentUser.uid))
+        throw new FirebaseError("", "Application Already Exists");
     const { url, name } = await addResume(values.file, currentUser.uid);
     const userAddress: Address = {
         streetAddress: values.addressLine1,

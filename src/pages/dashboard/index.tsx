@@ -127,7 +127,7 @@ function Dashboard() {
                                 }}
                             />
 
-                            <SidebarItem title="Application Status">
+                            <SidebarItem title="Application Status:">
                                 <p
                                     className={`${styles.sidebarText} ${styles.applicationStatus}`}
                                 >
