@@ -165,21 +165,35 @@
     margin: 12px 0;
 }
 
-.submitButton {
-    border: none;
-    background: none;
-    outline: none;
-    cursor: pointer;
+.file {
     font-size: var(--font-size-body);
-    color: var(--shell-purple);
-    transition: transform 1s ease;
 }
 
-.submitButtonBackground {
+.resumeSection {
+    animation: fade 0.1s linear forwards;
+}
+
+.noApplicationDiv {
+    display: flex;
+    margin: 15% auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.noApplicationTitle {
+}
+
+.noApplicationText {
+    font-weight: 500;
+}
+
+.smallButtonBackground {
     background: var(--pink-tan-gradient);
     border-radius: 15px;
-    width: 125px;
-    height: 45px;
+    width: 10em;
+    height: 3em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -187,12 +201,14 @@
     margin: 12px 0;
 }
 
-.file {
+.smallButton {
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
     font-size: var(--font-size-body);
-}
-
-.resumeSection {
-    animation: fade 0.1s linear forwards;
+    color: var(--shell-purple);
+    transition: transform 1s ease;
 }
 
 @keyframes fade {

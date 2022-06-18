@@ -8,7 +8,7 @@ import ShellHacks_Filled from "../../svg/ShellHacks_Filled.svg";
 import Stars from "../../svg/Stars.svg";
 import Edit from "../../svg/Edit.svg";
 import Download from "../../svg/Download.svg";
-import { useAuthUser, withAuthUser } from "next-firebase-auth";
+import { AuthAction, useAuthUser, withAuthUser } from "next-firebase-auth";
 import { Hacker } from "../../../util/types";
 import { formatError } from "../../util/errors";
 import { FirebaseError } from "firebase/app";
@@ -64,6 +64,8 @@ function Dashboard() {
 
     useEffect(() => {
         setIsLoading(true);
+        setDisplayPopup(true);
+        setPopupState(ProgressState.PROCESSING);
         if (user.id != null) {
             console.log(user);
             getHacker(user.id)
@@ -73,9 +75,12 @@ function Dashboard() {
                         setData(hacker);
                     }
                     setIsLoading(false);
+                    setDisplayPopup(false);
                 })
                 .catch((e: FirebaseError) => {
                     console.log(formatError(e));
+                    setErrorMessage(formatError(e));
+                    setPopupState(ProgressState.FAILED);
                 });
         }
     }, [user]);
@@ -110,9 +115,9 @@ function Dashboard() {
     }
 
     return (
-        <div>
-            {!isLoading && (
-                <div className={styles.background}>
+        <div className={styles.background}>
+            <div>
+                {!isLoading && (
                     <div className={styles.dashboardWrapper}>
                         <div className={styles.sidebar}>
                             <ShellHacks_Filled
@@ -175,173 +180,216 @@ function Dashboard() {
                         </div>
                         <div className={styles.applicationView}>
                             <h2>Application Information</h2>
-                            <div className="information-view">
-                                <div className={styles.applicationField}>
-                                    <p>Full Name:</p>
-                                    <p className={styles.applicationFieldText}>
-                                        {firstName} {lastName}
+                            {applicationStatus ==
+                            ApplicationStatus.NOT_APPLIED ? (
+                                <div className={styles.noApplicationDiv}>
+                                    <h3 className={styles.noApplicationTitle}>
+                                        No Application
+                                    </h3>
+                                    <p className={styles.noApplicationText}>
+                                        Please Complete the Application Before
+                                        The Deadline
                                     </p>
-                                </div>
-                                <div
-                                    className={`${styles.applicationField} ${styles.addressField}`}
-                                >
-                                    <div className="address-information">
-                                        <p>Address:</p>
-                                        <p
-                                            className={`${styles.applicationFieldText} ${styles.addressFieldText}`}
+                                    <div
+                                        className={styles.smallButtonBackground}
+                                    >
+                                        <button
+                                            className={styles.smallButton}
+                                            onClick={() => {
+                                                router.push("/application");
+                                            }}
                                         >
-                                            {streetAddress}
-                                            {apartment
-                                                ? " " + apartment
-                                                : ""}, {city}, {state} {country}
-                                            , {postalCode}
+                                            Apply Here
+                                        </button>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="information-view">
+                                    <div className={styles.applicationField}>
+                                        <p>Full Name:</p>
+                                        <p
+                                            className={
+                                                styles.applicationFieldText
+                                            }
+                                        >
+                                            {firstName} {lastName}
+                                        </p>
+                                    </div>
+                                    <div
+                                        className={`${styles.applicationField} ${styles.addressField}`}
+                                    >
+                                        <div className="address-information">
+                                            <p>Address:</p>
+                                            <p
+                                                className={`${styles.applicationFieldText} ${styles.addressFieldText}`}
+                                            >
+                                                {streetAddress}
+                                                {apartment
+                                                    ? " " + apartment
+                                                    : ""}
+                                                , {city}, {state} {country},{" "}
+                                                {postalCode}
+                                                <button
+                                                    className={
+                                                        styles.editButton
+                                                    }
+                                                    onClick={() => {
+                                                        setChangingAddress(
+                                                            !changingAddress
+                                                        );
+                                                    }}
+                                                >
+                                                    <Edit />
+                                                </button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className={styles.applicationField}>
+                                        <p>T-Shirt Size:</p>
+                                        <p
+                                            className={
+                                                styles.applicationFieldText
+                                            }
+                                        >
+                                            {shirtSize}
+                                        </p>
+                                    </div>
+                                    <div className={styles.applicationField}>
+                                        <p>Resume:</p>
+                                        <p
+                                            className={
+                                                styles.applicationFieldText
+                                            }
+                                        >
+                                            {resumeName}
+                                        </p>
+                                        <div className={styles.resumeButtons}>
+                                            <a
+                                                href={resumePath}
+                                                target="_blank"
+                                                rel="noreferrer noopener"
+                                            >
+                                                <Download
+                                                    className={
+                                                        styles.editButton
+                                                    }
+                                                />
+                                            </a>
                                             <button
                                                 className={styles.editButton}
                                                 onClick={() => {
-                                                    setChangingAddress(
-                                                        !changingAddress
+                                                    setChangingResume(
+                                                        !changingResume
                                                     );
                                                 }}
                                             >
                                                 <Edit />
                                             </button>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className={styles.applicationField}>
-                                    <p>T-Shirt Size:</p>
-                                    <p className={styles.applicationFieldText}>
-                                        {shirtSize}
-                                    </p>
-                                </div>
-                                <div className={styles.applicationField}>
-                                    <p>Resume:</p>
-                                    <p className={styles.applicationFieldText}>
-                                        {resumeName}
-                                    </p>
-                                    <div className={styles.resumeButtons}>
-                                        <a
-                                            href={resumePath}
-                                            target="_blank"
-                                            rel="noreferrer noopener"
-                                        >
-                                            <Download
-                                                className={styles.editButton}
-                                            />
-                                        </a>
-                                        <button
-                                            className={styles.editButton}
-                                            onClick={() => {
-                                                setChangingResume(
-                                                    !changingResume
-                                                );
-                                            }}
-                                        >
-                                            <Edit />
-                                        </button>
-                                    </div>
-                                    {changingResume && (
-                                        <div className={styles.resumeSection}>
-                                            <input
-                                                id="file"
-                                                name="file"
-                                                type="file"
-                                                onChange={(
-                                                    event: React.ChangeEvent<HTMLInputElement>
-                                                ) => {
-                                                    if (
-                                                        event.currentTarget
-                                                            .files
-                                                    ) {
-                                                        setFile(
-                                                            event.currentTarget
-                                                                .files[0]
-                                                        );
-                                                    }
-                                                }}
-                                                accept=".pdf"
-                                                className={styles.file}
-                                            />
+                                        </div>
+                                        {changingResume && (
                                             <div
-                                                className={`${styles.submitButtonBackground} ${styles.submit}`}
+                                                className={styles.resumeSection}
                                             >
-                                                <button
-                                                    className={
-                                                        styles.submitButton
-                                                    }
-                                                    onClick={() => {
+                                                <input
+                                                    id="file"
+                                                    name="file"
+                                                    type="file"
+                                                    onChange={(
+                                                        event: React.ChangeEvent<HTMLInputElement>
+                                                    ) => {
                                                         if (
-                                                            file != null &&
-                                                            user.id != null
+                                                            event.currentTarget
+                                                                .files
                                                         ) {
-                                                            setDisplayPopup(
-                                                                true
+                                                            setFile(
+                                                                event
+                                                                    .currentTarget
+                                                                    .files[0]
                                                             );
-                                                            setPopupState(
-                                                                ProgressState.PROCESSING
-                                                            );
-                                                            updateResume(
-                                                                file,
-                                                                user.id
-                                                            )
-                                                                .then(() => {
-                                                                    setDisplayPopup(
-                                                                        false
-                                                                    );
-                                                                    handleSuccess();
-                                                                })
-                                                                .catch((e) => {
-                                                                    console.log(
-                                                                        e
-                                                                    );
-                                                                    setDisplayPopup(
-                                                                        true
-                                                                    );
-                                                                    setPopupState(
-                                                                        ProgressState.FAILED
-                                                                    );
-                                                                    setErrorMessage(
-                                                                        formatError(
-                                                                            e
-                                                                        )
-                                                                    );
-                                                                });
                                                         }
                                                     }}
+                                                    accept=".pdf"
+                                                    className={styles.file}
+                                                />
+                                                <div
+                                                    className={`${styles.smallButtonBackground} ${styles.submit}`}
                                                 >
-                                                    Submit
-                                                </button>
+                                                    <button
+                                                        className={
+                                                            styles.smallButton
+                                                        }
+                                                        onClick={() => {
+                                                            if (
+                                                                file != null &&
+                                                                user.id != null
+                                                            ) {
+                                                                setDisplayPopup(
+                                                                    true
+                                                                );
+                                                                setPopupState(
+                                                                    ProgressState.PROCESSING
+                                                                );
+                                                                updateResume(
+                                                                    file,
+                                                                    user.id
+                                                                )
+                                                                    .then(
+                                                                        () => {
+                                                                            setDisplayPopup(
+                                                                                false
+                                                                            );
+                                                                            handleSuccess();
+                                                                        }
+                                                                    )
+                                                                    .catch(
+                                                                        (e) => {
+                                                                            console.log(
+                                                                                e
+                                                                            );
+                                                                            setDisplayPopup(
+                                                                                true
+                                                                            );
+                                                                            setPopupState(
+                                                                                ProgressState.FAILED
+                                                                            );
+                                                                            setErrorMessage(
+                                                                                formatError(
+                                                                                    e
+                                                                                )
+                                                                            );
+                                                                        }
+                                                                    );
+                                                            }
+                                                        }}
+                                                    >
+                                                        Submit
+                                                    </button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    )}
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
+                            )}
                         </div>
-                        <ChangeAddress
-                            trigger={changingAddress}
-                            setTrigger={setChangingAddress}
-                            handleSuccess={handleSuccess}
-                        />
-                        <ProgressModal
-                            trigger={displayPopup}
-                            setTrigger={setDisplayPopup}
-                            state={popupState}
-                            failedMessage={errorMessage}
-                        />
                     </div>
-                </div>
-            )}
-            {isLoading && (
-                <div>
-                    <h1>Oops unexpected error! Please refresh page!</h1>
-                </div>
-            )}
+                )}
+                <ChangeAddress
+                    trigger={changingAddress}
+                    setTrigger={setChangingAddress}
+                    handleSuccess={handleSuccess}
+                />
+                <ProgressModal
+                    trigger={displayPopup}
+                    setTrigger={setDisplayPopup}
+                    state={popupState}
+                    failedMessage={errorMessage}
+                    processingMessage={"Loading..."}
+                />
+            </div>
         </div>
     );
 }
 
-export default withAuthUser()(Dashboard);
-
-/* 
-
-*/
+export default withAuthUser({
+    whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
+})(Dashboard);
