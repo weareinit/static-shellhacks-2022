@@ -379,6 +379,7 @@ function Dashboard() {
                     trigger={changingAddress}
                     setTrigger={setChangingAddress}
                     handleSuccess={handleSuccess}
+                    user={user.firebaseUser}
                 />
                 <ProgressModal
                     trigger={displayPopup}

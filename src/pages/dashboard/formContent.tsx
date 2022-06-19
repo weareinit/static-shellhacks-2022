@@ -7,14 +7,15 @@ import styles from "./formContent.module.css";
 import X_Symbol from "../../svg/X_Symbol.svg";
 import FieldLabel from "../../components/FieldLabel";
 import updateAddress from "../../server/functions/updateAddress";
-import { useAuthUser } from "next-firebase-auth";
 import { formatError } from "../../util/errors";
 import ProgressModal, { ProgressState } from "../../components/ProgressModal";
+import { User } from "firebase/auth";
 
 type ChangeAddressProps = {
     trigger: boolean;
     setTrigger: Function;
     handleSuccess: () => void;
+    user: User | null;
 };
 
 type ChangeAddressValues = {
@@ -53,7 +54,7 @@ const ChangeAddress: React.FC<ChangeAddressProps> = (
         zipcode: "",
     };
 
-    const user = useAuthUser();
+    const { user } = props;
     const [displayPopup, setDisplayPopup] = useState(false);
     const [popupState, setPopupState] = useState(ProgressState.PROCESSING);
     const [errorMessage, setErrorMessage] = useState("");
@@ -79,7 +80,7 @@ const ChangeAddress: React.FC<ChangeAddressProps> = (
                         setDisplayPopup(true);
                         setPopupState(ProgressState.PROCESSING);
                         updateAddress(
-                            user.id ?? "",
+                            user?.uid ?? "",
                             values.addressLine1,
                             values.addressLine2,
                             values.city,
