@@ -50,6 +50,7 @@
     ]
   },
   "devDependencies": {
-    "@svgr/webpack": "^6.2.1"
+    "@svgr/webpack": "^6.2.1",
+    "eslint": "^8.18.0"
   }
 }
