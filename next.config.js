@@ -1,3 +1,5 @@
+import path from "path";
+
 module.exports = {
     webpack(config) {
         config.module.rules.push({
