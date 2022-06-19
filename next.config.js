@@ -1,5 +1,3 @@
-import path from "path";
-
 module.exports = {
     webpack(config) {
         config.module.rules.push({
@@ -11,11 +9,6 @@ module.exports = {
             // svgs imported from other file types (such as .css)
             issuer: { and: [/\.(js|ts|md)x?$/] },
             use: ["@svgr/webpack"],
-            resolve: {
-                alias: {
-                    core: path.join(__dirname, "core"),
-                },
-            },
         });
         return config;
     },
