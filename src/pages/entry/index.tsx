@@ -4,6 +4,7 @@ import CityBackground from "../../components/CityBackground";
 import LoginForm from "../../sections/LoginForm";
 import SignUpForm from "../../sections/SignUpForm";
 import ForgotPasswordForm from "../../sections/ForgotPasswordForm";
+import NavBar, { AccountActionState } from "../../components/NavBar";
 
 enum EntryState {
     LOGIN,
@@ -101,12 +102,15 @@ const EntryPage: React.FC = () => {
     }
 
     return (
-        <div className={styles.entryPageBackground}>
-            <CityBackground />
-            <div className={styles.entryBlock}>
-                <h2 className={styles.entryTitle}>{title}</h2>
-                {subtitle}
-                {body}
+        <div className={styles.entryPage}>
+            <NavBar accountAction={AccountActionState.DISABLED} />
+            <div className={styles.entryPageBackground}>
+                <CityBackground />
+                <div className={styles.entryBlock}>
+                    <h2 className={styles.entryTitle}>{title}</h2>
+                    {subtitle}
+                    {body}
+                </div>
             </div>
         </div>
     );

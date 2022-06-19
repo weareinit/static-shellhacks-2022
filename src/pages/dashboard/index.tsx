@@ -17,6 +17,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../server/firebaseApp";
 import updateResume from "../../server/functions/updateResume";
 import ProgressModal, { ProgressState } from "../../components/ProgressModal";
+import NavBar, { AccountActionState } from "../../components/NavBar";
 
 const enum ApplicationStatus {
     NOT_APPLIED,
@@ -116,16 +117,17 @@ function Dashboard() {
 
     return (
         <div className={styles.background}>
+            <NavBar accountAction={AccountActionState.LOGOUT} />
             <div>
                 {!isLoading && (
                     <div className={styles.dashboardWrapper}>
                         <div className={styles.sidebar}>
-                            <ShellHacks_Filled
+                            {/* <ShellHacks_Filled
                                 className={styles.logo}
                                 onClick={() => {
                                     router.push("/");
                                 }}
-                            />
+                            /> */}
 
                             <SidebarItem title="Application Status:">
                                 <p
@@ -167,7 +169,7 @@ function Dashboard() {
                                 </div>
                             </SidebarItem>
 
-                            <div
+                            {/* <div
                                 className={`${styles.logoutButtonBackground} ${styles.logout}`}
                             >
                                 <button
@@ -176,7 +178,7 @@ function Dashboard() {
                                 >
                                     Log Out
                                 </button>
-                            </div>
+                            </div> */}
                         </div>
                         <div className={styles.applicationView}>
                             <h2>Application Information</h2>

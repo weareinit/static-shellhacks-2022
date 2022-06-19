@@ -4,6 +4,7 @@
     min-height: 100vh;
     background: var(--purple-gradient);
     display: flex;
+    z-index: -1;
 }
 
 .city {

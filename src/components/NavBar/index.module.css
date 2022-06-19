@@ -1,0 +1,112 @@
+.navBarWrapper {
+    height: 100px;
+    width: 100%;
+}
+
+.navBar {
+    background-color: #28002f;
+    height: 100px;
+    width: 100%;
+    box-shadow: 0px 2px 15px 2px #000000;
+    position: fixed !important;
+    z-index: 100;
+}
+
+.navBarFlex {
+    display: flex;
+    flex-direction: row;
+}
+
+.logo {
+    height: 75px;
+    align-self: center;
+    justify-self: center;
+    cursor: pointer;
+    margin: 2%;
+}
+
+.hidden {
+    display: none;
+}
+
+.accountAction {
+    background: var(--shell-purple);
+    height: 100px;
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.accountActionText {
+    font-size: var(--font-size-small);
+    color: white;
+    cursor: pointer;
+}
+
+.accountActionHidden {
+    display: none !important;
+}
+
+.dropdown {
+    display: none;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.dropdownButton {
+    border: none;
+    background: none;
+    outline: none;
+    height: 50px;
+}
+
+.dropdownContent {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    box-shadow: 0px 10px 15px -2px #000000;
+}
+
+.dropdownContentHidden {
+    display: none;
+}
+
+.dropdownItem {
+    background: var(--shell-purple);
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    cursor: pointer;
+    width: 100%;
+    justify-content: center;
+    border-bottom: solid 2px black;
+}
+
+.dropdownItemText {
+    font-size: var(--font-size-small);
+    color: white;
+    cursor: pointer;
+}
+
+.inline {
+    width: 100%;
+    display: flex;
+}
+
+/* MOBILE VERSION */
+@media screen and (max-width: 1024px) {
+    .dropdown {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .inline {
+        display: none;
+    }
+}
