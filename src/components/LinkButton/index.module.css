@@ -50,10 +50,10 @@
 
 .filled {
     color: var(--shell-purple);
-    font-size: var(--font-size-large);
+    font-size: var(--font-size-medium);
 }
 
 .transparent {
     color: white;
-    font-size: var(--font-size-large);
+    font-size: var(--font-size-medium);
 }

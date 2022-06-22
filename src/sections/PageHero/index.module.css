@@ -69,19 +69,20 @@
 .detailsDiv ul {
     align-items: flex-start;
     width: 100%;
+    padding: 0;
 }
 
 .detailsDiv li {
     list-style: "";
-    font-size: var(--font-size-medium);
+    font-size: var(--font-size-small);
     padding: 1% 0 1% 2%;
     position: relative;
 }
 
 .detailsMarker {
-    position: absolute;
-    margin-left: -8%;
-    width: var(--font-size-medium);
+    display: inline;
+    margin-right: 2%;
+    width: var(--font-size-small);
 }
 
 .buttonsDiv {
@@ -180,17 +181,16 @@
     .pageHeroMiddle {
         margin: 0 10%;
         flex-direction: row;
-        justify-content: space-between;
-        gap: 5%;
+        justify-content: space-around;
     }
 
     .detailsDiv {
-        width: 50%;
+        width: 40%;
         padding: 2%;
     }
 
     .buttonsDiv {
-        width: 50%;
+        width: 40%;
         margin-top: 0;
     }
 

@@ -24,15 +24,15 @@ const LinkButton: React.FC<ButtonProps> = (props: ButtonProps) => {
             icon = <Twitter />;
             break;
         case SocialType.INSTAGRAM:
-            url = "https://www.facebook.com/upefiu";
+            url = "https://www.instagram.com/upefiu";
             icon = <Instagram />;
             break;
         case SocialType.LINKEDIN:
-            url = "https://www.facebook.com/upefiu";
+            url = "https://www.linkedin.com/company/upe-fiu";
             icon = <LinkedIn />;
             break;
         case SocialType.YOUTUBE:
-            url = "https://www.facebook.com/upefiu";
+            url = "https://www.youtube.com/channel/UC0rBglsAyXsfcE6NFIVGqwA";
             icon = <YouTube />;
             break;
     }

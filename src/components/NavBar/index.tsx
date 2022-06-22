@@ -79,14 +79,12 @@ const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
             <nav
                 className={`${styles.navBar} ${styles.navBarFlex} ${styles.navBarFixed}`}
             >
-                {showLogo && (
-                    <ShellHacks
-                        className={styles.logo}
-                        onClick={() => {
-                            router.push("/");
-                        }}
-                    />
-                )}
+                <ShellHacks
+                    className={styles.logo}
+                    onClick={() => {
+                        router.push("/");
+                    }}
+                />
                 <div
                     className={`${styles.dropdown} ${
                         hideAccountAction ? styles.accountActionHidden : ""

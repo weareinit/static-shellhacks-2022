@@ -7,7 +7,7 @@
     background-color: #28002f;
     height: 100px;
     width: 100%;
-    box-shadow: 0px 2px 15px 2px #000000;
+    box-shadow: 0px 2px 15px 2px #33003d;
     position: fixed !important;
     z-index: 100;
 }
@@ -68,7 +68,7 @@
     top: 100%;
     left: 0;
     width: 100%;
-    box-shadow: 0px 10px 15px -2px #000000;
+    box-shadow: 0px 5px 8px -2px black;
 }
 
 .dropdownContentHidden {
@@ -84,7 +84,6 @@
     cursor: pointer;
     width: 100%;
     justify-content: center;
-    border-bottom: solid 2px black;
 }
 
 .dropdownItemText {
@@ -100,6 +99,22 @@
 
 /* MOBILE VERSION */
 @media screen and (max-width: 1024px) {
+    .navBarWrapper {
+        height: 75px;
+    }
+
+    .navBar {
+        height: 75px;
+    }
+
+    .logo {
+        height: 50px;
+    }
+
+    .dropdownButton {
+        height: 35px;
+    }
+
     .dropdown {
         display: flex;
         justify-content: center;

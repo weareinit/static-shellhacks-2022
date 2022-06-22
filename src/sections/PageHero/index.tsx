@@ -29,11 +29,7 @@ const PageHero: React.FC = () => {
                     </EmojiProvider>
                 </div>
                 <div className={styles.buttonsDiv}>
-                    <LinkButton
-                        text="Register Now!"
-                        url="/entry"
-                        filled={true}
-                    />
+                    <LinkButton text="Sign Up!" url="/entry" filled={true} />
                     <div className={styles.buttonsRow}>
                         <LinkButton
                             text="Discord"
@@ -51,7 +47,12 @@ const PageHero: React.FC = () => {
                 {/* <Image alt="Plane" className="pageHeroPlane" src={Plane} />
                 <div id="spotlight1" className="pageHeroSpotlight" />
                 <div id="spotlight2" className="pageHeroSpotlight" /> */}
-                <Image src={CityPNG} loading="eager" layout="responsive" />
+                <Image
+                    src={CityPNG}
+                    loading="eager"
+                    layout="responsive"
+                    priority
+                />
             </div>
         </section>
     );

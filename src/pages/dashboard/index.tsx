@@ -137,7 +137,7 @@ function Dashboard() {
                                 </p>
                             </SidebarItem>
 
-                            <SidebarItem title="Hacker Guide">
+                            <SidebarItem title="Hacker Guide:">
                                 <p className={styles.sidebarText}>
                                     COMING SOON
                                 </p>
@@ -145,7 +145,7 @@ function Dashboard() {
 
                             {/* <SidebarItem title="Check-In QR Code"></SidebarItem> */}
 
-                            <SidebarItem title="Contact Us">
+                            <SidebarItem title="Contact Us:">
                                 <div className={styles.linkDiv}>
                                     <p>
                                         •{" "}
