@@ -1,4 +1,10 @@
-import { Formik, Form, Field, FormikHelpers } from "formik";
+import {
+    Formik,
+    Form,
+    Field,
+    FormikHelpers,
+    FormikComputedProps,
+} from "formik";
 import { Emoji, EmojiProvider } from "react-apple-emojis";
 import emojiData from "react-apple-emojis/lib/data.json";
 import * as Yup from "yup";
@@ -169,8 +175,9 @@ const HackerForm: React.FC = () => {
                     values,
                     setFieldValue,
                     setFieldTouched,
+                    isValid,
                 }) => (
-                    <Form id="form">
+                    <Form id="form" className={styles.form}>
                         <EmojiProvider data={emojiData}>
                             <div className={styles.fieldWrapper}>
                                 <FieldLabel
@@ -701,7 +708,7 @@ const HackerForm: React.FC = () => {
                                     name="addressLine1"
                                     emoji="house"
                                     title="Address - Line 1"
-                                    description="Street address for swag"
+                                    description="Street address to deliver giveaways, swag, and prizes"
                                 />
                                 <Field
                                     className={styles.field}
@@ -796,7 +803,7 @@ const HackerForm: React.FC = () => {
                                     name="phoneNumber"
                                     emoji="telephone-receiver"
                                     title="Phone Number"
-                                    description="We are unlikely to contact you via call. This will be used for shipping if necessary."
+                                    description="To contact you for any major announcements and prize shipment if necessary"
                                 />
                                 <Field
                                     className={styles.field}
@@ -881,6 +888,12 @@ const HackerForm: React.FC = () => {
                                     <option value="Sophomore">Sophomore</option>
                                     <option value="Junior">Junior</option>
                                     <option value="Senior">Senior</option>
+                                    <option value="Masters">Masters</option>
+                                    <option value="PhD">PhD</option>
+                                    <option value="New Grad">New Grad</option>
+                                    <option value="Bootcamp Student">
+                                        Bootcamp Student
+                                    </option>
                                 </Field>
                                 {errors.classStanding &&
                                 touched.classStanding ? (
@@ -916,6 +929,7 @@ const HackerForm: React.FC = () => {
                                     <option disabled value="">
                                         {SELECT_PLACEHOLDER}
                                     </option>
+                                    <option value="2021">2021</option>
                                     <option value="2022">2022</option>
                                     <option value="2023">2023</option>
                                     <option value="2024">2024</option>
@@ -1146,8 +1160,8 @@ const HackerForm: React.FC = () => {
                                     <option value="Devops Engineer">
                                         Devops Engineer
                                     </option>
-                                    <option value="Entrepeneur">
-                                        Entrepeneur
+                                    <option value="Entrepreneur">
+                                        Entrepreneur
                                     </option>
                                     <option value="Front-End Developer">
                                         Front-End Developer
@@ -1222,11 +1236,14 @@ const HackerForm: React.FC = () => {
                                     <option disabled value="">
                                         {SELECT_PLACEHOLDER}
                                     </option>
-                                    <option value="No">No</option>
-                                    <option value="Yes, 1-4 hackathons">
-                                        Yes, 1-4 hackathons
+                                    <option value="None">None</option>
+                                    <option value="One">
+                                        Yes, 1 hackathon
                                     </option>
-                                    <option value="Yes, 5+ hackathons">
+                                    <option value="Two to Four">
+                                        Yes, 2-4 hackathons
+                                    </option>
+                                    <option value="Five or More">
                                         Yes, 5+ hackathons
                                     </option>
                                 </Field>
@@ -1242,7 +1259,7 @@ const HackerForm: React.FC = () => {
                                 <FieldLabel
                                     name=""
                                     emoji="palm-tree"
-                                    title="Have you attended Shellhacks before?"
+                                    title="Have you attended ShellHacks before?"
                                     description="How far back do we go?"
                                     id="checkbox-group-1"
                                 />
@@ -1255,49 +1272,49 @@ const HackerForm: React.FC = () => {
                                         <Field
                                             type="checkbox"
                                             name="haveYouAttendedShellhacksBefore"
-                                            value="Shellhacks 2017"
+                                            value="ShellHacks 2017"
                                         />
-                                        Shellhacks 2017
+                                        ShellHacks 2017
                                     </label>
                                     <label>
                                         <Field
                                             type="checkbox"
                                             name="haveYouAttendedShellhacksBefore"
-                                            value="Shellhacks 2018"
+                                            value="ShellHacks 2018"
                                         />
-                                        Shellhacks 2018
+                                        ShellHacks 2018
                                     </label>
                                     <label>
                                         <Field
                                             type="checkbox"
                                             name="haveYouAttendedShellhacksBefore"
-                                            value="Shellhacks 2019"
+                                            value="ShellHacks 2019"
                                         />
-                                        Shellhacks 2019
+                                        ShellHacks 2019
                                     </label>
                                     <label>
                                         <Field
                                             type="checkbox"
                                             name="haveYouAttendedShellhacksBefore"
-                                            value="Shellhacks 2020"
+                                            value="ShellHacks 2020"
                                         />
-                                        Shellhacks 2020
+                                        ShellHacks 2020
                                     </label>
                                     <label>
                                         <Field
                                             type="checkbox"
                                             name="haveYouAttendedShellhacksBefore"
-                                            value="Shellhacks 2021"
+                                            value="ShellHacks 2021"
                                         />
-                                        Shellhacks 2021
+                                        ShellHacks 2021
                                     </label>
                                     <label>
                                         <Field
                                             type="checkbox"
                                             name="haveYouAttendedShellhacksBefore"
-                                            value="This is my first Shellhacks!"
+                                            value="This is my first ShellHacks!"
                                         />
-                                        This is my first Shellhacks!
+                                        This is my first ShellHacks!
                                     </label>
                                 </div>
                             </div>
@@ -1306,7 +1323,7 @@ const HackerForm: React.FC = () => {
                                 <FieldLabel
                                     name=""
                                     emoji="eyes"
-                                    title="How did you hear about Shellhacks?"
+                                    title="How did you hear about ShellHacks?"
                                     description="We'd love to know!"
                                     id="checkbox-group-2"
                                 />
@@ -1442,7 +1459,7 @@ const HackerForm: React.FC = () => {
                                 <FieldLabel
                                     name="whyAreYouInterestedInParticipatingInShellhacks"
                                     emoji="face-with-monocle"
-                                    title="Why are you interested in participating in Shellhacks?"
+                                    title="Why are you interested in participating in ShellHacks?"
                                     description="This is your chance to tell us more about you and why we should select you!"
                                 />
                                 <div
@@ -1672,6 +1689,13 @@ const HackerForm: React.FC = () => {
                                 ) : null}
                             </div>
 
+                            {!isValid ? (
+                                <div className={styles.errors}>
+                                    Unable to submit. Check for missing
+                                    information or errors.
+                                </div>
+                            ) : null}
+
                             <button
                                 id="submitBtn"
                                 className={styles.submitButton}
@@ -1693,7 +1717,7 @@ const HackerForm: React.FC = () => {
                 setTrigger={setDisplayPopup}
                 state={popupState}
                 failedMessage={errorMessage}
-                completeMessage="Successfully submitted! Attempting to navigate to dashboard."
+                completeMessage="Successfully submitted! Navigating to dashboard."
             />
         </section>
     );

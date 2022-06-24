@@ -18,5 +18,5 @@ const ApplicationPage: React.FC = () => {
 };
 
 export default withAuthUser({
-    whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
+    // whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
 })(ApplicationPage);

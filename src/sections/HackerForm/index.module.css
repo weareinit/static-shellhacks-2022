@@ -24,7 +24,7 @@
     color: white;
 }
 
-#form {
+.form {
     display: flex;
     flex-direction: column;
 }
@@ -94,6 +94,7 @@
 }
 
 .inputDiv {
+    min-height: 96px;
     height: auto;
     overflow-wrap: normal;
     display: inline-block;
@@ -117,6 +118,10 @@
     background-position-x: 100%;
 }
 
+.select option {
+    color: white;
+}
+
 .select::-ms-expand {
     display: none;
 }
@@ -133,6 +138,7 @@
     max-width: 400px;
     margin: 2% 0;
     align-self: center;
+    justify-self: center;
     cursor: pointer;
 }
 
