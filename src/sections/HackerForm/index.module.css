@@ -116,6 +116,7 @@
     background-image: url(../../svg/ArrowDown.svg);
     background-repeat: no-repeat;
     background-position-x: 100%;
+    height: auto;
 }
 
 .select option {
@@ -179,6 +180,48 @@
 
 .fieldWrapper {
     margin: 4% 0;
+}
+
+.radioButton {
+    width: var(--font-size-small);
+    margin-right: 12px;
+}
+
+.other {
+    margin-top: 2%;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.link {
+    font-size: var(--font-size-body);
+    text-decoration: none;
+    background: var(--pink-tan-gradient);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+    position: relative;
+    width: fit-content;
+    margin: 4px 0;
+}
+
+.link::before {
+    content: "";
+    position: absolute;
+    width: 0%;
+    left: 0;
+    top: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--pink-tan-gradient);
+    transition: width 0.3s ease-in-out;
+}
+
+.link:hover::before {
+    width: 100%;
 }
 
 /* Firefox Specific */

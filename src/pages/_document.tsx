@@ -4,7 +4,6 @@ export default function Document() {
     return (
         <Html>
             <Head>
-                <title>ShellHacks 2022</title>
                 <meta name="author" content="Upsilon Pi Epsilon" />
                 <meta
                     name="keywords"

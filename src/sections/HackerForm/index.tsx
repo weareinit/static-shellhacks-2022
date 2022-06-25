@@ -55,6 +55,12 @@ const HackerForm: React.FC = () => {
     const [agreedTerms, setAgreedTerms] = React.useState(false);
     const [agreedCommunications, setAgreedCommunications] =
         React.useState(false);
+    const [showOtherGender, setShowOtherGender] = React.useState(false);
+    const [gender, setGender] = React.useState("Other");
+    const [showOtherMajor, setShowOtherMajor] = React.useState(false);
+    const [major, setMajor] = React.useState("Other");
+    const [showOtherSchool, setShowOtherSchool] = React.useState(false);
+    const [school, setSchool] = React.useState("Other");
 
     const SignupSchema = Yup.object().shape({
         firstName: Yup.string()
@@ -86,10 +92,11 @@ const HackerForm: React.FC = () => {
         major: Yup.string().required(REQUIRED_FIELD_ERROR),
         gender: Yup.string().required(REQUIRED_FIELD_ERROR),
         ethnicity: Yup.string().required(REQUIRED_FIELD_ERROR),
-        race: Yup.array().required(REQUIRED_FIELD_ERROR),
+        race: Yup.string().required(REQUIRED_FIELD_ERROR),
         whyAreYouInterestedInParticipatingInShellhacks:
             Yup.string().required(REQUIRED_FIELD_ERROR),
         file: Yup.mixed().required(REQUIRED_FIELD_ERROR),
+        attendance: Yup.string().required(REQUIRED_FIELD_ERROR),
         isAdult: Yup.boolean().oneOf([true], REQUIRED_FIELD_ERROR),
         isSharingInfo: Yup.boolean().oneOf([true], REQUIRED_FIELD_ERROR),
         agreedMLH: Yup.boolean().oneOf([true], REQUIRED_FIELD_ERROR),
@@ -123,7 +130,7 @@ const HackerForm: React.FC = () => {
         linkedIn: "",
         github: "",
         website: "",
-        isRemote: isRemote,
+        attendance: "",
         isAdult: isAdult,
         isSharingInfo: isSharingInfo,
         agreedMLH: agreedMLH,
@@ -176,6 +183,7 @@ const HackerForm: React.FC = () => {
                     setFieldValue,
                     setFieldTouched,
                     isValid,
+                    handleChange,
                 }) => (
                     <Form id="form" className={styles.form}>
                         <EmojiProvider data={emojiData}>
@@ -826,11 +834,833 @@ const HackerForm: React.FC = () => {
                                     description="Which school do you currently attend?"
                                 />
                                 <Field
-                                    className={styles.field}
-                                    id="school"
+                                    className={`${styles.field} ${styles.select}`}
+                                    as="select"
                                     name="school"
-                                    placeholder="University name"
-                                />
+                                    id="school"
+                                    validate={(value: string) => {
+                                        let errorMessage;
+                                        if (
+                                            value == undefined ||
+                                            value.length == 0
+                                        ) {
+                                            errorMessage = REQUIRED_FIELD_ERROR;
+                                        }
+                                        return errorMessage;
+                                    }}
+                                    onChange={(
+                                        e: React.FormEvent<HTMLInputElement>
+                                    ) => {
+                                        handleChange(e);
+                                        setShowOtherSchool(
+                                            e.currentTarget.value === school
+                                        );
+                                    }}
+                                >
+                                    <option disabled value="">
+                                        {SELECT_PLACEHOLDER}
+                                    </option>
+                                    <option value="Florida International University">
+                                        Florida International University
+                                    </option>
+                                    <option value="Miami Dade College">
+                                        Miami Dade College
+                                    </option>
+                                    <option value="Broward College">
+                                        Broward College
+                                    </option>
+                                    <option value="University of Miami">
+                                        University of Miami
+                                    </option>
+                                    <option value="University of Central Florida">
+                                        University of Central Florida
+                                    </option>
+                                    <option value="University of Florida">
+                                        University of Florida
+                                    </option>
+                                    <option value="University of South Florida">
+                                        University of South Florida
+                                    </option>
+                                    <option value="University of Tampa">
+                                        University of Tampa
+                                    </option>
+                                    <option value="Florida State University">
+                                        Florida State University
+                                    </option>
+                                    <option value="Florida Atlantic University">
+                                        Florida Atlantic University
+                                    </option>
+                                    <option value="Florida A&M University">
+                                        Florida A&M University
+                                    </option>
+                                    <option value={school}>Other</option>
+                                    <option value="Adams State University">
+                                        Adams State University
+                                    </option>
+                                    <option value="Air University">
+                                        Air University{" "}
+                                    </option>
+                                    <option value="Alabama A&M University">
+                                        Alabama A&M University
+                                    </option>
+                                    <option value="Alabama State University">
+                                        Alabama State University
+                                    </option>
+                                    <option value="Amridge University">
+                                        Amridge University
+                                    </option>
+                                    <option value="Appalachian State University">
+                                        Appalachian State University
+                                    </option>
+                                    <option value="Arizona State University">
+                                        Arizona State University
+                                    </option>
+                                    <option value="Arkansas State University">
+                                        Arkansas State University
+                                    </option>
+                                    <option value="Arkansas Tech University">
+                                        Arkansas Tech University
+                                    </option>
+                                    <option value="Auburn University at Montgomery">
+                                        Auburn University at Montgomery
+                                    </option>
+                                    <option value="Augusta University">
+                                        Augusta University
+                                    </option>
+                                    <option value="Baker College">
+                                        Baker College
+                                    </option>
+                                    <option value="Barry University">
+                                        Barry University
+                                    </option>
+                                    <option value="Baylor University">
+                                        Baylor University
+                                    </option>
+                                    <option value="Bevill State Community College">
+                                        Bevill State Community College
+                                    </option>
+                                    <option value="Boise State University">
+                                        Boise State University
+                                    </option>
+                                    <option value="Boston College">
+                                        Boston College
+                                    </option>
+                                    <option value="Bowling Green State University">
+                                        Bowling Green State University
+                                    </option>
+                                    <option value="Bridgewater State University">
+                                        Bridgewater State University
+                                    </option>
+                                    <option value="Brigham Young University - Idaho">
+                                        Brigham Young University - Idaho
+                                    </option>
+                                    <option value="Brown University">
+                                        Brown University
+                                    </option>
+                                    <option value="Butler University">
+                                        Butler University
+                                    </option>
+                                    <option value="Calhoun Community College">
+                                        Calhoun Community College
+                                    </option>
+                                    <option value="California Institute of Technology">
+                                        California Institute of Technology
+                                    </option>
+                                    <option value="California Polytechnic State University">
+                                        California Polytechnic State University
+                                    </option>
+                                    <option value="California State University, Fullerton">
+                                        California State University, Fullerton
+                                    </option>
+                                    <option value="California State University, Long Beach">
+                                        California State University, Long Beach
+                                    </option>
+                                    <option value="California State University, Northridge">
+                                        California State University, Northridge
+                                    </option>
+                                    <option value="California State University, Sacramento">
+                                        California State University, Sacramento
+                                    </option>
+                                    <option value="Carnegie Mellon University">
+                                        Carnegie Mellon University
+                                    </option>
+                                    <option value="Central Connecticut State University">
+                                        Central Connecticut State University
+                                    </option>
+                                    <option value="Central Maine Community College">
+                                        Central Maine Community College
+                                    </option>
+                                    <option value="Central Michigan University">
+                                        Central Michigan University
+                                    </option>
+                                    <option value="Central New Mexico Community College">
+                                        Central New Mexico Community College
+                                    </option>
+                                    <option value="Century College">
+                                        Century College
+                                    </option>
+                                    <option value="Chicago State University">
+                                        Chicago State University
+                                    </option>
+                                    <option value="Clemson University">
+                                        Clemson University
+                                    </option>
+                                    <option value="Cleveland State University">
+                                        Cleveland State University
+                                    </option>
+                                    <option value="Coastal Alabama Community College">
+                                        Coastal Alabama Community College
+                                    </option>
+                                    <option value="College of Charleston">
+                                        College of Charleston
+                                    </option>
+                                    <option value="College of Southern Nevada">
+                                        College of Southern Nevada
+                                    </option>
+                                    <option value="College of Western Idaho">
+                                        College of Western Idaho
+                                    </option>
+                                    <option value="College Park">
+                                        College Park
+                                    </option>
+                                    <option value="Colorado Community College System">
+                                        Colorado Community College System
+                                    </option>
+                                    <option value="Colorado Mesa University">
+                                        Colorado Mesa University
+                                    </option>
+                                    <option value="Colorado Mountain College">
+                                        Colorado Mountain College
+                                    </option>
+                                    <option value="Colorado State University">
+                                        Colorado State University
+                                    </option>
+                                    <option value="Columbia Southern University">
+                                        Columbia Southern University
+                                    </option>
+                                    <option value="Columbia University">
+                                        Columbia University
+                                    </option>
+                                    <option value="Community College of Rhode Island">
+                                        Community College of Rhode Island
+                                    </option>
+                                    <option value="Cuyahoga Community College">
+                                        Cuyahoga Community College
+                                    </option>
+                                    <option value="Delaware Technical Community College">
+                                        Delaware Technical Community College
+                                    </option>
+                                    <option value="DePaul University">
+                                        DePaul University
+                                    </option>
+                                    <option value="Des Moines Area Community College">
+                                        Des Moines Area Community College
+                                    </option>
+                                    <option value="DeVry University">
+                                        DeVry University
+                                    </option>
+                                    <option value="Drake University">
+                                        Drake University
+                                    </option>
+                                    <option value="Duke University">
+                                        Duke University
+                                    </option>
+                                    <option value="East Carolina University">
+                                        East Carolina University
+                                    </option>
+                                    <option value="Eastern Kentucky University">
+                                        Eastern Kentucky University
+                                    </option>
+                                    <option value="Eastern Michigan University">
+                                        Eastern Michigan University
+                                    </option>
+                                    <option value="Embry-Riddle Aeronautical University">
+                                        Embry-Riddle Aeronautical University
+                                    </option>
+                                    <option value="Faulkner University">
+                                        Faulkner University
+                                    </option>
+                                    <option value="Ferris State University">
+                                        Ferris State University
+                                    </option>
+                                    <option value="Fort Valley State University">
+                                        Fort Valley State University
+                                    </option>
+                                    <option value="Fox Valley Technical College">
+                                        Fox Valley Technical College
+                                    </option>
+                                    <option value="Gadsden State Community College">
+                                        Gadsden State Community College
+                                    </option>
+                                    <option value="Gateway Community College">
+                                        Gateway Community College
+                                    </option>
+                                    <option value="Georgia College & State University">
+                                        Georgia College & State University
+                                    </option>
+                                    <option value="Georgia Institute of Technology">
+                                        Georgia Institute of Technology
+                                    </option>
+                                    <option value="Grand Canyon University">
+                                        Grand Canyon University
+                                    </option>
+                                    <option value="Grand Valley State University">
+                                        Grand Valley State University
+                                    </option>
+                                    <option value="Greenville Technical College">
+                                        Greenville Technical College
+                                    </option>
+                                    <option value="Harding University">
+                                        Harding University
+                                    </option>
+                                    <option value="Harvard University">
+                                        Harvard University
+                                    </option>
+                                    <option value="Henderson State University">
+                                        Henderson State University
+                                    </option>
+                                    <option value="Henry Ford College">
+                                        Henry Ford College
+                                    </option>
+                                    <option value="Idaho State University">
+                                        Idaho State University
+                                    </option>
+                                    <option value="Illinois Colllege">
+                                        Illinois Colllege
+                                    </option>
+                                    <option value="Illinois Institute of Technology">
+                                        Illinois Institute of Technology
+                                    </option>
+                                    <option value="Illinois State University">
+                                        Illinois State University
+                                    </option>
+                                    <option value="Indiana Institute of Technology">
+                                        Indiana Institute of Technology
+                                    </option>
+                                    <option value="Indiana State University">
+                                        Indiana State University
+                                    </option>
+                                    <option value="Iowa State University">
+                                        Iowa State University
+                                    </option>
+                                    <option value="Jacksonville State University">
+                                        Jacksonville State University
+                                    </option>
+                                    <option value="John Hopkins University">
+                                        John Hopkins University
+                                    </option>
+                                    <option value="Johnson & Wales University">
+                                        Johnson & Wales University
+                                    </option>
+                                    <option value="Kapiolani Community College">
+                                        Kapiolani Community College
+                                    </option>
+                                    <option value="Kirkwood Community College">
+                                        Kirkwood Community College
+                                    </option>
+                                    <option value="Lawson State Community College">
+                                        Lawson State Community College
+                                    </option>
+                                    <option value="Leech Lake Tribal College">
+                                        Leech Lake Tribal College
+                                    </option>
+                                    <option value="Leeward Community College">
+                                        Leeward Community College
+                                    </option>
+                                    <option value="Louisiana State University">
+                                        Louisiana State University
+                                    </option>
+                                    <option value="Loyola University">
+                                        Loyola University
+                                    </option>
+                                    <option value="Loyola University - New Orleans">
+                                        Loyola University - New Orleans
+                                    </option>
+                                    <option value="Macomb Community College">
+                                        Macomb Community College
+                                    </option>
+                                    <option value="Madison Area Technical College">
+                                        Madison Area Technical College
+                                    </option>
+                                    <option value="Manchester Community College">
+                                        Manchester Community College
+                                    </option>
+                                    <option value="Marquette University">
+                                        Marquette University
+                                    </option>
+                                    <option value="Marshall University">
+                                        Marshall University
+                                    </option>
+                                    <option value="Massachusetts Institute of Technology">
+                                        Massachusetts Institute of Technology
+                                    </option>
+                                    <option value="Metropolitan Community College">
+                                        Metropolitan Community College
+                                    </option>
+                                    <option value="Metropolitan State University of Denver">
+                                        Metropolitan State University of Denver
+                                    </option>
+                                    <option value="Michigan State University">
+                                        Michigan State University
+                                    </option>
+                                    <option value="Middle Tennessee State University">
+                                        Middle Tennessee State University
+                                    </option>
+                                    <option value="Midlands Technical College">
+                                        Midlands Technical College
+                                    </option>
+                                    <option value="Midwestern University">
+                                        Midwestern University
+                                    </option>
+                                    <option value="Mississippi College">
+                                        Mississippi College
+                                    </option>
+                                    <option value="Mississippi State University">
+                                        Mississippi State University
+                                    </option>
+                                    <option value="Missouri State University">
+                                        Missouri State University
+                                    </option>
+                                    <option value="Montclair State University">
+                                        Montclair State University
+                                    </option>
+                                    <option value="Morehead State University">
+                                        Morehead State University
+                                    </option>
+                                    <option value="Mount Holyoke College">
+                                        Mount Holyoke College
+                                    </option>
+                                    <option value="New Mexico State University">
+                                        New Mexico State University
+                                    </option>
+                                    <option value="New York University">
+                                        New York University
+                                    </option>
+                                    <option value="North Arizona University">
+                                        North Arizona University
+                                    </option>
+                                    <option value="North Carolina Central University">
+                                        North Carolina Central University
+                                    </option>
+                                    <option value="North Dakota State University">
+                                        North Dakota State University
+                                    </option>
+                                    <option value="Northeastern University">
+                                        Northeastern University
+                                    </option>
+                                    <option value="Northwest Arkansas Community College">
+                                        Northwest Arkansas Community College
+                                    </option>
+                                    <option value="Oakland University">
+                                        Oakland University
+                                    </option>
+                                    <option value="Ohio State University">
+                                        Ohio State University
+                                    </option>
+                                    <option value="Oklahoma State University">
+                                        Oklahoma State University
+                                    </option>
+                                    <option value="Oregon State University">
+                                        Oregon State University
+                                    </option>
+                                    <option value="Ottawa University">
+                                        Ottawa University
+                                    </option>
+                                    <option value="Park University">
+                                        Park University
+                                    </option>
+                                    <option value="Pennsylvania State University">
+                                        Pennsylvania State University
+                                    </option>
+                                    <option value="Portland Community College">
+                                        Portland Community College
+                                    </option>
+                                    <option value="Portland State University">
+                                        Portland State University
+                                    </option>
+                                    <option value="Princeton University">
+                                        Princeton University
+                                    </option>
+                                    <option value="Queens College">
+                                        Queens College
+                                    </option>
+                                    <option value="Quinnipiac University">
+                                        Quinnipiac University
+                                    </option>
+                                    <option value="Rockhurst University">
+                                        Rockhurst University
+                                    </option>
+                                    <option value="Rutgers University">
+                                        Rutgers University
+                                    </option>
+                                    <option value="Saint Mary's College">
+                                        Saint Mary's College
+                                    </option>
+                                    <option value="Saint Xavier University">
+                                        Saint Xavier University
+                                    </option>
+                                    <option value="Salem State University">
+                                        Salem State University
+                                    </option>
+                                    <option value="Samford University">
+                                        Samford University
+                                    </option>
+                                    <option value="San Diego State University">
+                                        San Diego State University
+                                    </option>
+                                    <option value="San Francisco State University">
+                                        San Francisco State University
+                                    </option>
+                                    <option value="San Jose State University">
+                                        San Jose State University
+                                    </option>
+                                    <option value="Shelton State Community College">
+                                        Shelton State Community College
+                                    </option>
+                                    <option value="South Dakota State University">
+                                        South Dakota State University
+                                    </option>
+                                    <option value="Southern Connecticut State University">
+                                        Southern Connecticut State University
+                                    </option>
+                                    <option value="Southern Maine Community College">
+                                        Southern Maine Community College
+                                    </option>
+                                    <option value="Southern New Hampshire University">
+                                        Southern New Hampshire University
+                                    </option>
+                                    <option value="Southern University">
+                                        Southern University
+                                    </option>
+                                    <option value="Stanford University">
+                                        Stanford University
+                                    </option>
+                                    <option value="Strayer University">
+                                        Strayer University
+                                    </option>
+                                    <option value="Temple University">
+                                        Temple University
+                                    </option>
+                                    <option value="Texas A&M University">
+                                        Texas A&M University
+                                    </option>
+                                    <option value="Texas State University">
+                                        Texas State University
+                                    </option>
+                                    <option value="Texas Tech University">
+                                        Texas Tech University
+                                    </option>
+                                    <option value="The City College of New York">
+                                        The City College of New York
+                                    </option>
+                                    <option value="Towson University">
+                                        Towson University
+                                    </option>
+                                    <option value="Trident Technical College">
+                                        Trident Technical College
+                                    </option>
+                                    <option value="Troy University">
+                                        Troy University
+                                    </option>
+                                    <option value="University at Buffalo">
+                                        University at Buffalo
+                                    </option>
+                                    <option value="University of Akron">
+                                        University of Akron
+                                    </option>
+                                    <option value="University of Alabama">
+                                        University of Alabama
+                                    </option>
+                                    <option value="University of Alaska Anchorage">
+                                        University of Alaska Anchorage
+                                    </option>
+                                    <option value="University of Alaska Fairbanks">
+                                        University of Alaska Fairbanks
+                                    </option>
+                                    <option value="University of Alaska Southeast">
+                                        University of Alaska Southeast
+                                    </option>
+                                    <option value="University of Arizona">
+                                        University of Arizona
+                                    </option>
+                                    <option value="University of Arkansas">
+                                        University of Arkansas
+                                    </option>
+                                    <option value="University of Arkansas - Pulaski Technical College">
+                                        University of Arkansas - Pulaski
+                                        Technical College
+                                    </option>
+                                    <option value="University of Arkansas at Little Rock">
+                                        University of Arkansas at Little Rock
+                                    </option>
+                                    <option value="University of California, Berkeley">
+                                        University of California, Berkeley
+                                    </option>
+                                    <option value="University of California, Davis">
+                                        University of California, Davis
+                                    </option>
+                                    <option value="University of California, Irvine">
+                                        University of California, Irvine
+                                    </option>
+                                    <option value="University of California, Los Angeles">
+                                        University of California, Los Angeles
+                                    </option>
+                                    <option value="University of California, Riverside">
+                                        University of California, Riverside
+                                    </option>
+                                    <option value="University of California, San Diego">
+                                        University of California, San Diego
+                                    </option>
+                                    <option value="University of California, Santa Barbara">
+                                        University of California, Santa Barbara
+                                    </option>
+                                    <option value="University of California, Santa Cruz">
+                                        University of California, Santa Cruz
+                                    </option>
+                                    <option value="University of Central Arkansas">
+                                        University of Central Arkansas
+                                    </option>
+                                    <option value="University of Central Missouri">
+                                        University of Central Missouri
+                                    </option>
+                                    <option value="University of Central Oklahoma">
+                                        University of Central Oklahoma
+                                    </option>
+                                    <option value="University of Chicago">
+                                        University of Chicago
+                                    </option>
+                                    <option value="University of Cincinnati">
+                                        University of Cincinnati
+                                    </option>
+                                    <option value="University of Colorado Boulder">
+                                        University of Colorado Boulder
+                                    </option>
+                                    <option value="University of Colorado Denver">
+                                        University of Colorado Denver
+                                    </option>
+                                    <option value="University of Connecticut">
+                                        University of Connecticut
+                                    </option>
+                                    <option value="University of Delaware">
+                                        University of Delaware
+                                    </option>
+                                    <option value="University of Denver">
+                                        University of Denver
+                                    </option>
+                                    <option value="University of Georgia">
+                                        University of Georgia
+                                    </option>
+                                    <option value="University of Hawaii at Manoa">
+                                        University of Hawaii at Manoa
+                                    </option>
+                                    <option value="University of Houston">
+                                        University of Houston
+                                    </option>
+                                    <option value="University of Idaho">
+                                        University of Idaho
+                                    </option>
+                                    <option value="University of Indianapolis">
+                                        University of Indianapolis
+                                    </option>
+                                    <option value="University of Iowa">
+                                        University of Iowa
+                                    </option>
+                                    <option value="University of Kentucky">
+                                        University of Kentucky
+                                    </option>
+                                    <option value="University of Louisville">
+                                        University of Louisville
+                                    </option>
+                                    <option value="University of Maine">
+                                        University of Maine
+                                    </option>
+                                    <option value="University of Maryland">
+                                        University of Maryland
+                                    </option>
+                                    <option value="University of Maryland Global Campus">
+                                        University of Maryland Global Campus
+                                    </option>
+                                    <option value="University of Massachusetts Boston">
+                                        University of Massachusetts Boston
+                                    </option>
+                                    <option value="University of Massachusetts Lowell">
+                                        University of Massachusetts Lowell
+                                    </option>
+                                    <option value="University of Memphis">
+                                        University of Memphis
+                                    </option>
+                                    <option value="University of Michigan">
+                                        University of Michigan
+                                    </option>
+                                    <option value="University of Minnesota, Twin Cities">
+                                        University of Minnesota, Twin Cities
+                                    </option>
+                                    <option value="University of Mississippi">
+                                        University of Mississippi
+                                    </option>
+                                    <option value="University of Missouri-Kansas City">
+                                        University of Missouri-Kansas City
+                                    </option>
+                                    <option value="University of Montana">
+                                        University of Montana
+                                    </option>
+                                    <option value="University of Nebraska Omaha">
+                                        University of Nebraska Omaha
+                                    </option>
+                                    <option value="University of Nebraska-Lincoln">
+                                        University of Nebraska-Lincoln
+                                    </option>
+                                    <option value="University of Nevada, Las Vegas">
+                                        University of Nevada, Las Vegas
+                                    </option>
+                                    <option value="University of Nevada, Reno">
+                                        University of Nevada, Reno
+                                    </option>
+                                    <option value="University of New England">
+                                        University of New England
+                                    </option>
+                                    <option value="University of New Hampshire">
+                                        University of New Hampshire
+                                    </option>
+                                    <option value="University of New Mexico">
+                                        University of New Mexico
+                                    </option>
+                                    <option value="University of New Orleans">
+                                        University of New Orleans
+                                    </option>
+                                    <option value="University of North Alabama">
+                                        University of North Alabama
+                                    </option>
+                                    <option value="University of North Carolina at Chapel Hill">
+                                        University of North Carolina at Chapel
+                                        Hill
+                                    </option>
+                                    <option value="University of North Carolina at Charlotte">
+                                        University of North Carolina at
+                                        Charlotte
+                                    </option>
+                                    <option value="University of North Dakota">
+                                        University of North Dakota
+                                    </option>
+                                    <option value="University of North Georgia">
+                                        University of North Georgia
+                                    </option>
+                                    <option value="University of Notre Dame">
+                                        University of Notre Dame
+                                    </option>
+                                    <option value="University of Oklahoma">
+                                        University of Oklahoma
+                                    </option>
+                                    <option value="University of Oregon">
+                                        University of Oregon
+                                    </option>
+                                    <option value="University of Phoenix">
+                                        University of Phoenix
+                                    </option>
+                                    <option value="University of Pittsburgh">
+                                        University of Pittsburgh
+                                    </option>
+                                    <option value="University of Rhode Island">
+                                        University of Rhode Island
+                                    </option>
+                                    <option value="University of South Alabama">
+                                        University of South Alabama
+                                    </option>
+                                    <option value="University of South Carolina Columbia (Main Campus)">
+                                        University of South Carolina Columbia
+                                        (Main Campus)
+                                    </option>
+                                    <option value="University of South Dakota">
+                                        University of South Dakota
+                                    </option>
+                                    <option value="University of Tennessee (Flagship university)">
+                                        University of Tennessee (Flagship
+                                        university)
+                                    </option>
+                                    <option value="University of Tennessee at Chattanooga">
+                                        University of Tennessee at Chattanooga
+                                    </option>
+                                    <option value="University of Texas at Austin">
+                                        University of Texas at Austin
+                                    </option>
+                                    <option value="University of Utah">
+                                        University of Utah
+                                    </option>
+                                    <option value="University of Vermont">
+                                        University of Vermont
+                                    </option>
+                                    <option value="University of Washington">
+                                        University of Washington
+                                    </option>
+                                    <option value="University of West Alabama">
+                                        University of West Alabama
+                                    </option>
+                                    <option value="University of Wisconsin - Madison">
+                                        University of Wisconsin - Madison
+                                    </option>
+                                    <option value="University of Wyoming">
+                                        University of Wyoming
+                                    </option>
+                                    <option value="Utah State University">
+                                        Utah State University
+                                    </option>
+                                    <option value="Utah Valley University">
+                                        Utah Valley University
+                                    </option>
+                                    <option value="Vanderbilt University">
+                                        Vanderbilt University
+                                    </option>
+                                    <option value="Wake Forest University">
+                                        Wake Forest University
+                                    </option>
+                                    <option value="Wallace State Community College">
+                                        Wallace State Community College
+                                    </option>
+                                    <option value="Washington State University">
+                                        Washington State University
+                                    </option>
+                                    <option value="Wayland Baptist University">
+                                        Wayland Baptist University
+                                    </option>
+                                    <option value="Wayne State University">
+                                        Wayne State University
+                                    </option>
+                                    <option value="West Virginia University">
+                                        West Virginia University
+                                    </option>
+                                    <option value="Western Iowa Tech Community College">
+                                        Western Iowa Tech Community College
+                                    </option>
+                                    <option value="Wilkes University">
+                                        Wilkes University
+                                    </option>
+                                    <option value="Wilmington University">
+                                        Wilmington University
+                                    </option>
+                                    <option value="Wright State University">
+                                        Wright State University
+                                    </option>
+                                    <option value="Xavier University of Louisiana - New Orleans">
+                                        Xavier University of Louisiana - New
+                                        Orleans
+                                    </option>
+                                    <option value="Yale University">
+                                        Yale University
+                                    </option>
+                                </Field>
+                                {showOtherSchool ? (
+                                    <Field
+                                        className={`${styles.field} ${styles.other}`}
+                                        id="school"
+                                        name="school"
+                                        onChange={(
+                                            e: React.FormEvent<HTMLInputElement>
+                                        ) => {
+                                            handleChange(e);
+                                            setSchool(e.currentTarget.value);
+                                        }}
+                                    />
+                                ) : null}
                                 {errors.school && touched.school ? (
                                     <div className={styles.errors}>
                                         {errors.school}
@@ -846,11 +1676,307 @@ const HackerForm: React.FC = () => {
                                     description="What are you currently studying?"
                                 />
                                 <Field
-                                    className={styles.field}
-                                    id="major"
+                                    className={`${styles.field} ${styles.select}`}
+                                    as="select"
                                     name="major"
-                                    placeholder="Computer Science"
-                                />
+                                    id="major"
+                                    validate={(value: string) => {
+                                        let errorMessage;
+                                        if (
+                                            value == undefined ||
+                                            value.length == 0
+                                        ) {
+                                            errorMessage = REQUIRED_FIELD_ERROR;
+                                        }
+                                        return errorMessage;
+                                    }}
+                                    onChange={(
+                                        e: React.FormEvent<HTMLInputElement>
+                                    ) => {
+                                        handleChange(e);
+                                        setShowOtherMajor(
+                                            e.currentTarget.value === major
+                                        );
+                                    }}
+                                >
+                                    <option disabled value="">
+                                        {SELECT_PLACEHOLDER}
+                                    </option>
+                                    <option value="Computer Science">
+                                        Computer Science
+                                    </option>
+                                    <option value="Computer Engineering">
+                                        Computer Engineering
+                                    </option>
+                                    <option value="Computer and Information Systems">
+                                        Computer and Information Systems
+                                    </option>
+                                    <option value="Cybersecurity">
+                                        Cybersecurity
+                                    </option>
+                                    <option value="Information Technology">
+                                        Information Technology
+                                    </option>
+                                    <option value="Internet of Things">
+                                        Internet of Things
+                                    </option>
+                                    <option value={major}>Other</option>
+                                    <option value="Accounting">
+                                        Accounting
+                                    </option>
+                                    <option value="Advertising and Public Relations">
+                                        Advertising and Public Relations
+                                    </option>
+                                    <option value="Aerospace Engineering">
+                                        Aerospace Engineering
+                                    </option>
+                                    <option value="Agricultural Economics">
+                                        Agricultural Economics
+                                    </option>
+                                    <option value="Agriculture Production and Management">
+                                        Agriculture Production and Management
+                                    </option>
+                                    <option value="Animal Services">
+                                        Animal Services
+                                    </option>
+                                    <option value="Applied Mathematics">
+                                        Applied Mathematics
+                                    </option>
+                                    <option value="Architecture">
+                                        Architecture
+                                    </option>
+                                    <option value="Art History">
+                                        Art History
+                                    </option>
+                                    <option value="Astronomy">Astronomy</option>
+                                    <option value="Biochemical Sciences">
+                                        Biochemical Sciences
+                                    </option>
+                                    <option value="Biology">Biology</option>
+                                    <option value="Biomedical Engineering">
+                                        Biomedical Engineering
+                                    </option>
+                                    <option value="Botany">Botany</option>
+                                    <option value="Business Management and Administration">
+                                        Business Management and Administration
+                                    </option>
+                                    <option value="Chemical Engineering">
+                                        Chemical Engineering
+                                    </option>
+                                    <option value="Chemistry">Chemistry</option>
+                                    <option value="Civil Engineering">
+                                        Civil Engineering
+                                    </option>
+                                    <option value="Commercial Art and Graphic Design">
+                                        Commercial Art and Graphic Design
+                                    </option>
+                                    <option value="Communication Disorders Sciences and Services">
+                                        Communication Disorders Sciences and
+                                        Services
+                                    </option>
+                                    <option value="Communication Technologies">
+                                        Communication Technologies
+                                    </option>
+                                    <option value="Communications">
+                                        Communications
+                                    </option>
+                                    <option value="Construction Services">
+                                        Construction Services
+                                    </option>
+                                    <option value="Court Reporting">
+                                        Court Reporting
+                                    </option>
+                                    <option value="Criminal Justice">
+                                        Criminal Justice
+                                    </option>
+                                    <option value="Criminology">
+                                        Criminology
+                                    </option>
+                                    <option value="Drama and Theater Arts">
+                                        Drama and Theater Arts
+                                    </option>
+                                    <option value="Early Childhood Education">
+                                        Early Childhood Education
+                                    </option>
+                                    <option value="Ecology">Ecology</option>
+                                    <option value="Economics">Economics</option>
+                                    <option value="Educational Administration and Supervision">
+                                        Educational Administration and
+                                        Supervision
+                                    </option>
+                                    <option value="Electrical Engineering">
+                                        Electrical Engineering
+                                    </option>
+                                    <option value="Engineering and Industrial Management">
+                                        Engineering and Industrial Management
+                                    </option>
+                                    <option value="English Language and Rhetoric">
+                                        English Language and Rhetoric
+                                    </option>
+                                    <option value="Environmental Engineering">
+                                        Environmental Engineering
+                                    </option>
+                                    <option value="Environmental Science">
+                                        Environmental Science
+                                    </option>
+                                    <option value="Film Video and Photographic Arts">
+                                        Film Video and Photographic Arts
+                                    </option>
+                                    <option value="Finance">Finance</option>
+                                    <option value="Fine Arts">Fine Arts</option>
+                                    <option value="Food Science">
+                                        Food Science
+                                    </option>
+                                    <option value="Forestry">Forestry</option>
+                                    <option value="General Agriculture">
+                                        General Agriculture
+                                    </option>
+                                    <option value="General Business">
+                                        General Business
+                                    </option>
+                                    <option value="General Education">
+                                        General Education
+                                    </option>
+                                    <option value="Genetics">Genetics</option>
+                                    <option value="Geology">Geology</option>
+                                    <option value="Health and Medical Administrative Services">
+                                        Health and Medical Administrative
+                                        Services
+                                    </option>
+                                    <option value="History">History</option>
+                                    <option value="Hospitality Management">
+                                        Hospitality Management
+                                    </option>
+                                    <option value="Human Resources and Personnel Management">
+                                        Human Resources and Personnel Management
+                                    </option>
+                                    <option value="Humanities">
+                                        Humanities
+                                    </option>
+                                    <option value="International Business">
+                                        International Business
+                                    </option>
+                                    <option value="International Relations">
+                                        International Relations
+                                    </option>
+                                    <option value="Journalism">
+                                        Journalism
+                                    </option>
+                                    <option value="Liberal Arts">
+                                        Liberal Arts
+                                    </option>
+                                    <option value="Library Science">
+                                        Library Science
+                                    </option>
+                                    <option value="Marketing and Marketing Research">
+                                        Marketing and Marketing Research
+                                    </option>
+                                    <option value="Mass Media">
+                                        Mass Media
+                                    </option>
+                                    <option value="Mathematics">
+                                        Mathematics
+                                    </option>
+                                    <option value="Mathematics Teacher Education">
+                                        Mathematics Teacher Education
+                                    </option>
+                                    <option value="Mechanical Engineering">
+                                        Mechanical Engineering
+                                    </option>
+                                    <option value="Medical Technologies Technicians">
+                                        Medical Technologies Technicians
+                                    </option>
+                                    <option value="Microbiology">
+                                        Microbiology
+                                    </option>
+                                    <option value="Music">Music</option>
+                                    <option value="Natural Resources Management">
+                                        Natural Resources Management
+                                    </option>
+                                    <option value="Neuroscience">
+                                        Neuroscience
+                                    </option>
+                                    <option value="Nursing">Nursing</option>
+                                    <option value="Nutrition Sciences">
+                                        Nutrition Sciences
+                                    </option>
+                                    <option value="Oceanography">
+                                        Oceanography
+                                    </option>
+                                    <option value="Operations Logistics and E-Commerce">
+                                        Operations Logistics and E-Commerce
+                                    </option>
+                                    <option value="Pharmacology">
+                                        Pharmacology
+                                    </option>
+                                    <option value="Philosophy and Religious Studies">
+                                        Philosophy and Religious Studies
+                                    </option>
+                                    <option value="Physical and Health Teacher Education">
+                                        Physical and Health Teacher Education
+                                    </option>
+                                    <option value="Physics">Physics</option>
+                                    <option value="Physiology">
+                                        Physiology
+                                    </option>
+                                    <option value="Plant Science and Agronomy">
+                                        Plant Science and Agronomy
+                                    </option>
+                                    <option value="Political Science">
+                                        Political Science
+                                    </option>
+                                    <option value="Pre-Law and Legal Studies">
+                                        Pre-Law and Legal Studies
+                                    </option>
+                                    <option value="Psychology">
+                                        Psychology
+                                    </option>
+                                    <option value="School Student Counseling">
+                                        School Student Counseling
+                                    </option>
+                                    <option value="Science or Computer Teacher Education">
+                                        Science or Computer Teacher Education
+                                    </option>
+                                    <option value="Secondary Teacher Education">
+                                        Secondary Teacher Education
+                                    </option>
+                                    <option value="Social Science or History Teacher Education">
+                                        Social Science or History Teacher
+                                        Education
+                                    </option>
+                                    <option value="Soil Science">
+                                        Soil Science
+                                    </option>
+                                    <option value="Special Needs Education">
+                                        Special Needs Education
+                                    </option>
+                                    <option value="Statistics">
+                                        Statistics
+                                    </option>
+                                    <option value="Studio Arts">
+                                        Studio Arts
+                                    </option>
+                                    <option value="Theology and Religious Vocations">
+                                        Theology and Religious Vocations
+                                    </option>
+                                    <option value="Visual and Performing Arts">
+                                        Visual and Performing Arts
+                                    </option>
+                                    <option value="Zoology">Zoology</option>
+                                </Field>
+                                {showOtherMajor ? (
+                                    <Field
+                                        className={`${styles.field} ${styles.other}`}
+                                        id="major"
+                                        name="major"
+                                        onChange={(
+                                            e: React.FormEvent<HTMLInputElement>
+                                        ) => {
+                                            handleChange(e);
+                                            setMajor(e.currentTarget.value);
+                                        }}
+                                    />
+                                ) : null}
                                 {errors.major && touched.major ? (
                                     <div className={styles.errors}>
                                         {errors.major}
@@ -951,12 +2077,86 @@ const HackerForm: React.FC = () => {
                                     title="Gender"
                                     description="For demographic purposes only"
                                 />
-                                <Field
-                                    className={styles.field}
-                                    id="gender"
-                                    name="gender"
-                                    placeholder="Gender"
-                                />
+                                <label>
+                                    <Field
+                                        type="radio"
+                                        name="gender"
+                                        value="Female"
+                                        className={styles.radioButton}
+                                        onChange={(e: React.ChangeEvent) => {
+                                            handleChange(e);
+                                            setShowOtherGender(false);
+                                        }}
+                                    />
+                                    Female
+                                </label>
+                                <label>
+                                    <Field
+                                        type="radio"
+                                        name="gender"
+                                        value="Male"
+                                        className={styles.radioButton}
+                                        onChange={(e: React.ChangeEvent) => {
+                                            handleChange(e);
+                                            setShowOtherGender(false);
+                                        }}
+                                    />
+                                    Male
+                                </label>
+                                <label>
+                                    <Field
+                                        type="radio"
+                                        name="gender"
+                                        value="Non-binary"
+                                        className={styles.radioButton}
+                                        onChange={(e: React.ChangeEvent) => {
+                                            handleChange(e);
+                                            setShowOtherGender(false);
+                                        }}
+                                    />
+                                    Non-binary
+                                </label>
+                                <label>
+                                    <Field
+                                        type="radio"
+                                        className={styles.radioButton}
+                                        value="Prefer not to say"
+                                        name="gender"
+                                        onChange={(e: React.ChangeEvent) => {
+                                            handleChange(e);
+                                            setShowOtherGender(false);
+                                        }}
+                                    />
+                                    Prefer not to say
+                                </label>
+                                <label>
+                                    <Field
+                                        type="radio"
+                                        className={styles.radioButton}
+                                        value={gender}
+                                        name="gender"
+                                        onChange={(e: React.ChangeEvent) => {
+                                            handleChange(e);
+                                            setShowOtherGender(
+                                                !showOtherGender
+                                            );
+                                        }}
+                                    />
+                                    Other
+                                </label>
+                                {showOtherGender ? (
+                                    <Field
+                                        className={`${styles.field} ${styles.other}`}
+                                        id="gender"
+                                        name="gender"
+                                        onChange={(
+                                            e: React.FormEvent<HTMLInputElement>
+                                        ) => {
+                                            handleChange(e);
+                                            setGender(e.currentTarget.value);
+                                        }}
+                                    />
+                                ) : null}
                                 {errors.gender && touched.gender ? (
                                     <div className={styles.errors}>
                                         {errors.gender}
@@ -971,35 +2171,33 @@ const HackerForm: React.FC = () => {
                                     title="Ethnicity"
                                     description="For demographic purposes only"
                                 />
-                                <Field
-                                    className={`${styles.field} ${styles.select}`}
-                                    as="select"
-                                    name="ethnicity"
-                                    id="ethnicity"
-                                    validate={(value: string) => {
-                                        let errorMessage;
-                                        if (
-                                            value == undefined ||
-                                            value.length == 0
-                                        ) {
-                                            errorMessage = REQUIRED_FIELD_ERROR;
-                                        }
-                                        return errorMessage;
-                                    }}
-                                >
-                                    <option disabled value="">
-                                        {SELECT_PLACEHOLDER}
-                                    </option>
-                                    <option value="Hispanic or Latinx">
-                                        Hispanic or Latinx
-                                    </option>
-                                    <option value="Not Hispanic or Latinx">
-                                        Not Hispanic or Latinx
-                                    </option>
-                                    <option value="Prefer not to answer">
-                                        Prefer not to answer
-                                    </option>
-                                </Field>
+                                <label>
+                                    <Field
+                                        type="radio"
+                                        name="ethnicity"
+                                        value="Hispanic or Latinx"
+                                        className={styles.radioButton}
+                                    />
+                                    Hispanic or Latinx
+                                </label>
+                                <label>
+                                    <Field
+                                        type="radio"
+                                        name="ethnicity"
+                                        value="Not Hispanic or Latinx"
+                                        className={styles.radioButton}
+                                    />
+                                    Not Hispanic or Latinx
+                                </label>
+                                <label>
+                                    <Field
+                                        type="radio"
+                                        name="ethnicity"
+                                        value="Prefer not to answer"
+                                        className={styles.radioButton}
+                                    />
+                                    Prefer not to answer
+                                </label>
                                 {errors.ethnicity && touched.ethnicity ? (
                                     <div className={styles.errors}>
                                         {errors.ethnicity}
@@ -1021,50 +2219,65 @@ const HackerForm: React.FC = () => {
                                 >
                                     <label>
                                         <Field
-                                            type="checkbox"
+                                            type="radio"
                                             name="race"
                                             value="American Indian or Alaska Native"
+                                            className={styles.radioButton}
                                         />
                                         American Indian or Alaska Native
                                     </label>
                                     <label>
                                         <Field
-                                            type="checkbox"
+                                            type="radio"
                                             name="race"
                                             value="Asian"
+                                            className={styles.radioButton}
                                         />
                                         Asian
                                     </label>
                                     <label>
                                         <Field
-                                            type="checkbox"
+                                            type="radio"
                                             name="race"
                                             value="Black or African American"
+                                            className={styles.radioButton}
                                         />
                                         Black or African American
                                     </label>
                                     <label>
                                         <Field
-                                            type="checkbox"
+                                            type="radio"
                                             name="race"
                                             value="Native Hawaiian Or Other Pacific Islander"
+                                            className={styles.radioButton}
                                         />
                                         Native Hawaiian Or Other Pacific
                                         Islander
                                     </label>
                                     <label>
                                         <Field
-                                            type="checkbox"
+                                            type="radio"
                                             name="race"
                                             value="White"
+                                            className={styles.radioButton}
                                         />
                                         White
                                     </label>
                                     <label>
                                         <Field
-                                            type="checkbox"
+                                            type="radio"
+                                            name="race"
+                                            value="Multiracial"
+                                            className={styles.radioButton}
+                                        />
+                                        Multiracial
+                                    </label>
+                                    <label>
+                                        <Field
+                                            type="radio"
                                             name="race"
                                             value="Prefer not to answer"
+                                            className={styles.radioButton}
                                         />
                                         Prefer not to answer
                                     </label>
@@ -1083,31 +2296,51 @@ const HackerForm: React.FC = () => {
                                     title="T-Shirt Size"
                                     description=""
                                 />
-                                <Field
-                                    className={`${styles.field} ${styles.select}`}
-                                    as="select"
-                                    name="tshirtSize"
-                                    id="tshirtSize"
-                                    validate={(value: string) => {
-                                        let errorMessage;
-                                        if (
-                                            value == undefined ||
-                                            value.length == 0
-                                        ) {
-                                            errorMessage = REQUIRED_FIELD_ERROR;
-                                        }
-                                        return errorMessage;
-                                    }}
-                                >
-                                    <option disabled value="">
-                                        {SELECT_PLACEHOLDER}
-                                    </option>
-                                    <option value="XS">Extra-Small</option>
-                                    <option value="S">Small</option>
-                                    <option value="M">Medium</option>
-                                    <option value="L">Large</option>
-                                    <option value="XL">Extra-Large</option>
-                                </Field>
+                                <label>
+                                    <Field
+                                        type="radio"
+                                        name="tshirtSize"
+                                        value="S"
+                                        className={styles.radioButton}
+                                    />
+                                    S
+                                </label>
+                                <label>
+                                    <Field
+                                        type="radio"
+                                        name="tshirtSize"
+                                        value="M"
+                                        className={styles.radioButton}
+                                    />
+                                    M
+                                </label>
+                                <label>
+                                    <Field
+                                        type="radio"
+                                        name="tshirtSize"
+                                        value="L"
+                                        className={styles.radioButton}
+                                    />
+                                    L
+                                </label>
+                                <label>
+                                    <Field
+                                        type="radio"
+                                        name="tshirtSize"
+                                        value="XL"
+                                        className={styles.radioButton}
+                                    />
+                                    XL
+                                </label>
+                                <label>
+                                    <Field
+                                        type="radio"
+                                        name="tshirtSize"
+                                        value="XXL"
+                                        className={styles.radioButton}
+                                    />
+                                    XXL
+                                </label>
                                 {errors.tshirtSize && touched.tshirtSize ? (
                                     <div className={styles.errors}>
                                         {errors.tshirtSize}
@@ -1564,16 +2797,27 @@ const HackerForm: React.FC = () => {
                                 <FieldLabel
                                     name=""
                                     emoji="globe-with-meridians"
-                                    title="Will you be participating remotely?"
+                                    title="If accepted, will you be participating in-person or remotely this year?"
                                     description="Please let us know!"
                                 />
-                                <Field
-                                    type="checkbox"
-                                    name="isRemote"
-                                    value={isRemote}
-                                    onClick={() => setIsRemote(!isRemote)}
-                                    checked={isRemote}
-                                />
+                                <label>
+                                    <Field
+                                        type="radio"
+                                        name="attendance"
+                                        value="In-Person"
+                                        className={styles.radioButton}
+                                    />
+                                    In-Person
+                                </label>
+                                <label>
+                                    <Field
+                                        type="radio"
+                                        name="attendance"
+                                        value="Remote"
+                                        className={styles.radioButton}
+                                    />
+                                    Remote
+                                </label>
                             </div>
 
                             <div className={styles.fieldWrapper}>
@@ -1621,13 +2865,21 @@ const HackerForm: React.FC = () => {
                                 ) : null}
                             </div>
 
-                            <div className={styles.fieldWrapper}>
+                            <div
+                                className={`${styles.fieldWrapper} ${styles.column}`}
+                            >
                                 <FieldLabel
                                     name=""
                                     emoji="handshake"
-                                    title="MLH Agreement"
+                                    title="Major League Hacking Agreement"
                                     description="I have read and agreed to the MLH Code of Conduct"
                                 />
+                                <a
+                                    className={styles.link}
+                                    href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf"
+                                >
+                                    Code of Conduct
+                                </a>
                                 <Field
                                     type="checkbox"
                                     name="agreedMLH"
@@ -1642,13 +2894,27 @@ const HackerForm: React.FC = () => {
                                 ) : null}
                             </div>
 
-                            <div className={styles.fieldWrapper}>
+                            <div
+                                className={`${styles.fieldWrapper} ${styles.column}`}
+                            >
                                 <FieldLabel
                                     name=""
                                     emoji="scroll"
-                                    title="MLH Terms and Conditions"
-                                    description="I have read and agreed to the MLH Code of Conduct. I authorize you to share my application/registration information with Major League Hacking for event administration, ranking, and MLH administration in-line with the MLH privacy policy. I further agree to the terms of both the MLH Contest Terms and Conditions and the MLH Privacy Policy. "
+                                    title="Major League Hacking Terms and Conditions"
+                                    description="I authorize you to share my application/registration information with Major League Hacking for event administration, ranking, and MLH administration in-line with the MLH privacy policy. I further agree to the terms of both the MLH Contest Terms and Conditions and the MLH Privacy Policy. "
                                 />
+                                <a
+                                    className={styles.link}
+                                    href="https://mlh.io/privacy"
+                                >
+                                    Privacy Policy
+                                </a>
+                                <a
+                                    className={styles.link}
+                                    href="https://mlh.io/terms"
+                                >
+                                    Terms and Conditions
+                                </a>
                                 <Field
                                     type="checkbox"
                                     name="agreedTerms"
@@ -1667,7 +2933,7 @@ const HackerForm: React.FC = () => {
                                 <FieldLabel
                                     name=""
                                     emoji="envelope"
-                                    title="Communications from MLH"
+                                    title="Communications from Major League Hacking"
                                     description="I authorize MLH to send me pre- and post-event informational emails, which contain free credit and opportunities from their partners"
                                 />
                                 <Field

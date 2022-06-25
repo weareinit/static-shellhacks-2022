@@ -21,7 +21,7 @@ export type Hacker = {
     firstName: string;
     lastName: string;
     email: string;
-    isRemote: boolean;
+    attendance: string;
     address: Address;
     school: string;
     major: string;
@@ -29,7 +29,7 @@ export type Hacker = {
     gradYear: number;
     gender: string;
     ethnicity: string;
-    race: Array<string>;
+    race: string;
     shirtSize: string;
     roles: Array<string>;
     attendedHackathon: string;
@@ -110,7 +110,7 @@ export type HackerValues = {
     graduationYear: number;
     gender: string;
     ethnicity: string;
-    race: Array<string>;
+    race: string;
     tshirtSize: string;
     whichRoleBestDescribesYou: Array<string>;
     haveYouAttendedAHackathonBefore: string;
@@ -121,7 +121,7 @@ export type HackerValues = {
     linkedIn: string;
     github: string;
     website: string;
-    isRemote: boolean;
+    attendance: string;
     isAdult: boolean;
     isSharingInfo: boolean;
     agreedMLH: boolean;
