@@ -25,7 +25,7 @@ async function addHacker(
         firstName: values.firstName,
         lastName: values.lastName,
         email: currentUser.email ? currentUser.email : "",
-        isRemote: values.isRemote,
+        attendance: values.attendance,
         address: userAddress,
         school: values.school,
         major: values.major,
