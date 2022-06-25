@@ -190,7 +190,7 @@ function Dashboard() {
                                     </h3>
                                     <p className={styles.noApplicationText}>
                                         Please Complete the Application Before
-                                        The Deadline
+                                        the Deadline
                                     </p>
                                     <div
                                         className={styles.smallButtonBackground}

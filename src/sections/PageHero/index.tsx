@@ -22,7 +22,7 @@ const PageHero: React.FC = () => {
                     {/* prettier-ignore */}
                     <EmojiProvider data={emojiData}>
                         <ul>
-                            <li><Emoji className={styles.detailsMarker} name="rocket"/>September 23-25, 2022</li>
+                            <li><Emoji className={styles.detailsMarker} name="rocket"/>September 16-18, 2022</li>
                             <li><Emoji className={styles.detailsMarker} name="rocket"/>Florida International University</li>
                             <li><Emoji className={styles.detailsMarker} name="rocket"/>Miami, FL ● In-Person & Virtual!</li>
                         </ul>
