@@ -11,7 +11,7 @@ import * as Yup from "yup";
 import styles from "./index.module.css";
 import addHacker from "../../server/functions/addHacker";
 import { HackerValues } from "../../../util/types";
-import React from "react";
+import React, { useState } from "react";
 import { auth } from "../../server/firebaseApp";
 import { onAuthStateChanged } from "firebase/auth";
 import ProgressModal from "../../components/ProgressModal";
@@ -145,6 +145,7 @@ const HackerForm: React.FC = () => {
     onAuthStateChanged(auth, (currentUser: any) => {
         setUser(currentUser);
     });
+    const [hasTriedSubmitting, setHasTriedSubmitting] = useState(false);
     const [displayPopup, setDisplayPopup] = React.useState(false);
     const [errorMessage, setErrorMessage] = React.useState("");
     const [popupState, setPopupState] = React.useState(
@@ -2123,14 +2124,14 @@ const HackerForm: React.FC = () => {
                                     <Field
                                         type="radio"
                                         className={styles.radioButton}
-                                        value="Prefer not to say"
+                                        value="Prefer not to answer"
                                         name="gender"
                                         onChange={(e: React.ChangeEvent) => {
                                             handleChange(e);
                                             setShowOtherGender(false);
                                         }}
                                     />
-                                    Prefer not to say
+                                    Prefer not to answer
                                 </label>
                                 <label>
                                     <Field
@@ -2979,7 +2980,7 @@ const HackerForm: React.FC = () => {
                                 ) : null}
                             </div>
 
-                            {!isValid ? (
+                            {!isValid && hasTriedSubmitting ? (
                                 <div className={styles.errors}>
                                     Unable to submit. Check for missing
                                     information or errors.
@@ -2990,6 +2991,9 @@ const HackerForm: React.FC = () => {
                                 id="submitBtn"
                                 className={styles.submitButton}
                                 type="submit"
+                                onClick={() => {
+                                    setHasTriedSubmitting(true);
+                                }}
                             >
                                 <div className={styles.submitButtonBackground}>
                                     <div
