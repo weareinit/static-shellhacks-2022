@@ -1,10 +1,11 @@
 import styles from "./index.module.css";
-import React from "react";
+import React, { createRef, FormEvent } from "react";
 import { auth } from "../../server/firebaseApp";
 import { sendPasswordResetEmail } from "firebase/auth";
 import ProgressModal, { ProgressState } from "../../components/ProgressModal";
 import { FirebaseError } from "firebase/app";
 import { formatError } from "../../util/errors";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const ForgotPasswordForm: React.FC = () => {
     const [email, setEmail] = React.useState("");
@@ -13,6 +14,9 @@ const ForgotPasswordForm: React.FC = () => {
     const [popupState, setPopupState] = React.useState(
         ProgressState.PROCESSING
     );
+    const [disableSubmit, setDisableSubmit] = React.useState(true);
+
+    const recaptchaRef = createRef();
 
     const forgotPassword = async (event: any) => {
         event.preventDefault();
@@ -30,7 +34,13 @@ const ForgotPasswordForm: React.FC = () => {
     };
 
     return (
-        <form>
+        <form
+            onSubmit={(e: FormEvent<HTMLFormElement>) => {
+                // @ts-ignore
+                const recaptchaValue = recaptchaRef.current.getValue();
+                forgotPassword(e);
+            }}
+        >
             <ProgressModal
                 trigger={displayPopup}
                 setTrigger={setDisplayPopup}
@@ -52,14 +62,30 @@ const ForgotPasswordForm: React.FC = () => {
                     }}
                 />
             </div>
+            <ReCAPTCHA
+                ref={recaptchaRef}
+                sitekey="6Lf0HqsgAAAAAExp_b89HLfv4LnHw18W0riS5enQ"
+                onChange={() => {
+                    if (disableSubmit) setDisableSubmit(false);
+                }}
+                className={styles.recaptcha}
+            />
             <div className={styles.buttonDiv}>
-                <div className={styles.submitButtonBackground}>
+                <div
+                    className={`${styles.submitButtonBackground} ${
+                        disableSubmit
+                            ? styles.submitButtonDisabledBackground
+                            : ""
+                    }`}
+                >
                     <input
-                        className={styles.submitButton}
+                        className={`${styles.submitButton} ${
+                            disableSubmit ? styles.submitButtonDisabled : ""
+                        }`}
                         type="submit"
                         value="Send Password Reset"
                         id="signin"
-                        onClick={forgotPassword}
+                        disabled={disableSubmit}
                     />
                 </div>
             </div>

@@ -59,6 +59,18 @@
     cursor: pointer;
 }
 
+.submitButtonDisabled {
+    color: gray !important;
+}
+
+.submitButtonBackground:hover .submitButtonDisabled {
+    transform: initial !important;
+}
+
+.submitButtonDisabledBackground {
+    background: darkgray !important;
+}
+
 .buttonDiv {
     display: flex;
     margin: 24px auto;
@@ -73,6 +85,12 @@
 
 .currentUser {
     margin-bottom: 1rem;
+}
+
+.recaptcha {
+    margin: auto;
+    margin-top: 2%;
+    width: fit-content;
 }
 
 /* LANDSCAPE VERSION */

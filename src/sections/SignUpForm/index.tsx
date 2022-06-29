@@ -1,10 +1,11 @@
 import styles from "./index.module.css";
-import React from "react";
+import React, { createRef, FormEvent } from "react";
 import ProgressModal, { ProgressState } from "../../components/ProgressModal";
 import { FirebaseError } from "firebase/app";
 import { formatError } from "../../util/errors";
 import { useRouter } from "next/router";
 import createUser from "../../server/functions/createUser";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const SignUpForm: React.FC = () => {
     const [email, setEmail] = React.useState("");
@@ -12,8 +13,10 @@ const SignUpForm: React.FC = () => {
     const [error, setError] = React.useState("");
     const [errorOccured, setErrorOccured] = React.useState(false);
     const [displayPopup, setDisplayPopup] = React.useState(false);
+    const [disableSubmit, setDisableSubmit] = React.useState(true);
 
     const router = useRouter();
+    const recaptchaRef = createRef();
 
     const signUp = async (event: any) => {
         event.preventDefault();
@@ -31,7 +34,13 @@ const SignUpForm: React.FC = () => {
     };
 
     return (
-        <form>
+        <form
+            onSubmit={(e: FormEvent<HTMLFormElement>) => {
+                // @ts-ignore
+                const recaptchaValue = recaptchaRef.current.getValue();
+                signUp(e);
+            }}
+        >
             <ProgressModal
                 trigger={displayPopup}
                 setTrigger={setDisplayPopup}
@@ -68,14 +77,30 @@ const SignUpForm: React.FC = () => {
                     }}
                 />
             </div>
+            <ReCAPTCHA
+                ref={recaptchaRef}
+                sitekey="6Lf0HqsgAAAAAExp_b89HLfv4LnHw18W0riS5enQ"
+                onChange={() => {
+                    if (disableSubmit) setDisableSubmit(false);
+                }}
+                className={styles.recaptcha}
+            />
             <div className={styles.buttonDiv}>
-                <div className={styles.submitButtonBackground}>
+                <div
+                    className={`${styles.submitButtonBackground} ${
+                        disableSubmit
+                            ? styles.submitButtonDisabledBackground
+                            : ""
+                    }`}
+                >
                     <input
-                        className={styles.submitButton}
+                        className={`${styles.submitButton} ${
+                            disableSubmit ? styles.submitButtonDisabled : ""
+                        }`}
                         type="submit"
                         value="Sign Up"
                         id="signup"
-                        onClick={signUp}
+                        disabled={disableSubmit}
                     />
                 </div>
             </div>

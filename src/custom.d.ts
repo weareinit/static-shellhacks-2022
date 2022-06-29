@@ -24,3 +24,4 @@ declare module "*.module.css" {
 }
 
 declare module "react-file-previewer";
+declare module "react-google-recaptcha";
