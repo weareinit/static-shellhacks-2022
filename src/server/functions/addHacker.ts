@@ -50,6 +50,7 @@ async function addHacker(
         agreedMLH: values.agreedMLH,
         agreedTerms: values.agreedTerms,
         agreedCommunications: values.agreedCommunications,
+        agreedPrize: values.agreedPrize,
     };
     await setDoc(doc(collection(db, "hackers"), currentUser.uid), hacker);
 }
