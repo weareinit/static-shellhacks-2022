@@ -46,6 +46,7 @@ export type Hacker = {
     agreedMLH: boolean;
     agreedTerms: boolean;
     agreedCommunications: boolean;
+    agreedPrize: boolean;
 };
 
 export type Mentors = {
@@ -127,4 +128,5 @@ export type HackerValues = {
     agreedMLH: boolean;
     agreedTerms: boolean;
     agreedCommunications: boolean;
+    agreedPrize: boolean;
 };

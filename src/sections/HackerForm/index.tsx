@@ -55,6 +55,7 @@ const HackerForm: React.FC = () => {
     const [agreedTerms, setAgreedTerms] = React.useState(false);
     const [agreedCommunications, setAgreedCommunications] =
         React.useState(false);
+    const [agreedPrize, setAgreedPrize] = React.useState(false);
     const [showOtherGender, setShowOtherGender] = React.useState(false);
     const [gender, setGender] = React.useState("Other");
     const [showOtherMajor, setShowOtherMajor] = React.useState(false);
@@ -102,6 +103,7 @@ const HackerForm: React.FC = () => {
         agreedMLH: Yup.boolean().oneOf([true], REQUIRED_FIELD_ERROR),
         agreedTerms: Yup.boolean().oneOf([true], REQUIRED_FIELD_ERROR),
         agreedCommunications: Yup.boolean().oneOf([true], REQUIRED_FIELD_ERROR),
+        agreedPrize: Yup.boolean().oneOf([true], REQUIRED_FIELD_ERROR),
     });
 
     const initialValues: any = {
@@ -136,6 +138,7 @@ const HackerForm: React.FC = () => {
         agreedMLH: agreedMLH,
         agreedTerms: agreedTerms,
         agreedCommunications: agreedCommunications,
+        agreedPrize: agreedPrize,
     };
 
     const [user, setUser] = React.useState<any>({});
@@ -2861,6 +2864,27 @@ const HackerForm: React.FC = () => {
                                 touched.isSharingInfo ? (
                                     <div className={styles.errors}>
                                         {errors.isSharingInfo}
+                                    </div>
+                                ) : null}
+                            </div>
+
+                            <div className={styles.fieldWrapper}>
+                                <FieldLabel
+                                    name=""
+                                    emoji="wrapped-gift"
+                                    title="Prize Disclaimer"
+                                    description="I am aware that prizes received from participating in ShellHacks that are worth $600 or more will be subject to a gift tax, as per the IRS and Florida International University's gift policies. I am also aware that if I have won a prize from UPE or ShellHacks in the past and win another one this year with the total of both prizes being $600 or more, it will also be subject to a gift tax."
+                                />
+                                <Field
+                                    type="checkbox"
+                                    name="agreedPrize"
+                                    value={agreedPrize}
+                                    onClick={() => setAgreedPrize(!agreedPrize)}
+                                    checked={agreedPrize}
+                                />
+                                {errors.agreedPrize && touched.agreedPrize ? (
+                                    <div className={styles.errors}>
+                                        {errors.agreedPrize}
                                     </div>
                                 ) : null}
                             </div>

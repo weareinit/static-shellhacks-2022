@@ -88,8 +88,7 @@
 }
 
 .recaptcha {
-    margin: auto;
-    margin-top: 2%;
+    margin: 24px auto;
     width: fit-content;
 }
 
@@ -100,5 +99,8 @@
     }
     .submitButtonBackground {
         padding: 2%;
+    }
+    .recaptcha {
+        margin: 4% auto;
     }
 }
