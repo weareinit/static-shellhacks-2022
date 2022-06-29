@@ -1,6 +1,4 @@
 import styles from "./index.module.css";
-import City from "../../svg/CityNoShell.svg";
-import CityPNG from "../../svg/CityPNGA.png";
 import CityPNGA from "../../../public/static/CityPNGA.png";
 import Image from "next/image";
 

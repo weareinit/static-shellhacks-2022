@@ -1,8 +1,8 @@
 import styles from "./index.module.css";
 import React, { useEffect, useState } from "react";
-import ShellHacks from "../../svg/ShellHacks_Filled.svg";
-import ArrowDown from "../../svg/ArrowDown.svg";
-import ArrowUp from "../../svg/ArrowUp.svg";
+import ShellHacks from "../../../public/static/ShellHacks_Filled.svg";
+import ArrowDown from "../../../public/static/ArrowDown.svg";
+import ArrowUp from "../../../public/static/ArrowUp.svg";
 import { useRouter } from "next/router";
 import { signOut } from "firebase/auth";
 import { auth } from "../../server/firebaseApp";

@@ -1,8 +1,8 @@
 import styles from "./index.module.css";
 import React from "react";
-import X_Symbol from "../../svg/X_Symbol.svg";
-import Error_Symbol from "../../svg/Error_Symbol.svg";
-import Success_Symbol from "../../svg/Success_Symbol.svg";
+import X_Symbol from "../../../public/static/X_Symbol.svg";
+import Error_Symbol from "../../../public/static/Error_Symbol.svg";
+import Success_Symbol from "../../../public/static/Success_Symbol.svg";
 
 export enum ProgressState {
     PROCESSING,

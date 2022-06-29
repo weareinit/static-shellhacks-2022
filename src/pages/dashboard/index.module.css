@@ -32,7 +32,7 @@
     margin: 2% 0;
     color: white;
     border: 20px solid;
-    border-image: url("../../svg/Border.svg");
+    border-image: url("../../../public/static/Border.svg");
     border-image-slice: 20 20;
 }
 
@@ -261,7 +261,7 @@
         margin: 5% 0;
         color: white;
         border: 20px solid;
-        border-image: url("../../svg/Border.svg");
+        border-image: url("../../../public/static/Border.svg");
         border-image-slice: 20 20;
     }
 

@@ -1,11 +1,11 @@
 import styles from "./index.module.css";
 import React from "react";
 import { SocialType } from "../../util/types";
-import Facebook from "../../svg/Facebook.svg";
-import Twitter from "../../svg/Twitter.svg";
-import Instagram from "../../svg/Instagram.svg";
-import LinkedIn from "../../svg/LinkedIn.svg";
-import YouTube from "../../svg/YouTube.svg";
+import Facebook from "../../../public/static/Facebook.svg";
+import Twitter from "../../../public/static/Twitter.svg";
+import Instagram from "../../../public/static/Instagram.svg";
+import LinkedIn from "../../../public/static/LinkedIn.svg";
+import YouTube from "../../../public/static/YouTube.svg";
 import Image from "next/image";
 
 type ButtonProps = {

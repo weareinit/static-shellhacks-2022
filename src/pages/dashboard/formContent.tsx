@@ -4,7 +4,7 @@ import { Emoji, EmojiProvider } from "react-apple-emojis";
 import emojiData from "react-apple-emojis/lib/data.json";
 import * as Yup from "yup";
 import styles from "./formContent.module.css";
-import X_Symbol from "../../svg/X_Symbol.svg";
+import X_Symbol from "../../../public/static/X_Symbol.svg";
 import FieldLabel from "../../components/FieldLabel";
 import updateAddress from "../../server/functions/updateAddress";
 import { formatError } from "../../util/errors";

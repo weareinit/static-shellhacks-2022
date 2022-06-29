@@ -1,13 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import ChangeAddress from "./formContent";
-import Resume from "./resume";
 import { useRouter } from "next/router";
 import styles from "./index.module.css";
 import SidebarItem from "./sibebarItem";
-import ShellHacks_Filled from "../../svg/ShellHacks_Filled.svg";
-import Stars from "../../svg/Stars.svg";
-import Edit from "../../svg/Edit.svg";
-import Download from "../../svg/Download.svg";
+import Edit from "../../../public/static/Edit.svg";
+import Download from "../../../public/static/Download.svg";
 import { AuthAction, useAuthUser, withAuthUser } from "next-firebase-auth";
 import { Hacker } from "../../../util/types";
 import { formatError } from "../../util/errors";

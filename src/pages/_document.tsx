@@ -11,7 +11,7 @@ export default function Document() {
                 />
                 <meta
                     name="description"
-                    content="ShellHacks is Florida's largest hackathon."
+                    content="ShellHacks is Florida’s largest hackathon, taking place September 9 - 11th both remotely and in Miami, FL!"
                 />
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link
