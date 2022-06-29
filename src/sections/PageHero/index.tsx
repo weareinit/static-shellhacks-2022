@@ -6,6 +6,7 @@ import LinkButton from "../../components/LinkButton";
 import ShellHacks from "../../svg/ShellHacks_Filled.svg";
 import Stars from "../../svg/Stars.svg";
 import CityPNG from "../../svg/CityPNGA.png";
+import CityPNGA from "../../../public/static/CityPNGA.png";
 import Footer from "../Footer";
 import Image from "next/image";
 
@@ -22,7 +23,7 @@ const PageHero: React.FC = () => {
                     {/* prettier-ignore */}
                     <EmojiProvider data={emojiData}>
                         <ul>
-                            <li><Emoji className={styles.detailsMarker} name="rocket"/>September 16-18, 2022</li>
+                            <li><Emoji className={styles.detailsMarker} name="rocket"/>September 9-11, 2022</li>
                             <li><Emoji className={styles.detailsMarker} name="rocket"/>Florida International University</li>
                             <li><Emoji className={styles.detailsMarker} name="rocket"/>Miami, FL ● In-Person & Virtual!</li>
                         </ul>
@@ -48,7 +49,7 @@ const PageHero: React.FC = () => {
                 <div id="spotlight1" className="pageHeroSpotlight" />
                 <div id="spotlight2" className="pageHeroSpotlight" /> */}
                 <Image
-                    src={CityPNG}
+                    src={CityPNGA}
                     loading="eager"
                     layout="responsive"
                     priority

@@ -1,6 +1,7 @@
 import styles from "./index.module.css";
 import City from "../../svg/CityNoShell.svg";
 import CityPNG from "../../svg/CityPNGA.png";
+import CityPNGA from "../../../public/static/CityPNGA.png";
 import Image from "next/image";
 
 const CityBackground: React.FC = () => {
@@ -8,7 +9,7 @@ const CityBackground: React.FC = () => {
         <div className={styles.cityBackground}>
             <div className={styles.cityDiv}>
                 <Image
-                    src={CityPNG}
+                    src={CityPNGA}
                     loading="eager"
                     layout="responsive"
                     className={styles.city}

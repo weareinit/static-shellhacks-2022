@@ -14,7 +14,7 @@ const SEO: React.FC<SEOProps> = (props: SEOProps) => {
     const metaTitle = title ? title : "ShellHacks 2022";
     const metaDescription = description
         ? description
-        : "ShellHacks is Florida’s largest hackathon, taking place September 16 - 18th both remotely and in Miami, FL!";
+        : "ShellHacks is Florida’s largest hackathon, taking place September 9 - 11th both remotely and in Miami, FL!";
     const metaUrl = url ? url : "https://shellhacks.net";
 
     return (

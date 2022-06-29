@@ -726,7 +726,7 @@ const HackerForm: React.FC = () => {
                                     className={styles.field}
                                     id="addressLine1"
                                     name="addressLine1"
-                                    placeholder="123 lane street"
+                                    placeholder="1234 SE 89 St."
                                 />
                                 {errors.addressLine1 && touched.addressLine1 ? (
                                     <div className={styles.errors}>
@@ -2763,7 +2763,7 @@ const HackerForm: React.FC = () => {
                                     className={styles.field}
                                     id="linkedIn"
                                     name="linkedIn"
-                                    placeholder="link"
+                                    placeholder="Link"
                                 />
                             </div>
 
@@ -2778,7 +2778,7 @@ const HackerForm: React.FC = () => {
                                     className={styles.field}
                                     id="github"
                                     name="github"
-                                    placeholder="link"
+                                    placeholder="Link"
                                 />
                             </div>
 
@@ -2793,7 +2793,7 @@ const HackerForm: React.FC = () => {
                                     className={styles.field}
                                     id="website"
                                     name="website"
-                                    placeholder="link"
+                                    placeholder="Link"
                                 />
                             </div>
 
@@ -2902,6 +2902,8 @@ const HackerForm: React.FC = () => {
                                 <a
                                     className={styles.link}
                                     href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                 >
                                     Code of Conduct
                                 </a>
@@ -2931,12 +2933,16 @@ const HackerForm: React.FC = () => {
                                 <a
                                     className={styles.link}
                                     href="https://mlh.io/privacy"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                 >
                                     Privacy Policy
                                 </a>
                                 <a
                                     className={styles.link}
                                     href="https://mlh.io/terms"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                 >
                                     Terms and Conditions
                                 </a>
