@@ -20,6 +20,9 @@ const ForgotPasswordForm: React.FC = () => {
 
     const forgotPassword = async (event: any) => {
         event.preventDefault();
+        // @ts-ignore
+        const recaptchaValue = recaptchaRef.current.getValue();
+        if (recaptchaValue === "") return;
         setPopupState(ProgressState.PROCESSING);
         setDisplayPopup(true);
         await sendPasswordResetEmail(auth, email)
@@ -36,8 +39,6 @@ const ForgotPasswordForm: React.FC = () => {
     return (
         <form
             onSubmit={(e: FormEvent<HTMLFormElement>) => {
-                // @ts-ignore
-                const recaptchaValue = recaptchaRef.current.getValue();
                 forgotPassword(e);
             }}
         >

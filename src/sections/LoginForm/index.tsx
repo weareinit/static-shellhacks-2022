@@ -21,6 +21,9 @@ const LoginForm: React.FC = () => {
 
     const login = async (event: any) => {
         event.preventDefault();
+        // @ts-ignore
+        const recaptchaValue = recaptchaRef.current.getValue();
+        if (recaptchaValue === "") return;
         setErrorOccured(false);
         setDisplayPopup(true);
 
@@ -38,8 +41,6 @@ const LoginForm: React.FC = () => {
     return (
         <form
             onSubmit={(e: FormEvent<HTMLFormElement>) => {
-                // @ts-ignore
-                const recaptchaValue = recaptchaRef.current.getValue();
                 login(e);
             }}
         >

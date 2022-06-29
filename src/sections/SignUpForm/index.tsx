@@ -20,6 +20,9 @@ const SignUpForm: React.FC = () => {
 
     const signUp = async (event: any) => {
         event.preventDefault();
+        // @ts-ignore
+        const recaptchaValue = recaptchaRef.current.getValue();
+        if (recaptchaValue === "") return;
         setErrorOccured(false);
         setDisplayPopup(true);
         await createUser(email, password)
@@ -36,8 +39,6 @@ const SignUpForm: React.FC = () => {
     return (
         <form
             onSubmit={(e: FormEvent<HTMLFormElement>) => {
-                // @ts-ignore
-                const recaptchaValue = recaptchaRef.current.getValue();
                 signUp(e);
             }}
         >
