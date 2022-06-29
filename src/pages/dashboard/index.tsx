@@ -18,6 +18,7 @@ import { auth } from "../../server/firebaseApp";
 import updateResume from "../../server/functions/updateResume";
 import ProgressModal, { ProgressState } from "../../components/ProgressModal";
 import NavBar, { AccountActionState } from "../../components/NavBar";
+import SEO from "../../components/SEO";
 
 const enum ApplicationStatus {
     NOT_APPLIED,
@@ -117,6 +118,7 @@ function Dashboard() {
 
     return (
         <div className={styles.background}>
+            <SEO />
             <NavBar accountAction={AccountActionState.LOGOUT} />
             <div>
                 {!isLoading && (

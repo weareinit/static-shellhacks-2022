@@ -4,11 +4,13 @@ import CityBackground from "../../components/CityBackground";
 import PasswordResetForm from "../../sections/PasswordResetForm";
 import { useRouter } from "next/router";
 import NavBar, { AccountActionState } from "../../components/NavBar";
+import SEO from "../../components/SEO";
 
 const PasswordResetPage: React.FC = () => {
     const router = useRouter();
     return (
         <div>
+            <SEO />
             <NavBar accountAction={AccountActionState.LOGIN} />
             <div className={styles.resetPageBackground}>
                 <CityBackground />

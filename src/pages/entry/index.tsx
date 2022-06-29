@@ -1,10 +1,12 @@
 import styles from "./index.module.css";
-import React from "react";
+import React, { useEffect } from "react";
 import CityBackground from "../../components/CityBackground";
 import LoginForm from "../../sections/LoginForm";
 import SignUpForm from "../../sections/SignUpForm";
 import ForgotPasswordForm from "../../sections/ForgotPasswordForm";
 import NavBar, { AccountActionState } from "../../components/NavBar";
+import { useRouter } from "next/router";
+import SEO from "../../components/SEO";
 
 enum EntryState {
     LOGIN,
@@ -18,6 +20,18 @@ const EntryPage: React.FC = () => {
     let subtitle;
     let body;
 
+    const router = useRouter();
+    const { state } = router.query;
+
+    useEffect(() => {
+        if (state) {
+            if (state === "login") setEntryState(EntryState.LOGIN);
+            if (state === "signup") setEntryState(EntryState.SIGNUP);
+            if (state === "forgot_password")
+                setEntryState(EntryState.PASSWORD_RESET);
+        }
+    }, [state]);
+
     switch (entryState) {
         case EntryState.LOGIN:
             title = "Welcome Back!";
@@ -28,7 +42,8 @@ const EntryPage: React.FC = () => {
                         <span
                             className={styles.entrySubtitleButton}
                             onClick={() => {
-                                setEntryState(EntryState.SIGNUP);
+                                router.query.state = "signup";
+                                router.push(router);
                             }}
                         >
                             Sign up here!
@@ -39,7 +54,8 @@ const EntryPage: React.FC = () => {
                         <span
                             className={styles.entrySubtitleButton}
                             onClick={() => {
-                                setEntryState(EntryState.PASSWORD_RESET);
+                                router.query.state = "forgot_password";
+                                router.push(router);
                             }}
                         >
                             Click here!
@@ -57,7 +73,8 @@ const EntryPage: React.FC = () => {
                     <span
                         className={styles.entrySubtitleButton}
                         onClick={() => {
-                            setEntryState(EntryState.LOGIN);
+                            router.query.state = "login";
+                            router.push(router);
                         }}
                     >
                         Login here!
@@ -73,7 +90,8 @@ const EntryPage: React.FC = () => {
                     <span
                         className={styles.entrySubtitleButton}
                         onClick={() => {
-                            setEntryState(EntryState.LOGIN);
+                            router.query.state = "login";
+                            router.push(router);
                         }}
                     >
                         Login here!
@@ -90,7 +108,8 @@ const EntryPage: React.FC = () => {
                     <span
                         className={styles.entrySubtitleButton}
                         onClick={() => {
-                            setEntryState(EntryState.LOGIN);
+                            router.query.state = "login";
+                            router.push(router);
                         }}
                     >
                         Login here!
@@ -103,6 +122,7 @@ const EntryPage: React.FC = () => {
 
     return (
         <div className={styles.entryPage}>
+            <SEO />
             <NavBar accountAction={AccountActionState.DISABLED} />
             <div className={styles.entryPageBackground}>
                 <CityBackground />

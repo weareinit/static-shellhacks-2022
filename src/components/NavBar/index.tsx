@@ -53,7 +53,7 @@ const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
         case AccountActionState.LOGIN:
             accountActionText = "Login";
             accountAction = () => {
-                router.push("/entry");
+                router.push("/entry?state=login");
             };
             break;
         case AccountActionState.DASHBOARD:
