@@ -97,7 +97,7 @@
     min-height: 96px;
     height: auto;
     overflow-wrap: normal;
-    display: inline-block;
+    display: block;
     word-break: break-word;
 }
 
@@ -222,6 +222,12 @@
 
 .link:hover::before {
     width: 100%;
+}
+
+.required {
+    color: red;
+    font-weight: 500;
+    margin-left: 4px;
 }
 
 /* Firefox Specific */

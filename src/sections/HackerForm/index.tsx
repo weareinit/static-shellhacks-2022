@@ -29,6 +29,7 @@ type LabelProps = {
     title: string;
     description?: string;
     id?: string;
+    optional?: boolean;
 };
 
 const FieldLabel: React.FC<LabelProps> = (props: LabelProps) => {
@@ -40,7 +41,10 @@ const FieldLabel: React.FC<LabelProps> = (props: LabelProps) => {
                 id={props.id}
             >
                 <Emoji className={styles.applicationEmoji} name={props.emoji} />
-                {props.title}
+                {props.title}{" "}
+                {props.optional ? null : (
+                    <span className={styles.required}>*</span>
+                )}
             </label>
             <p className={styles.fieldLabelDesc}>{props.description}</p>
         </div>
@@ -104,6 +108,8 @@ const HackerForm: React.FC = () => {
         agreedTerms: Yup.boolean().oneOf([true], REQUIRED_FIELD_ERROR),
         agreedCommunications: Yup.boolean().oneOf([true], REQUIRED_FIELD_ERROR),
         agreedPrize: Yup.boolean().oneOf([true], REQUIRED_FIELD_ERROR),
+        haveYouAttendedAHackathonBefore:
+            Yup.string().required(REQUIRED_FIELD_ERROR),
     });
 
     const initialValues: any = {
@@ -741,6 +747,7 @@ const HackerForm: React.FC = () => {
                                     emoji="house"
                                     title="Address - Line 2"
                                     description="Other address designation"
+                                    optional={true}
                                 />
                                 <Field
                                     className={styles.field}
@@ -2499,6 +2506,7 @@ const HackerForm: React.FC = () => {
                                     title="Have you attended ShellHacks before?"
                                     description="How far back do we go?"
                                     id="checkbox-group-1"
+                                    optional={true}
                                 />
                                 <div
                                     className="checkboxGroup"
@@ -2563,6 +2571,7 @@ const HackerForm: React.FC = () => {
                                     title="How did you hear about ShellHacks?"
                                     description="We'd love to know!"
                                     id="checkbox-group-2"
+                                    optional={true}
                                 />
                                 <div
                                     className="dividedCheckboxGroup"
@@ -2756,8 +2765,9 @@ const HackerForm: React.FC = () => {
                                 <FieldLabel
                                     name="linkedIn"
                                     emoji="briefcase"
-                                    title="LinkedIn (Optional)"
+                                    title="LinkedIn"
                                     description="Link to your LinkedIn profile"
+                                    optional={true}
                                 />
                                 <Field
                                     className={styles.field}
@@ -2771,8 +2781,9 @@ const HackerForm: React.FC = () => {
                                 <FieldLabel
                                     name="github"
                                     emoji="laptop"
-                                    title="Github (Optional)"
+                                    title="Github"
                                     description="Link to your Github profile"
+                                    optional={true}
                                 />
                                 <Field
                                     className={styles.field}
@@ -2786,8 +2797,9 @@ const HackerForm: React.FC = () => {
                                 <FieldLabel
                                     name="website"
                                     emoji="spider-web"
-                                    title="Website (Optional)"
+                                    title="Website"
                                     description="Link to your Website"
+                                    optional={true}
                                 />
                                 <Field
                                     className={styles.field}
