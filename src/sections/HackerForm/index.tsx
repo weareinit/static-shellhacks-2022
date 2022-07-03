@@ -2293,7 +2293,7 @@ const HackerForm: React.FC = () => {
                                         Prefer not to answer
                                     </label>
                                 </div>
-                                {errors.race ? (
+                                {errors.race && touched.race ? (
                                     <div className={styles.errors}>
                                         {errors.race}
                                     </div>

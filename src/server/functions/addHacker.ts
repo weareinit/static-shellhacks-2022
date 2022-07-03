@@ -52,7 +52,6 @@ async function addHacker(
         agreedCommunications: values.agreedCommunications,
         agreedPrize: values.agreedPrize,
         timeCreated: Timestamp.now(),
-        dateCreated: Timestamp.now().toDate(),
     };
     await setDoc(doc(collection(db, "hackers"), currentUser.uid), hacker);
 }

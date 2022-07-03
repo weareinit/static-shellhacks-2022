@@ -17,7 +17,6 @@ export type Address = {
 };
 
 export type Hacker = {
-    dateCreated?: Date;
     timeCreated?: Timestamp;
     firstName: string;
     lastName: string;
