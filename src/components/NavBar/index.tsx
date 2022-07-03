@@ -41,7 +41,7 @@ const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
         return () => {
             window.removeEventListener("scroll", handleScroll);
         };
-    }, [isAtTop]);
+    }, []);
 
     const showLogo = isInLandingPage ? !isAtTop : true;
 
