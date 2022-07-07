@@ -85,9 +85,7 @@ const HackerForm: React.FC = () => {
         state: Yup.string().required(REQUIRED_FIELD_ERROR),
         zipcode: Yup.string()
             .required(REQUIRED_FIELD_ERROR)
-            .matches(/^[0-9]+$/, "Must be only digits")
-            .min(5, "Must be exactly 5 digits")
-            .max(5, "Must be exactly 5 digits"),
+            .matches(/^[0-9]+$/, "Must be only digits"),
         phoneNumber: Yup.string()
             .required(REQUIRED_FIELD_ERROR)
             .matches(/^[0-9]+$/, "Must be only digits")
