@@ -2,9 +2,10 @@ import { db } from "../firebaseApp";
 import { Address, Hacker, HackerValues } from "../../../util/types";
 import { collection, doc, setDoc, Timestamp } from "firebase/firestore";
 import addResume from "./addResume";
-import { User } from "firebase/auth";
+import { updateProfile, User } from "firebase/auth";
 import hasApplied from "./hasApplied";
 import { FirebaseError } from "firebase/app";
+import { sendApplicationEmail } from "./sendApplicationEmail";
 
 async function addHacker(
     values: HackerValues,
@@ -54,6 +55,10 @@ async function addHacker(
         timeCreated: Timestamp.now(),
     };
     await setDoc(doc(collection(db, "hackers"), currentUser.uid), hacker);
+    await updateProfile(currentUser, {
+        displayName: values.firstName + " " + values.lastName,
+    });
+    await sendApplicationEmail(currentUser, values.firstName);
 }
 
 export default addHacker;

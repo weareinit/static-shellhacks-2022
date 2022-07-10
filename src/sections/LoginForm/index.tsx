@@ -13,7 +13,7 @@ const LoginForm: React.FC = () => {
     const [error, setError] = React.useState("");
     const [errorOccured, setErrorOccured] = React.useState(false);
     const [displayPopup, setDisplayPopup] = React.useState(false);
-    const [disableSubmit, setDisableSubmit] = React.useState(true);
+    const [disableSubmit, setDisableSubmit] = React.useState(false);
 
     const router = useRouter();
     const recaptchaRef = createRef();
@@ -23,7 +23,7 @@ const LoginForm: React.FC = () => {
         event.preventDefault();
         // @ts-ignore
         const recaptchaValue = recaptchaRef.current.getValue();
-        if (recaptchaValue === "") return;
+        // if (recaptchaValue === "") return;
         setErrorOccured(false);
         setDisplayPopup(true);
 
