@@ -902,7 +902,6 @@ const HackerForm: React.FC = () => {
                                     <option value="Florida A&M University">
                                         Florida A&M University
                                     </option>
-                                    <option value={school}>Other</option>
                                     <option value="Adams State University">
                                         Adams State University
                                     </option>
@@ -1656,6 +1655,7 @@ const HackerForm: React.FC = () => {
                                     <option value="Yale University">
                                         Yale University
                                     </option>
+                                    <option value={school}>Other</option>
                                 </Field>
                                 {showOtherSchool ? (
                                     <Field
