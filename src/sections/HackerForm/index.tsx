@@ -1729,7 +1729,6 @@ const HackerForm: React.FC = () => {
                                     <option value="Internet of Things">
                                         Internet of Things
                                     </option>
-                                    <option value={major}>Other</option>
                                     <option value="Accounting">
                                         Accounting
                                     </option>
@@ -1972,6 +1971,7 @@ const HackerForm: React.FC = () => {
                                         Visual and Performing Arts
                                     </option>
                                     <option value="Zoology">Zoology</option>
+                                    <option value={major}>Other</option>
                                 </Field>
                                 {showOtherMajor ? (
                                     <Field
