@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useAuthUser, withAuthUser } from "next-firebase-auth";
 import loginUser from "../../server/functions/loginUser";
 import ReCAPTCHA from "react-google-recaptcha";
+import axios from "axios";
 
 const LoginForm: React.FC = () => {
     const [email, setEmail] = React.useState("");
@@ -24,6 +25,21 @@ const LoginForm: React.FC = () => {
         // @ts-ignore
         const recaptchaValue = recaptchaRef.current.getValue();
         if (recaptchaValue === "") return;
+
+        await axios
+            .post("/verifyRecaptcha", { token: recaptchaValue })
+            .then((res) => {
+                if (res.status != 200) {
+                    setErrorOccured(true);
+                    return;
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                setErrorOccured(true);
+                return;
+            });
+
         setErrorOccured(false);
         setDisplayPopup(true);
 
@@ -82,7 +98,7 @@ const LoginForm: React.FC = () => {
             </div>
             <ReCAPTCHA
                 ref={recaptchaRef}
-                sitekey="6Lf0HqsgAAAAAExp_b89HLfv4LnHw18W0riS5enQ"
+                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
                 onChange={() => {
                     if (disableSubmit) setDisableSubmit(false);
                 }}

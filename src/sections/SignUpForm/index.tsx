@@ -80,7 +80,7 @@ const SignUpForm: React.FC = () => {
             </div>
             <ReCAPTCHA
                 ref={recaptchaRef}
-                sitekey="6Lf0HqsgAAAAAExp_b89HLfv4LnHw18W0riS5enQ"
+                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
                 onChange={() => {
                     if (disableSubmit) setDisableSubmit(false);
                 }}
