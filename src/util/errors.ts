@@ -4,7 +4,7 @@ import { AuthErrorCodes } from "firebase/auth";
 export function formatError(error: FirebaseError) {
     switch (error.code) {
         case AuthErrorCodes.INVALID_PASSWORD:
-            return "Invalid email. Try again.";
+            return "Invalid password. Try again.";
         case AuthErrorCodes.USER_DELETED:
             return "User not found. Try again.";
         case AuthErrorCodes.NETWORK_REQUEST_FAILED:

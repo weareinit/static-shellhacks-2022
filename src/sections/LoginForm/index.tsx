@@ -27,7 +27,7 @@ const LoginForm: React.FC = () => {
         if (recaptchaValue === "") return;
 
         await axios
-            .post("/verifyRecaptcha", { token: recaptchaValue })
+            .post("/api/verifyRecaptcha", { token: recaptchaValue })
             .then((res) => {
                 if (res.status != 200) {
                     setErrorOccured(true);
