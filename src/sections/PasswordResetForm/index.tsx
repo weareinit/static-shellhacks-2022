@@ -31,7 +31,6 @@ const PasswordResetForm: React.FC = () => {
                 }, 3000);
             })
             .catch((e: FirebaseError) => {
-                console.log(e.code);
                 setPopupState(ProgressState.FAILED);
                 setError(formatError(e));
             });

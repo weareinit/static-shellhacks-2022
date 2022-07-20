@@ -30,7 +30,6 @@ const ForgotPasswordForm: React.FC = () => {
                 setPopupState(ProgressState.COMPLETE);
             })
             .catch((e: FirebaseError) => {
-                console.log(e.code);
                 setPopupState(ProgressState.FAILED);
                 setError(formatError(e));
             });

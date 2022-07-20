@@ -30,7 +30,6 @@ const SignUpForm: React.FC = () => {
                 router.push("/application");
             })
             .catch((e: FirebaseError) => {
-                console.log(e.code);
                 setErrorOccured(true);
                 setError(formatError(e));
             });

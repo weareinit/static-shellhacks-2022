@@ -35,7 +35,6 @@ const LoginForm: React.FC = () => {
                 }
             })
             .catch((error) => {
-                console.log(error);
                 setErrorOccured(true);
                 return;
             });
@@ -48,7 +47,6 @@ const LoginForm: React.FC = () => {
                 router.push("/dashboard");
             })
             .catch((e) => {
-                console.log(e);
                 setErrorOccured(true);
                 setError(formatError(e));
             });
