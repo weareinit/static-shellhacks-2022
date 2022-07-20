@@ -23,7 +23,7 @@ const LoginForm: React.FC = () => {
         event.preventDefault();
         // @ts-ignore
         const recaptchaValue = recaptchaRef.current.getValue();
-        // if (recaptchaValue === "") return;
+        if (recaptchaValue === "") return;
         setErrorOccured(false);
         setDisplayPopup(true);
 
