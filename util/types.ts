@@ -47,6 +47,9 @@ export type Hacker = {
     agreedTerms: boolean;
     agreedCommunications: boolean;
     agreedPrize: boolean;
+    isAccepted?: boolean;
+    isConfirmed?: boolean;
+    isCheckedIn?: boolean;
 };
 
 export type Mentors = {

@@ -53,6 +53,9 @@ async function addHacker(
         agreedCommunications: values.agreedCommunications,
         agreedPrize: values.agreedPrize,
         timeCreated: Timestamp.now(),
+        isAccepted: false,
+        isCheckedIn: false,
+        isConfirmed: false,
     };
     await setDoc(doc(collection(db, "hackers"), currentUser.uid), hacker);
     await updateProfile(currentUser, {
