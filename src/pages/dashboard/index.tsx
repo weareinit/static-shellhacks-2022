@@ -71,6 +71,12 @@ function Dashboard() {
                 .then((hacker: Hacker | null) => {
                     if (hacker != undefined) {
                         setApplicationStatus(ApplicationStatus.APPLIED);
+                        if (hacker.isAccepted ?? false) {
+                            setApplicationStatus(ApplicationStatus.ACCEPTED);
+                        }
+                        if (hacker.isConfirmed ?? false) {
+                            setApplicationStatus(ApplicationStatus.CONFIRMED);
+                        }
                         setData(hacker);
                     }
                     setIsLoading(false);
