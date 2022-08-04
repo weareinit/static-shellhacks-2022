@@ -38,11 +38,7 @@ const ChangeAddress: React.FC<ChangeAddressProps> = (
         addressLine1: Yup.string().required(REQUIRED_FIELD_ERROR),
         city: Yup.string().required(REQUIRED_FIELD_ERROR),
         state: Yup.string().required(REQUIRED_FIELD_ERROR),
-        zipcode: Yup.string()
-            .required(REQUIRED_FIELD_ERROR)
-            .matches(/^[0-9]+$/, "Must be only digits")
-            .min(5, "Must be exactly 5 digits")
-            .max(5, "Must be exactly 5 digits"),
+        zipcode: Yup.string().required(REQUIRED_FIELD_ERROR),
     });
 
     const initialValues: any = {
