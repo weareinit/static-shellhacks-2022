@@ -50,6 +50,7 @@ export type Hacker = {
     isAccepted?: boolean;
     isConfirmed?: boolean;
     isCheckedIn?: boolean;
+    phoneNumber?: string;
 };
 
 export type Mentors = {

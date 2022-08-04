@@ -56,6 +56,7 @@ async function addHacker(
         isAccepted: false,
         isCheckedIn: false,
         isConfirmed: false,
+        phoneNumber: values.phoneNumber,
     };
     await setDoc(doc(collection(db, "hackers"), currentUser.uid), hacker);
     await updateProfile(currentUser, {
