@@ -66,7 +66,6 @@ function Dashboard() {
         setDisplayPopup(true);
         setPopupState(ProgressState.PROCESSING);
         if (user.id != null) {
-            console.log(user);
             getHacker(user.id)
                 .then((hacker: Hacker | null) => {
                     if (hacker != undefined) {
@@ -92,7 +91,6 @@ function Dashboard() {
 
     const handleSuccess = useCallback(() => {
         if (user.id != null) {
-            console.log(user);
             getHacker(user.id)
                 .then((hacker: Hacker | null) => {
                     if (hacker != undefined) {
