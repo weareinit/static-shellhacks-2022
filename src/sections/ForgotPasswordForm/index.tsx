@@ -6,6 +6,7 @@ import ProgressModal, { ProgressState } from "../../components/ProgressModal";
 import { FirebaseError } from "firebase/app";
 import { formatError } from "../../util/errors";
 import ReCAPTCHA from "react-google-recaptcha";
+import axios from "axios";
 
 const ForgotPasswordForm: React.FC = () => {
     const [email, setEmail] = React.useState("");
@@ -23,6 +24,20 @@ const ForgotPasswordForm: React.FC = () => {
         // @ts-ignore
         const recaptchaValue = recaptchaRef.current.getValue();
         if (recaptchaValue === "") return;
+
+        await axios
+            .post("/api/verifyRecaptcha", { token: recaptchaValue })
+            .then((res) => {
+                if (res.status != 200) {
+                    setPopupState(ProgressState.FAILED);
+                    return;
+                }
+            })
+            .catch((error) => {
+                setPopupState(ProgressState.FAILED);
+                return;
+            });
+
         setPopupState(ProgressState.PROCESSING);
         setDisplayPopup(true);
         await sendPasswordResetEmail(auth, email)

@@ -6,6 +6,7 @@ import { formatError } from "../../util/errors";
 import { useRouter } from "next/router";
 import createUser from "../../server/functions/createUser";
 import ReCAPTCHA from "react-google-recaptcha";
+import axios from "axios";
 
 const SignUpForm: React.FC = () => {
     const [email, setEmail] = React.useState("");
@@ -23,6 +24,20 @@ const SignUpForm: React.FC = () => {
         // @ts-ignore
         const recaptchaValue = recaptchaRef.current.getValue();
         if (recaptchaValue === "") return;
+
+        await axios
+            .post("/api/verifyRecaptcha", { token: recaptchaValue })
+            .then((res) => {
+                if (res.status != 200) {
+                    setErrorOccured(true);
+                    return;
+                }
+            })
+            .catch((error) => {
+                setErrorOccured(true);
+                return;
+            });
+
         setErrorOccured(false);
         setDisplayPopup(true);
         await createUser(email, password)

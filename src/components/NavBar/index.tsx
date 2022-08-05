@@ -85,6 +85,7 @@ const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
                         router.push("/");
                     }}
                 />
+                {/** MOBILE NAVBAR DROPDOWN */}
                 <div
                     className={`${styles.dropdown} ${
                         hideAccountAction ? styles.accountActionHidden : ""
@@ -121,6 +122,7 @@ const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
                         </div>
                     </div>
                 </div>
+                {/** DESKTOP NAVBAR INLINE */}
                 <div className={styles.inline}>
                     <div
                         className={`${styles.accountAction} ${
