@@ -885,6 +885,9 @@ const HackerForm: React.FC = () => {
                                     <option value="University of Florida">
                                         University of Florida
                                     </option>
+                                    <option value="University of North Florida">
+                                        University of North Florida
+                                    </option>
                                     <option value="University of South Florida">
                                         University of South Florida
                                     </option>
