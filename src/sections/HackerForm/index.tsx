@@ -66,6 +66,9 @@ const HackerForm: React.FC = () => {
     const [major, setMajor] = React.useState("Other");
     const [showOtherSchool, setShowOtherSchool] = React.useState(false);
     const [school, setSchool] = React.useState("Other");
+    const [showOtherLevelOfStudy, setShowOtherLevelOfStudy] =
+        React.useState(false);
+    const [levelOfStudy, setLevelOfStudy] = React.useState("Other");
 
     const SignupSchema = Yup.object().shape({
         firstName: Yup.string()
@@ -79,6 +82,9 @@ const HackerForm: React.FC = () => {
         // email: Yup.string()
         //     .email("Invalid email")
         //     .required(REQUIRED_FIELD_ERROR),
+        age: Yup.string()
+            .required(REQUIRED_FIELD_ERROR)
+            .matches(/^[0-9]+$/, "Must be only digits"),
         country: Yup.string().required(REQUIRED_FIELD_ERROR),
         addressLine1: Yup.string().required(REQUIRED_FIELD_ERROR),
         city: Yup.string().required(REQUIRED_FIELD_ERROR),
@@ -90,6 +96,7 @@ const HackerForm: React.FC = () => {
             .min(10, "Must be exactly 10 digits")
             .max(10, "Must be exactly 10 digits"),
         school: Yup.string().required(REQUIRED_FIELD_ERROR),
+        levelOfStudy: Yup.string().required(REQUIRED_FIELD_ERROR),
         major: Yup.string().required(REQUIRED_FIELD_ERROR),
         gender: Yup.string().required(REQUIRED_FIELD_ERROR),
         ethnicity: Yup.string().required(REQUIRED_FIELD_ERROR),
@@ -112,6 +119,7 @@ const HackerForm: React.FC = () => {
         firstName: "",
         lastName: "",
         // email: "",
+        age: "",
         country: "",
         addressLine1: "",
         addressLine2: "",
@@ -120,6 +128,7 @@ const HackerForm: React.FC = () => {
         zipcode: "",
         phoneNumber: "",
         school: "",
+        levelOfStudy: "",
         major: "",
         classStanding: "",
         graduationYear: "",
@@ -229,6 +238,26 @@ const HackerForm: React.FC = () => {
                                 {errors.lastName && touched.lastName ? (
                                     <div className={styles.errors}>
                                         {errors.lastName}
+                                    </div>
+                                ) : null}
+                            </div>
+
+                            <div className={styles.fieldWrapper}>
+                                <FieldLabel
+                                    name="age"
+                                    emoji="person-standing"
+                                    title="Age"
+                                    description=""
+                                />
+                                <Field
+                                    className={styles.field}
+                                    id="age"
+                                    name="age"
+                                    placeholder="18+"
+                                />
+                                {errors.age && touched.age ? (
+                                    <div className={styles.errors}>
+                                        {errors.age}
                                     </div>
                                 ) : null}
                             </div>
@@ -1680,6 +1709,95 @@ const HackerForm: React.FC = () => {
 
                             <div className={styles.fieldWrapper}>
                                 <FieldLabel
+                                    name="levelOfStudy"
+                                    emoji="backpack"
+                                    title="Level of Study"
+                                    description=""
+                                />
+                                <Field
+                                    className={`${styles.field} ${styles.select}`}
+                                    as="select"
+                                    name="levelOfStudy"
+                                    id="levelOfStudy"
+                                    validate={(value: string) => {
+                                        let errorMessage;
+                                        if (
+                                            value == undefined ||
+                                            value.length == 0
+                                        ) {
+                                            errorMessage = REQUIRED_FIELD_ERROR;
+                                        }
+                                        return errorMessage;
+                                    }}
+                                    onChange={(
+                                        e: React.FormEvent<HTMLInputElement>
+                                    ) => {
+                                        handleChange(e);
+                                        setShowOtherLevelOfStudy(
+                                            e.currentTarget.value ===
+                                                levelOfStudy
+                                        );
+                                    }}
+                                >
+                                    <option disabled value="">
+                                        {SELECT_PLACEHOLDER}
+                                    </option>
+                                    <option value="Less than Secondary / High School">
+                                        Less than Secondary / High School
+                                    </option>
+                                    <option value="Secondary / High School">
+                                        Secondary / High School
+                                    </option>
+                                    <option value="Undergraduate University (2 year - community college or similar)">
+                                        Undergraduate University (2 year -
+                                        community college or similar)
+                                    </option>
+                                    <option value="Undergraduate University (3+ year)">
+                                        Undergraduate University (3+ year)
+                                    </option>
+                                    <option value="Graduate University (Masters, Professional, Doctoral, etc)">
+                                        Graduate University (Masters,
+                                        Professional, Doctoral, etc)
+                                    </option>
+                                    <option value="Code School / Bootcamp">
+                                        Code School / Bootcamp
+                                    </option>
+                                    <option value="Other Vocational / Trade Program or Apprenticeship">
+                                        Other Vocational / Trade Program or
+                                        Apprenticeship
+                                    </option>
+                                    <option value="I'm not currently a student">
+                                        I'm not currently a student
+                                    </option>
+                                    <option value="Prefer not to answer">
+                                        Prefer not to answer
+                                    </option>
+                                    <option value={levelOfStudy}>Other</option>
+                                </Field>
+                                {showOtherLevelOfStudy ? (
+                                    <Field
+                                        className={`${styles.field} ${styles.other}`}
+                                        id="levelOfStudy"
+                                        name="levelOfStudy"
+                                        onChange={(
+                                            e: React.FormEvent<HTMLInputElement>
+                                        ) => {
+                                            handleChange(e);
+                                            setLevelOfStudy(
+                                                e.currentTarget.value
+                                            );
+                                        }}
+                                    />
+                                ) : null}
+                                {errors.levelOfStudy && touched.levelOfStudy ? (
+                                    <div className={styles.errors}>
+                                        {errors.levelOfStudy}
+                                    </div>
+                                ) : null}
+                            </div>
+
+                            <div className={styles.fieldWrapper}>
+                                <FieldLabel
                                     name="major"
                                     emoji="books"
                                     title="Major"
@@ -2975,8 +3093,8 @@ const HackerForm: React.FC = () => {
                                 <FieldLabel
                                     name=""
                                     emoji="envelope"
-                                    title="Communications from Major League Hacking"
-                                    description="I authorize MLH to send me pre- and post-event informational emails, which contain free credit and opportunities from their partners"
+                                    title="Communication from Major League Hacking"
+                                    description="I authorize MLH to send me an email where I can further opt into the MLH Hacker, Events, or Organizer Newsletters and other communications from MLH."
                                 />
                                 <Field
                                     type="checkbox"

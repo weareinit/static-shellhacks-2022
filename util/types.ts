@@ -21,9 +21,11 @@ export type Hacker = {
     firstName: string;
     lastName: string;
     email: string;
+    age?: string;
     attendance: string;
     address: Address;
     school: string;
+    levelOfStudy?: string;
     major: string;
     classStanding: string;
     gradYear: number;
@@ -102,6 +104,7 @@ export type HackerValues = {
     firstName: string;
     lastName: string;
     email: string;
+    age: string;
     country: string;
     addressLine1: string;
     addressLine2: string;
@@ -110,6 +113,7 @@ export type HackerValues = {
     zipcode: string;
     phoneNumber: string;
     school: string;
+    levelOfStudy: string;
     major: string;
     classStanding: string;
     graduationYear: number;

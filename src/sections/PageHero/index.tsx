@@ -12,6 +12,18 @@ import Image from "next/image";
 const PageHero: React.FC = () => {
     return (
         <section className={styles.pageHeroBackground}>
+            <a
+                id="mlh-trust-badge"
+                className={styles.mlhBanner}
+                href="https://mlh.io/na?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2023-season&utm_content=white"
+                target="_blank"
+            >
+                <img
+                    className={styles.mlhImage}
+                    src="https://s3.amazonaws.com/logged-assets/trust-badge/2023/mlh-trust-badge-2023-white.svg"
+                    alt="Major League Hacking 2023 Hackathon Season"
+                />
+            </a>
             <div className={styles.pageHeroTop}>
                 <Stars className={styles.pageHeroStars} />
                 <ShellHacks className={styles.pageHeroLogo} />

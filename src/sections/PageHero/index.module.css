@@ -107,6 +107,22 @@
     width: 100%;
 }
 
+.mlhBanner {
+    display: block;
+    max-width: 100px;
+    min-width: 60px;
+    position: fixed;
+    margin-right: 5%;
+    top: 75px;
+    width: 10%;
+    z-index: 10000;
+    align-self: flex-end;
+}
+
+.mlhImage {
+    width: 100%;
+}
+
 /* ANIMATIONS */
 
 .pageHeroPlane {
@@ -202,5 +218,9 @@
 
     .pageHeroSpotlight {
         display: block;
+    }
+
+    .mlhBanner {
+        top: 100px;
     }
 }

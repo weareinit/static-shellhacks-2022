@@ -16,6 +16,7 @@ import updateResume from "../../server/functions/updateResume";
 import ProgressModal, { ProgressState } from "../../components/ProgressModal";
 import NavBar, { AccountActionState } from "../../components/NavBar";
 import SEO from "../../components/SEO";
+import confirmHacker from "../../server/functions/confirmHacker";
 
 const enum ApplicationStatus {
     NOT_APPLIED,
@@ -143,6 +144,49 @@ function Dashboard() {
                                     className={`${styles.sidebarText} ${styles.applicationStatus}`}
                                 >
                                     {applicationStatusText}
+                                    {applicationStatus ==
+                                    ApplicationStatus.ACCEPTED ? (
+                                        <button
+                                            className={`${styles.smallButtonBackground}
+                                                ${styles.confirm}`}
+                                            onClick={() => {
+                                                if (user.id) {
+                                                    setDisplayPopup(true);
+                                                    setPopupState(
+                                                        ProgressState.PROCESSING
+                                                    );
+                                                    confirmHacker(user.id)
+                                                        .then(() => {
+                                                            setDisplayPopup(
+                                                                false
+                                                            );
+                                                            handleSuccess();
+                                                        })
+                                                        .catch(
+                                                            (
+                                                                e: FirebaseError
+                                                            ) => {
+                                                                setDisplayPopup(
+                                                                    true
+                                                                );
+                                                                setPopupState(
+                                                                    ProgressState.FAILED
+                                                                );
+                                                                setErrorMessage(
+                                                                    formatError(
+                                                                        e
+                                                                    )
+                                                                );
+                                                            }
+                                                        );
+                                                }
+                                            }}
+                                        >
+                                            <div className={styles.smallButton}>
+                                                Confirm
+                                            </div>
+                                        </button>
+                                    ) : null}
                                 </p>
                             </SidebarItem>
 
