@@ -53,6 +53,7 @@ export type Hacker = {
     isConfirmed?: boolean;
     isCheckedIn?: boolean;
     phoneNumber?: string;
+    acceptedAttendance?: string;
 };
 
 export type Mentors = {

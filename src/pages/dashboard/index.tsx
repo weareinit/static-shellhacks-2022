@@ -150,12 +150,18 @@ function Dashboard() {
                                             className={`${styles.smallButtonBackground}
                                                 ${styles.confirm}`}
                                             onClick={() => {
-                                                if (user.id) {
+                                                if (user.id && data) {
                                                     setDisplayPopup(true);
                                                     setPopupState(
                                                         ProgressState.PROCESSING
                                                     );
-                                                    confirmHacker(user.id)
+                                                    confirmHacker(
+                                                        user.id,
+                                                        data.email,
+                                                        data.firstName,
+                                                        data.acceptedAttendance ??
+                                                            ""
+                                                    )
                                                         .then(() => {
                                                             setDisplayPopup(
                                                                 false
