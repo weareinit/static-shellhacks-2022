@@ -17,12 +17,14 @@ import ProgressModal, { ProgressState } from "../../components/ProgressModal";
 import NavBar, { AccountActionState } from "../../components/NavBar";
 import SEO from "../../components/SEO";
 import confirmHacker from "../../server/functions/confirmHacker";
+import notAttending from "../../server/functions/notAttending";
 
 const enum ApplicationStatus {
     NOT_APPLIED,
     APPLIED,
     ACCEPTED,
     CONFIRMED,
+    NOT_ATTENDING,
 }
 
 function Dashboard() {
@@ -77,6 +79,11 @@ function Dashboard() {
                         if (hacker.isConfirmed ?? false) {
                             setApplicationStatus(ApplicationStatus.CONFIRMED);
                         }
+                        if (hacker.notAttending ?? false) {
+                            setApplicationStatus(
+                                ApplicationStatus.NOT_ATTENDING
+                            );
+                        }
                         setData(hacker);
                     }
                     setIsLoading(false);
@@ -102,6 +109,11 @@ function Dashboard() {
                         if (hacker.isConfirmed ?? false) {
                             setApplicationStatus(ApplicationStatus.CONFIRMED);
                         }
+                        if (hacker.notAttending ?? false) {
+                            setApplicationStatus(
+                                ApplicationStatus.NOT_ATTENDING
+                            );
+                        }
                         setData(hacker);
                     }
                     setIsLoading(false);
@@ -122,6 +134,9 @@ function Dashboard() {
             break;
         case ApplicationStatus.CONFIRMED:
             applicationStatusText = "CONFIRMED";
+            break;
+        case ApplicationStatus.NOT_ATTENDING:
+            applicationStatusText = "NOT ATTENDING";
     }
 
     return (
@@ -146,52 +161,104 @@ function Dashboard() {
                                     {applicationStatusText}
                                     {applicationStatus ==
                                     ApplicationStatus.ACCEPTED ? (
-                                        <button
-                                            className={`${styles.smallButtonBackground}
-                                                ${styles.confirm}`}
-                                            onClick={() => {
-                                                if (user.id && data) {
-                                                    setDisplayPopup(true);
-                                                    setPopupState(
-                                                        ProgressState.PROCESSING
-                                                    );
-                                                    confirmHacker(
-                                                        user.id,
-                                                        data.email,
-                                                        data.firstName,
-                                                        data.acceptedAttendance ??
-                                                            ""
-                                                    )
-                                                        .then(() => {
-                                                            setDisplayPopup(
-                                                                false
-                                                            );
-                                                            handleSuccess();
-                                                        })
-                                                        .catch(
-                                                            (
-                                                                e: FirebaseError
-                                                            ) => {
-                                                                setDisplayPopup(
-                                                                    true
-                                                                );
-                                                                setPopupState(
-                                                                    ProgressState.FAILED
-                                                                );
-                                                                setErrorMessage(
-                                                                    formatError(
-                                                                        e
-                                                                    )
-                                                                );
-                                                            }
-                                                        );
+                                        <div className={styles.buttonContainer}>
+                                            <button
+                                                className={
+                                                    styles.smallButtonBackground
                                                 }
-                                            }}
-                                        >
-                                            <div className={styles.smallButton}>
-                                                Confirm
-                                            </div>
-                                        </button>
+                                                onClick={() => {
+                                                    if (user.id && data) {
+                                                        setDisplayPopup(true);
+                                                        setPopupState(
+                                                            ProgressState.PROCESSING
+                                                        );
+                                                        confirmHacker(
+                                                            user.id,
+                                                            data.email,
+                                                            data.firstName,
+                                                            data.acceptedAttendance ??
+                                                                ""
+                                                        )
+                                                            .then(() => {
+                                                                setDisplayPopup(
+                                                                    false
+                                                                );
+                                                                handleSuccess();
+                                                            })
+                                                            .catch(
+                                                                (
+                                                                    e: FirebaseError
+                                                                ) => {
+                                                                    setDisplayPopup(
+                                                                        true
+                                                                    );
+                                                                    setPopupState(
+                                                                        ProgressState.FAILED
+                                                                    );
+                                                                    setErrorMessage(
+                                                                        formatError(
+                                                                            e
+                                                                        )
+                                                                    );
+                                                                }
+                                                            );
+                                                    }
+                                                }}
+                                            >
+                                                <div
+                                                    className={
+                                                        styles.smallButton
+                                                    }
+                                                >
+                                                    Confirm
+                                                </div>
+                                            </button>
+                                            <button
+                                                className={
+                                                    styles.smallButtonBackground
+                                                }
+                                                onClick={() => {
+                                                    if (user.id && data) {
+                                                        setDisplayPopup(true);
+                                                        setPopupState(
+                                                            ProgressState.PROCESSING
+                                                        );
+                                                        notAttending(user.id)
+                                                            .then(() => {
+                                                                setDisplayPopup(
+                                                                    false
+                                                                );
+                                                                handleSuccess();
+                                                            })
+                                                            .catch(
+                                                                (
+                                                                    e: FirebaseError
+                                                                ) => {
+                                                                    setDisplayPopup(
+                                                                        true
+                                                                    );
+                                                                    setPopupState(
+                                                                        ProgressState.FAILED
+                                                                    );
+                                                                    setErrorMessage(
+                                                                        formatError(
+                                                                            e
+                                                                        )
+                                                                    );
+                                                                }
+                                                            );
+                                                    }
+                                                }}
+                                            >
+                                                <div
+                                                    className={
+                                                        styles.smallButton
+                                                    }
+                                                >
+                                                    Not Attending
+                                                </div>
+                                            </button>
+                                        </div>
                                     ) : null}
                                 </p>
                             </SidebarItem>

@@ -193,13 +193,15 @@
 .smallButtonBackground {
     background: var(--pink-tan-gradient);
     border-radius: 15px;
-    width: 10em;
+    width: 14em;
     height: 3em;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    margin: 12px 0;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    margin-right: 12px;
 }
 
 .smallButton {
@@ -210,6 +212,11 @@
     font-size: var(--font-size-body);
     color: var(--shell-purple);
     transition: transform 1s ease;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: column;
 }
 
 @keyframes fade {
@@ -286,5 +293,9 @@
 
     .applicationField {
         margin: 2% 0;
+    }
+
+    .buttonContainer {
+        flex-direction: row;
     }
 }
