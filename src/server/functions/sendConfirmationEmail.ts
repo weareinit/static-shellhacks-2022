@@ -7,14 +7,8 @@ export async function sendConfirmationEmail(
     name: string,
     attendance: string
 ): Promise<boolean> {
-    const square = new URL(
-        "../../../public/static/Accepted_Square.png",
-        import.meta.url
-    );
-    const rectangle = new URL(
-        "../../../public/static/Accepted_Rectangle.png",
-        import.meta.url
-    );
+    const square = "https://i.imgur.com/4eBa2KV.png";
+    const rectangle = "https://i.imgur.com/jtBFemN.png";
     const location = attendance === "Remote" ? "VIRTUAL" : "IN-PERSON";
     const address =
         attendance === "Remote"
@@ -65,11 +59,11 @@ export async function sendConfirmationEmail(
             attachments: [
                 {
                     filename: "ShellHacks_Accepted_Square.png",
-                    path: square.toString(),
+                    path: square,
                 },
                 {
                     filename: "ShellHacks_Accepted_Rectangle.png",
-                    path: rectangle.toString(),
+                    path: rectangle,
                 },
             ],
         },
