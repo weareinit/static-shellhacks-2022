@@ -31,11 +31,13 @@ const SingleFAQ = (props: { question: string; children: string; }) => {
     const question = useRef<HTMLParagraphElement>(null);
     const answer = useRef<HTMLParagraphElement>(null);
 
+    console.log(question.current?.clientHeight);
+
     return (
         <li className={styles.questionBlock} style={!opened ? {
-            maxHeight: question.current?.clientHeight ?? 70
+            maxHeight: Math.floor(question.current?.getBoundingClientRect().height ?? 70)
         } : {
-            maxHeight: (question.current?.clientHeight ?? 70) + (answer.current?.clientHeight ?? 0)
+            maxHeight: (question.current?.getBoundingClientRect().height ?? 70) + (answer.current?.getBoundingClientRect().height ?? 0)
         }}>
             <p ref={question} className={styles.question} onClick={() => setOpened((q) => !q)}>
                 <span className={styles.questionStatus}>{!opened ? "+" : "-"}</span>

@@ -193,3 +193,15 @@
         display: none;
     }
 }
+
+@media screen and (max-width: 500px) {
+    .mainContent {
+        margin: 0;
+        margin-left: 5%;
+        width: 90%;
+    }
+
+    .mainContent > div {
+        padding-left: 0;
+    }
+}
