@@ -31,8 +31,6 @@ const SingleFAQ = (props: { question: string; children: string; }) => {
     const question = useRef<HTMLParagraphElement>(null);
     const answer = useRef<HTMLParagraphElement>(null);
 
-    console.log(question.current?.clientHeight);
-
     return (
         <li className={styles.questionBlock} style={!opened ? {
             maxHeight: Math.floor(question.current?.getBoundingClientRect().height ?? 70)
