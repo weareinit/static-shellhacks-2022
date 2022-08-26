@@ -7,8 +7,8 @@ export async function sendConfirmationEmail(
     name: string,
     attendance: string
 ): Promise<boolean> {
-    const square = "https://i.imgur.com/4eBa2KV.png";
-    const rectangle = "https://i.imgur.com/jtBFemN.png";
+    const square = "https://i.imgur.com/gpimvA2.png";
+    const rectangle = "https://i.imgur.com/TCj4cdp.png";
     const location = attendance === "Remote" ? "VIRTUAL" : "IN-PERSON";
     const address =
         attendance === "Remote"
@@ -34,7 +34,7 @@ export async function sendConfirmationEmail(
             
             3️⃣ Follow Us and Share Your Acceptance For A Shot At Airpod Pros!
             
-            Let everyone know you're excited for ShellHacks and enter an Airpod Pros giveaway! Follow us on Instagram at https://www.instagram.com/upefiu and Twitter at https://twitter.com/upefiu and make a post or story tagging @upefiu using the hashtag #ShellHacks by Friday, September 2nd to enter the giveaway — attached below are some images for you to use! Please check us out on LinkedIn at https://www.linkedin.com/company/28673457 and Facebook at https://www.facebook.com/upefiu too and keep an eye out for any future updates!
+            Let everyone know you're excited for ShellHacks and enter an Airpod Pros giveaway! Follow us on Instagram at https://www.instagram.com/upefiu and LinkedIn at https://www.linkedin.com/company/28673457 and make a post or story tagging @upefiu using the hashtag #ShellHacks by Friday, September 2nd to enter the giveaway — attached below are some images for you to use! Please check us out on Facebook at https://www.facebook.com/upefiu and Twitter at https://twitter.com/upefiu too and keep an eye out for any future updates!
 
             Best,
             
@@ -52,7 +52,7 @@ export async function sendConfirmationEmail(
             <p><b>2️⃣ Join Our Discord</b></p>
             <p>Discord is our official communication platform for ShellHacks, so be sure to sign up for it as soon as you can! On Discord you can chat with fellow attendees, discuss project ideas, find team members, get updates and reminders on certain events during Shellhacks, and more. You can also contact the event organizers and ask us any questions you have! Join our Discord <a href="https://discord.gg/upefiu" target="_blank" rel="noopener noreferrer">here</a>.</p>
             <p><b>3️⃣ Follow Us and Share Your Acceptance For A Shot At Airpod Pros!</b></p>
-            <p>Let everyone know you're excited for ShellHacks and enter an Airpod Pros giveaway! Follow us on <a href="https://www.instagram.com/upefiu" target="_blank" rel="noopener noreferrer">Instagram</a> and <a href="https://twitter.com/upefiu" target="_blank" rel="noopener noreferrer">Twitter</a> and make a post or story tagging @upefiu using the hashtag #ShellHacks by <b>Friday, September 2nd</b> to enter the giveaway — attached below are some images for you to use! Please check us out on <a href="https://www.linkedin.com/company/28673457" target="_blank" rel="noopener noreferrer">LinkedIn</a> and <a href="https://www.facebook.com/upefiu" target="_blank" rel="noopener noreferrer">Facebook</a> too and keep an eye out for any future updates!</p>
+            <p>Let everyone know you're excited for ShellHacks and enter an Airpod Pros giveaway! Follow us on <a href="https://www.instagram.com/upefiu" target="_blank" rel="noopener noreferrer">Instagram</a> and <a href="https://www.linkedin.com/company/28673457" target="_blank" rel="noopener noreferrer">LinkedIn</a> and make a post or story tagging @upefiu using the hashtag #ShellHacks by <b>Friday, September 2nd</b> to enter the giveaway — attached below are some images for you to use! Please check us out on <a href="https://www.facebook.com/upefiu" target="_blank" rel="noopener noreferrer">Facebook</a> and <a href="https://twitter.com/upefiu" target="_blank" rel="noopener noreferrer">Twitter</a> too and keep an eye out for any future updates!</p>
             <br>
             <p>With ❤️,</p>
             <p>ShellHacks Organizing Team</p>`,
