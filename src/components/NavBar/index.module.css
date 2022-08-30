@@ -78,7 +78,9 @@
 
 .dropdownContent {
     display: flex;
+    flex-direction: column;
     position: absolute;
+    z-index: 200;
     top: 100%;
     left: 0;
     width: 100%;
