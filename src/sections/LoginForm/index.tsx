@@ -14,7 +14,7 @@ const LoginForm: React.FC = () => {
     const [error, setError] = React.useState("");
     const [errorOccured, setErrorOccured] = React.useState(false);
     const [displayPopup, setDisplayPopup] = React.useState(false);
-    const [disableSubmit, setDisableSubmit] = React.useState(false);
+    const [disableSubmit, setDisableSubmit] = React.useState(true);
 
     const router = useRouter();
     const recaptchaRef = createRef();
@@ -24,20 +24,20 @@ const LoginForm: React.FC = () => {
         event.preventDefault();
         // @ts-ignore
         const recaptchaValue = recaptchaRef.current.getValue();
-        // if (recaptchaValue === "") return;
+        if (recaptchaValue === "") return;
 
-        // await axios
-        //     .post("/api/verifyRecaptcha", { token: recaptchaValue })
-        //     .then((res) => {
-        //         if (res.status != 200) {
-        //             setErrorOccured(true);
-        //             return;
-        //         }
-        //     })
-        //     .catch((error) => {
-        //         setErrorOccured(true);
-        //         return;
-        //     });
+        await axios
+            .post("/api/verifyRecaptcha", { token: recaptchaValue })
+            .then((res) => {
+                if (res.status != 200) {
+                    setErrorOccured(true);
+                    return;
+                }
+            })
+            .catch((error) => {
+                setErrorOccured(true);
+                return;
+            });
 
         setErrorOccured(false);
         setDisplayPopup(true);
@@ -105,8 +105,8 @@ const LoginForm: React.FC = () => {
             <div className={styles.buttonDiv}>
                 <div
                     className={`${styles.submitButtonBackground} ${disableSubmit
-                            ? styles.submitButtonDisabledBackground
-                            : ""
+                        ? styles.submitButtonDisabledBackground
+                        : ""
                         }`}
                 >
                     <input
