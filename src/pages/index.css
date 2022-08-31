@@ -22,6 +22,7 @@
         #ffe1a0 100%
     );
     --purple-gradient: linear-gradient(#28002f, #50409e);
+    --purple-gradient-reverse: linear-gradient(#50409e, #28002f);
 
     --glass-background: rgba(255, 255, 255, 0.1);
     --dark-background: rgba(0, 0, 0, 0.7);

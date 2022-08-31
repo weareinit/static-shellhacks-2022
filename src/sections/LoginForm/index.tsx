@@ -104,16 +104,14 @@ const LoginForm: React.FC = () => {
             />
             <div className={styles.buttonDiv}>
                 <div
-                    className={`${styles.submitButtonBackground} ${
-                        disableSubmit
-                            ? styles.submitButtonDisabledBackground
-                            : ""
-                    }`}
+                    className={`${styles.submitButtonBackground} ${disableSubmit
+                        ? styles.submitButtonDisabledBackground
+                        : ""
+                        }`}
                 >
                     <input
-                        className={`${styles.submitButton} ${
-                            disableSubmit ? styles.submitButtonDisabled : ""
-                        }`}
+                        className={`${styles.submitButton} ${disableSubmit ? styles.submitButtonDisabled : ""
+                            }`}
                         type="submit"
                         value="Login"
                         id="signin"

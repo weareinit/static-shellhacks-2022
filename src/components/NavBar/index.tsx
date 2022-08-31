@@ -120,10 +120,28 @@ const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
                                 {accountActionText}
                             </p>
                         </div>
+                        <div
+                            className={styles.dropdownItem}
+                            onClick={() => {
+                                router.push("/faq");
+                            }}
+                        >
+                            <p className={styles.dropdownItemText}>FAQ</p>
+                        </div>
                     </div>
                 </div>
                 {/** DESKTOP NAVBAR INLINE */}
                 <div className={styles.inline}>
+                    <div
+                        className={`${styles.faqPage} ${
+                            hideAccountAction ? styles.accountActionHidden : ""
+                        }`}
+                        onClick={() => {
+                            router.push("/faq");
+                        }}
+                    >
+                        <p className={styles.accountActionText}>FAQ</p>
+                    </div>
                     <div
                         className={`${styles.accountAction} ${
                             hideAccountAction ? styles.accountActionHidden : ""
