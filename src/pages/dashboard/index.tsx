@@ -265,7 +265,12 @@ function Dashboard() {
 
                             <SidebarItem title="Hacker Guide:">
                                 <p className={styles.sidebarText}>
-                                    COMING SOON
+                                    <a
+                                        className={styles.link}
+                                        href="https://go.fiu.edu/Shell2022HackerGuide"
+                                    >
+                                        HERE
+                                    </a>
                                 </p>
                             </SidebarItem>
 
