@@ -263,16 +263,30 @@ function Dashboard() {
                                 </p>
                             </SidebarItem>
 
-                            <SidebarItem title="Hacker Guide:">
-                                <p className={styles.sidebarText}>
-                                    <a
-                                        className={styles.link}
-                                        href="https://go.fiu.edu/Shell2022HackerGuide"
-                                    >
-                                        HERE
-                                    </a>
-                                </p>
-                            </SidebarItem>
+                            {applicationStatus ==
+                            ApplicationStatus.CONFIRMED ? (
+                                <SidebarItem title="Hacker Guide:">
+                                    <p className={styles.sidebarText}>
+                                        <a
+                                            className={styles.link}
+                                            href="https://go.fiu.edu/Shell2022HackerGuide"
+                                        >
+                                            HERE
+                                        </a>
+                                    </p>
+                                </SidebarItem>
+                            ) : (
+                                <SidebarItem title="FAQ:">
+                                    <p className={styles.sidebarText}>
+                                        <a
+                                            className={styles.link}
+                                            href="https://shellhacks.net/faq"
+                                        >
+                                            HERE
+                                        </a>
+                                    </p>
+                                </SidebarItem>
+                            )}
 
                             {/* <SidebarItem title="Check-In QR Code"></SidebarItem> */}
 
