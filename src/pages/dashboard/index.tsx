@@ -160,7 +160,7 @@ function Dashboard() {
                                 >
                                     {applicationStatusText}
                                     {applicationStatus ==
-                                    ApplicationStatus.ACCEPTED ? (
+                                        ApplicationStatus.ACCEPTED ? (
                                         <div className={styles.buttonContainer}>
                                             <button
                                                 className={
@@ -177,7 +177,7 @@ function Dashboard() {
                                                             data.email,
                                                             data.firstName,
                                                             data.acceptedAttendance ??
-                                                                ""
+                                                            ""
                                                         )
                                                             .then(() => {
                                                                 setDisplayPopup(
@@ -264,7 +264,7 @@ function Dashboard() {
                             </SidebarItem>
 
                             {applicationStatus ==
-                            ApplicationStatus.CONFIRMED ? (
+                                ApplicationStatus.CONFIRMED ? (
                                 <SidebarItem title="Hacker Guide:">
                                     <p className={styles.sidebarText}>
                                         <a
@@ -280,7 +280,7 @@ function Dashboard() {
                                     <p className={styles.sidebarText}>
                                         <a
                                             className={styles.link}
-                                            href="https://shellhacks.net/faq"
+                                            href="https://shellhacks.net/#faq"
                                         >
                                             HERE
                                         </a>
@@ -328,7 +328,7 @@ function Dashboard() {
                         <div className={styles.applicationView}>
                             <h2>Application Information</h2>
                             {applicationStatus ==
-                            ApplicationStatus.NOT_APPLIED ? (
+                                ApplicationStatus.NOT_APPLIED ? (
                                 <div className={styles.noApplicationDiv}>
                                     <h3 className={styles.noApplicationTitle}>
                                         No Application

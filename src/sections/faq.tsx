@@ -1,27 +1,10 @@
-import { useAuthUser, withAuthUser } from "next-firebase-auth";
 import React, { useRef, useState } from "react";
-import NavBar, { AccountActionState } from "../components/NavBar";
-import SEO from "../components/SEO";
 import styles from "./faq.module.css";
-import Stars from "../../public/static/Stars.svg";
 import FAQBuilding from "../../public/static/FAQ-Building.png";
-import FAQShell from "../../public/static/FAQ-Shell.png";
 
 const FAQ: React.FC = () => {
-    const user = useAuthUser();
     return (
-        <div>
-            <SEO />
-            <NavBar
-                accountAction={
-                    user.email != null
-                        ? AccountActionState.DASHBOARD
-                        : AccountActionState.LOGIN
-                }
-                isInLandingPage={false}
-            />
-            <FAQBody />
-        </div>
+        <FAQBody />
     );
 };
 
@@ -58,10 +41,9 @@ const FAQS = [
 
 const FAQBody: React.FC = () => (
     <section className={styles.faqBackground}>
-        <img src={FAQShell.src} className={styles.shell} />
-        <Stars className={styles.faqStars} />
-
+        {/* <Stars className={styles.faqStars} /> */}
         <div className={styles.mainContent}>
+            <span id="faq" className={styles.faqlink} />
             <img src={FAQBuilding.src} style={{ aspectRatio: "3/4", minWidth: "150px", maxWidth: "500px", alignSelf: "start" }} />
             <div>
                 <h1 className={styles.header}>FAQ </h1>
@@ -79,4 +61,4 @@ const FAQBody: React.FC = () => (
     </section>
 );
 
-export default withAuthUser()(FAQ);
+export default FAQ;

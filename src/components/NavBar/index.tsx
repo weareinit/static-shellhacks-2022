@@ -46,7 +46,7 @@ const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
     const showLogo = isInLandingPage ? !isAtTop : true;
 
     let accountActionText = "Text";
-    let accountAction: () => void = () => {};
+    let accountAction: () => void = () => { };
     let hideAccountAction = false;
 
     switch (props.accountAction) {
@@ -87,9 +87,8 @@ const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
                 />
                 {/** MOBILE NAVBAR DROPDOWN */}
                 <div
-                    className={`${styles.dropdown} ${
-                        hideAccountAction ? styles.accountActionHidden : ""
-                    } `}
+                    className={`${styles.dropdown} ${hideAccountAction ? styles.accountActionHidden : ""
+                        } `}
                 >
                     {showDropdown ? (
                         <ArrowUp
@@ -104,16 +103,14 @@ const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
                     )}
 
                     <div
-                        className={`${styles.dropdownContent} ${
-                            !showDropdown ? styles.dropdownContentHidden : ""
-                        }`}
+                        className={`${styles.dropdownContent} ${!showDropdown ? styles.dropdownContentHidden : ""
+                            }`}
                     >
                         <div
-                            className={`${styles.dropdownItem} ${
-                                hideAccountAction
-                                    ? styles.accountActionHidden
-                                    : ""
-                            }`}
+                            className={`${styles.dropdownItem} ${hideAccountAction
+                                ? styles.accountActionHidden
+                                : ""
+                                }`}
                             onClick={accountAction}
                         >
                             <p className={styles.dropdownItemText}>
@@ -123,29 +120,46 @@ const NavBar: React.FC<NavBarProps> = (props: NavBarProps) => {
                         <div
                             className={styles.dropdownItem}
                             onClick={() => {
-                                router.push("/faq");
+                                router.push("/#faq");
+                                handleDropdown();
                             }}
                         >
                             <p className={styles.dropdownItemText}>FAQ</p>
+                        </div>
+                        <div
+                            className={styles.dropdownItem}
+                            onClick={() => {
+                                router.push("/#schedule");
+                                handleDropdown();
+                            }}
+                        >
+                            <p className={styles.dropdownItemText}>Schedule</p>
                         </div>
                     </div>
                 </div>
                 {/** DESKTOP NAVBAR INLINE */}
                 <div className={styles.inline}>
                     <div
-                        className={`${styles.faqPage} ${
-                            hideAccountAction ? styles.accountActionHidden : ""
-                        }`}
+                        className={`${styles.faqPage} ${hideAccountAction ? styles.accountActionHidden : ""
+                            }`}
                         onClick={() => {
-                            router.push("/faq");
+                            router.push("/#faq");
                         }}
                     >
                         <p className={styles.accountActionText}>FAQ</p>
                     </div>
                     <div
-                        className={`${styles.accountAction} ${
-                            hideAccountAction ? styles.accountActionHidden : ""
-                        }`}
+                        className={`${styles.faqPage} ${hideAccountAction ? styles.accountActionHidden : ""
+                            }`}
+                        onClick={() => {
+                            router.push("/#schedule");
+                        }}
+                    >
+                        <p className={styles.accountActionText}>Schedule</p>
+                    </div>
+                    <div
+                        className={`${styles.accountAction} ${hideAccountAction ? styles.accountActionHidden : ""
+                            }`}
                         onClick={accountAction}
                     >
                         <p className={styles.accountActionText}>

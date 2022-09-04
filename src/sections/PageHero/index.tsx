@@ -8,6 +8,8 @@ import Stars from "../../../public/static//Stars.svg";
 import CityPNGA from "../../../public/static/CityPNGA.png";
 import Footer from "../Footer";
 import Image from "next/image";
+import Faq from "../faq";
+import Schedule from "../schedule";
 
 const PageHero: React.FC = () => {
     return (
@@ -34,9 +36,9 @@ const PageHero: React.FC = () => {
                     {/* prettier-ignore */}
                     <EmojiProvider data={emojiData}>
                         <ul>
-                            <li><Emoji className={styles.detailsMarker} name="rocket"/>September 9-11, 2022</li>
-                            <li><Emoji className={styles.detailsMarker} name="rocket"/>Florida International University</li>
-                            <li><Emoji className={styles.detailsMarker} name="rocket"/>Miami, FL ● In-Person & Virtual!</li>
+                            <li><Emoji className={styles.detailsMarker} name="rocket" />September 9-11, 2022</li>
+                            <li><Emoji className={styles.detailsMarker} name="rocket" />Florida International University</li>
+                            <li><Emoji className={styles.detailsMarker} name="rocket" />Miami, FL ● In-Person & Virtual!</li>
                         </ul>
                     </EmojiProvider>
                 </div>
@@ -55,6 +57,8 @@ const PageHero: React.FC = () => {
                 </div>
             </div>
             <Footer />
+            <Faq />
+            <Schedule />
             <div className={styles.pageHeroCity}>
                 {/* <Image alt="Plane" className="pageHeroPlane" src={Plane} />
                 <div id="spotlight1" className="pageHeroSpotlight" />
