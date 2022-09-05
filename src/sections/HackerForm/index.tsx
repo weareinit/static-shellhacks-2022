@@ -2930,9 +2930,10 @@ const HackerForm: React.FC = () => {
                                 <FieldLabel
                                     name=""
                                     emoji="globe-with-meridians"
-                                    title="If accepted, will you be participating in-person or remotely this year?"
-                                    description="Please let us know!"
+                                    title="If accepted, you will be accepted as remote"
+                                    description="In-person applications have closed"
                                 />
+                                {/*
                                 <label>
                                     <Field
                                         type="radio"
@@ -2942,6 +2943,7 @@ const HackerForm: React.FC = () => {
                                     />
                                     In-Person
                                 </label>
+                                */}
                                 <label>
                                     <Field
                                         type="radio"
