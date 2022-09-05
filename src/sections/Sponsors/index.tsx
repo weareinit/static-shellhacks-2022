@@ -28,7 +28,7 @@ import Xbox from "./../../../public/static/sponsors/Xbox.svg";
 import Nvidia from "./../../../public/static/sponsors/Nvidia.svg";
 import Rivian from "./../../../public/static/sponsors/Rivian.svg";
 import JPMC from "./../../../public/static/sponsors/JPMC.svg";
-import Codepath from "./../../../public/static/sponsors/Codepath.svg";
+import Codepath from "./../../../public/static/sponsors/CodePath.svg";
 import MLT from "./../../../public/static/sponsors/MLT.svg";
 import ManTech from "./../../../public/static/sponsors/ManTech.svg";
 import Carnival from "./../../../public/static/sponsors/Carnival.svg";
