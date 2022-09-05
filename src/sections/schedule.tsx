@@ -7,17 +7,28 @@ import Stars from "../../public/static/Stars.svg";
 import FAQShell from "../../public/static/FAQ-Shell.png";
 
 const Schedule: React.FC = () => {
-    return (
-        <ScheduleBody />
-    );
+    return <ScheduleBody />;
 };
 
-const Header = (props: { children: string; selected: boolean; onClick: () => void; }) => {
+const Header = (props: {
+    children: string;
+    selected: boolean;
+    onClick: () => void;
+}) => {
     return (
-        <li className={styles.questionBlock} style={{ "--gradient": props.selected ? "var(--pink-tan-gradient)" : "var(--glass-background)", "color": !props.selected ? "white" : "var(--shell-purple)" } as CSSProperties} onClick={props.onClick}>
-            <p className={styles.question}>
-                {props.children}
-            </p>
+        <li
+            className={styles.questionBlock}
+            style={
+                {
+                    "--gradient": props.selected
+                        ? "var(--pink-tan-gradient)"
+                        : "var(--glass-background)",
+                    color: !props.selected ? "white" : "var(--shell-purple)",
+                } as CSSProperties
+            }
+            onClick={props.onClick}
+        >
+            <p className={styles.question}>{props.children}</p>
         </li>
     );
 };
@@ -28,33 +39,32 @@ const Days = [
     "Sunday, Sept. 11th",
 ] as string[];
 
-const Badge = (props: { children: string; }) => {
-
-    const B = (props: { children: string; }) => {
+const Badge = (props: { children: string }) => {
+    const B = (props: { children: string }) => {
         const s = {
-            background: props.children == "In Person" ? "var(--shell-pink)" : "var(--shell-tan)",
-            color: props.children == "In Person" ? "white" : "black"
+            background:
+                props.children == "In Person"
+                    ? "var(--shell-pink)"
+                    : "var(--shell-tan)",
+            color: props.children == "In Person" ? "white" : "black",
         };
         return (
             <div className={styles.badge} style={s}>
-                <p>
-                    {props.children}
-                </p>
+                <p>{props.children}</p>
             </div>
         );
     };
 
     return (
         <>
-            {props.children == "Both" ?
+            {props.children == "Both" ? (
                 <div className={styles.badges}>
                     <B>In Person</B>
                     <B>Virtual</B>
                 </div>
-                :
+            ) : (
                 <B>{props.children}</B>
-            }
-
+            )}
         </>
     );
 };
@@ -62,7 +72,10 @@ const Badge = (props: { children: string; }) => {
 const Schedules = [
     <>
         <h1>Check-In</h1>
-        <p>4:00 PM - 7:00 PM EST | Location: <a href="/dashboard">Dashboard</a></p>
+        <p>
+            4:00 PM - 7:00 PM EST
+            {/* | Location: <a href="/dashboard">Dashboard</a> */}
+        </p>
         <Badge>Both</Badge>
         <br />
 
@@ -125,39 +138,49 @@ const Schedules = [
         <p>5:00 PM EST - 6:00 PM EST</p>
         <Badge>Both</Badge>
         <br />
-    </>
+    </>,
 ];
 
 const ScheduleBody: React.FC = () => {
-
     const [selected, setSelected] = useState(0);
 
-    return <section className={styles.faqBackground}>
-        <img src={FAQShell.src} className={styles.shell} />
-        {/* <Stars className={styles.faqStars} /> */}
+    return (
+        <section className={styles.faqBackground}>
+            <img src={FAQShell.src} className={styles.shell} />
+            {/* <Stars className={styles.faqStars} /> */}
 
-        <div className={styles.mainContent}>
-            <span id="schedule" className={styles.schedulelink} />
-            <div>
-                <h1 className={styles.header}>Schedule</h1>
-                <ul className={styles.questionList}>
-                    {Days.map((f, i) => {
-                        return (
-                            <Header key={f} selected={i == selected} onClick={() => { setSelected(i); }}>
-                                {f}
-                            </Header>
-                        );
-                    })}
-                </ul>
-                <div className={styles.scheduleBox}>
-                    <div className={styles.schedule}>
-                        {Schedules[selected]}
-                        <p className={styles.moreInfo}>For more information, please check your hacker guide on the <a href="/dashboard">Dashboard</a>!</p>
+            <div className={styles.mainContent}>
+                <span id="schedule" className={styles.schedulelink} />
+                <div>
+                    <h1 className={styles.header}>Schedule</h1>
+                    <ul className={styles.questionList}>
+                        {Days.map((f, i) => {
+                            return (
+                                <Header
+                                    key={f}
+                                    selected={i == selected}
+                                    onClick={() => {
+                                        setSelected(i);
+                                    }}
+                                >
+                                    {f}
+                                </Header>
+                            );
+                        })}
+                    </ul>
+                    <div className={styles.scheduleBox}>
+                        <div className={styles.schedule}>
+                            {Schedules[selected]}
+                            <p className={styles.moreInfo}>
+                                For more information, please check your hacker
+                                guide on the <a href="/dashboard">Dashboard</a>!
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>;
+        </section>
+    );
 };
 
 export default Schedule;
