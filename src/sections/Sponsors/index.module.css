@@ -63,88 +63,69 @@
 }
 
 .mainContent > div {
-    flex-grow: 2;
-    padding-left: 40px;
-    width: 50%;
-}
-
-.mainContent ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-
-    gap: 40px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.questionBlock {
-    position: relative;
-    overflow: hidden;
-    transition: 0.25s max-height;
-    height: 100%;
-    border-radius: 30px;
+.logo {
+    margin: 16px;
+    height: auto;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.questionBlock:after {
-    content: "";
-    z-index: -1;
-    border-radius: 30px;
-    background: white;
-    top: 0;
-    bottom: 0;
-    left: 15px;
-    right: 15px;
-    position: absolute;
+.conch {
+    width: 100%;
 }
 
-.question {
-    position: relative;
-    background: var(--pink-tan-gradient);
-    border-radius: 30px;
-    padding: 16px 32px;
-    padding-left: 52px;
-    font-size: var(--font-size-medium);
-    color: var(--shell-purple);
-    cursor: pointer;
+.conch > svg {
+    max-height: 300px;
 }
 
-.questionStatus {
-    position: absolute;
-    left: 25px;
-    color: white;
+.cone {
+    width: 40%;
 }
 
-.answer {
-    color: black;
-    padding: 16px 32px;
-    margin-inline: 20px;
-    font-size: var(--font-size-small);
+.scallop {
+    width: 40%;
 }
 
-.faqStars {
-    position: absolute;
-    top: -200px;
-    z-index: -10;
+.sand {
+    width: 40%;
 }
 
-.shell {
-    position: absolute;
-    z-index: -100;
-    left: 0;
-    right: 0;
-    top: 0;
-    margin: auto;
-    transform: scale(1.25);
+.kind {
+    width: 40%;
+}
+
+.sponsorlist {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (min-width: 1024px) {
+    .scallop {
+        width: 30%;
+    }
+
+    .sand {
+        width: 20%;
+    }
+
+    .kind {
+        width: 20%;
+    }
 }
 
 @media screen and (max-width: 1100px) {
     .mainContent > div {
         flex-basis: 100%;
-    }
-
-    .mainContent > img {
-        display: none;
     }
 }
 
