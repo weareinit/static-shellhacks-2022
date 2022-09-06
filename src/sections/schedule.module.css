@@ -101,7 +101,7 @@
     background: var(--gradient);
     border-radius: 30px;
     padding: 16px 32px;
-    font-size: var(--font-size-medium);
+    font-size: var(--font-size-small);
     cursor: pointer;
     text-align: center;
 }

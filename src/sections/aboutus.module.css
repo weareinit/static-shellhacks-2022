@@ -1,0 +1,26 @@
+.background {
+    color: white;
+    padding-top: 75px;
+    padding-inline: 10vw;
+}
+
+.background h1 {
+    font-size: var(--font-size-large);
+    padding-bottom: 10px;
+}
+
+.background > div {
+    position: relative;
+    padding: 20px;
+}
+
+.buttonOutlinedBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 20px solid;
+    border-image: url("../../public/static/Border.svg");
+    border-image-slice: 20 20;
+}

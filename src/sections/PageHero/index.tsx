@@ -11,6 +11,7 @@ import Image from "next/image";
 import Faq from "../faq";
 import Schedule from "../schedule";
 import Sponsors from "../Sponsors";
+import Aboutus from "../aboutus";
 
 const PageHero: React.FC = () => {
     return (
@@ -58,6 +59,7 @@ const PageHero: React.FC = () => {
                 </div>
             </div>
             <Footer />
+            <Aboutus />
             <Faq />
             <Schedule />
             <Sponsors />
