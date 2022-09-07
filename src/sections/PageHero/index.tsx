@@ -12,6 +12,7 @@ import Faq from "../faq";
 import Schedule from "../schedule";
 import Sponsors from "../Sponsors";
 import Aboutus from "../aboutus";
+import Partners from "../Partners";
 
 const PageHero: React.FC = () => {
     return (
@@ -63,6 +64,7 @@ const PageHero: React.FC = () => {
             <Faq />
             <Schedule />
             <Sponsors />
+            <Partners />
             <div className={styles.pageHeroCity}>
                 {/* <Image alt="Plane" className="pageHeroPlane" src={Plane} />
                 <div id="spotlight1" className="pageHeroSpotlight" />
