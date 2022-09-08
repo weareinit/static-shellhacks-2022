@@ -45,6 +45,7 @@ import GCP from "./../../../public/static/sponsors/GCP.svg";
 import Echo from "./../../../public/static/sponsors/echoAR.svg";
 import Balsamiq from "./../../../public/static/sponsors/Balsamiq.svg";
 import MLH from "./../../../public/static/sponsors/MLH.svg";
+import CuttingEdge from "./../../../public/static/sponsors/CuttingEdge.svg";
 
 enum SponsorTiers {
     CONCH,
@@ -240,6 +241,12 @@ const SponsorList: Sponsor[] = [
         name: "Elfen Software",
         link: "https://www.elfensoftware.com/",
         image: <Elfen />,
+        tier: SponsorTiers.SCALLOP,
+    },
+    {
+        name: "Cutting Edge AI",
+        link: "https://www.cuttingedgeai.com/",
+        image: <CuttingEdge />,
         tier: SponsorTiers.SCALLOP,
     },
     {
