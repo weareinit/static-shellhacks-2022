@@ -369,6 +369,28 @@ function Dashboard() {
                                             {firstName} {lastName}
                                         </p>
                                     </div>
+                                    {applicationStatus ==
+                                    ApplicationStatus.CONFIRMED ? (
+                                        <div
+                                            className={styles.applicationField}
+                                        >
+                                            <p>Discord Code:</p>
+                                            <b
+                                                className={
+                                                    styles.applicationFieldText
+                                                }
+                                            >
+                                                {
+                                                    "Warning: this is your secret code to access Discord. Don't share it with anyone."
+                                                }
+                                            </b>
+                                            <p
+                                                className={`${styles.applicationFieldText}`}
+                                            >
+                                                {user.id}
+                                            </p>
+                                        </div>
+                                    ) : null}
                                     {acceptedAttendance != undefined ? (
                                         <div
                                             className={styles.applicationField}
@@ -560,5 +582,5 @@ function Dashboard() {
 }
 
 export default withAuthUser({
-    whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
+    // whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
 })(Dashboard);
