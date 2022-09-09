@@ -373,7 +373,7 @@ function Dashboard() {
                                         <div
                                             className={styles.applicationField}
                                         >
-                                            <p>Accepted Attendance</p>
+                                            <p>Accepted Attendance:</p>
                                             <p
                                                 className={
                                                     styles.applicationFieldText
