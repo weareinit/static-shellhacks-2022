@@ -40,8 +40,15 @@ function Dashboard() {
     const [popupState, setPopupState] = useState(ProgressState.PROCESSING);
     const [errorMessage, setErrorMessage] = useState("");
 
-    const { firstName, lastName, address, shirtSize, resumePath, resumeName } =
-        data || {};
+    const {
+        firstName,
+        lastName,
+        address,
+        shirtSize,
+        resumePath,
+        resumeName,
+        acceptedAttendance,
+    } = data || {};
     const { apartment, city, country, postalCode, state, streetAddress } =
         address || {};
 
@@ -160,7 +167,7 @@ function Dashboard() {
                                 >
                                     {applicationStatusText}
                                     {applicationStatus ==
-                                        ApplicationStatus.ACCEPTED ? (
+                                    ApplicationStatus.ACCEPTED ? (
                                         <div className={styles.buttonContainer}>
                                             <button
                                                 className={
@@ -177,7 +184,7 @@ function Dashboard() {
                                                             data.email,
                                                             data.firstName,
                                                             data.acceptedAttendance ??
-                                                            ""
+                                                                ""
                                                         )
                                                             .then(() => {
                                                                 setDisplayPopup(
@@ -264,7 +271,7 @@ function Dashboard() {
                             </SidebarItem>
 
                             {applicationStatus ==
-                                ApplicationStatus.CONFIRMED ? (
+                            ApplicationStatus.CONFIRMED ? (
                                 <SidebarItem title="Hacker Guide:">
                                     <p className={styles.sidebarText}>
                                         <a
@@ -328,7 +335,7 @@ function Dashboard() {
                         <div className={styles.applicationView}>
                             <h2>Application Information</h2>
                             {applicationStatus ==
-                                ApplicationStatus.NOT_APPLIED ? (
+                            ApplicationStatus.NOT_APPLIED ? (
                                 <div className={styles.noApplicationDiv}>
                                     <h3 className={styles.noApplicationTitle}>
                                         No Application
@@ -362,6 +369,20 @@ function Dashboard() {
                                             {firstName} {lastName}
                                         </p>
                                     </div>
+                                    {acceptedAttendance != undefined ? (
+                                        <div
+                                            className={styles.applicationField}
+                                        >
+                                            <p>Accepted Attendance</p>
+                                            <p
+                                                className={
+                                                    styles.applicationFieldText
+                                                }
+                                            >
+                                                {acceptedAttendance}
+                                            </p>
+                                        </div>
+                                    ) : null}
                                     <div
                                         className={`${styles.applicationField} ${styles.addressField}`}
                                     >
