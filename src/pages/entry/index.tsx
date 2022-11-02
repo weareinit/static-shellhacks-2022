@@ -32,93 +32,8 @@ const EntryPage: React.FC = () => {
         }
     }, [state]);
 
-    switch (entryState) {
-        case EntryState.LOGIN:
-            title = "Welcome Back!";
-            subtitle = (
-                <div>
-                    <p className={styles.entrySubtitle}>
-                        Don't have an account?{" "}
-                        <span
-                            className={styles.entrySubtitleButton}
-                            onClick={() => {
-                                router.query.state = "signup";
-                                router.push(router);
-                            }}
-                        >
-                            Sign up here!
-                        </span>
-                    </p>
-                    <p className={styles.entrySubtitle}>
-                        Forgot Password?{" "}
-                        <span
-                            className={styles.entrySubtitleButton}
-                            onClick={() => {
-                                router.query.state = "forgot_password";
-                                router.push(router);
-                            }}
-                        >
-                            Click here!
-                        </span>
-                    </p>
-                </div>
-            );
-            body = <LoginForm />;
-            break;
-        case EntryState.SIGNUP:
-            title = "Sign Up!";
-            subtitle = (
-                <p className={styles.entrySubtitle}>
-                    Already have an account?{" "}
-                    <span
-                        className={styles.entrySubtitleButton}
-                        onClick={() => {
-                            router.query.state = "login";
-                            router.push(router);
-                        }}
-                    >
-                        Login here!
-                    </span>
-                </p>
-            );
-            body = <SignUpForm />;
-            break;
-        case EntryState.PASSWORD_RESET:
-            title = "Reset Password";
-            subtitle = (
-                <p className={styles.entrySubtitle}>
-                    <span
-                        className={styles.entrySubtitleButton}
-                        onClick={() => {
-                            router.query.state = "login";
-                            router.push(router);
-                        }}
-                    >
-                        Login here!
-                    </span>
-                </p>
-            );
-            body = <ForgotPasswordForm />;
-            break;
-        default:
-            title = "Sign Up!";
-            subtitle = (
-                <p className={styles.entrySubtitle}>
-                    Already have an account?{" "}
-                    <span
-                        className={styles.entrySubtitleButton}
-                        onClick={() => {
-                            router.query.state = "login";
-                            router.push(router);
-                        }}
-                    >
-                        Login here!
-                    </span>
-                </p>
-            );
-            body = <SignUpForm />;
-            break;
-    }
+    title = "Registrations are closed.";
+    subtitle = "Thank you for attending. See you next year!";
 
     return (
         <div className={styles.entryPage}>
@@ -128,8 +43,7 @@ const EntryPage: React.FC = () => {
                 <CityBackground />
                 <div className={styles.entryBlock}>
                     <h2 className={styles.entryTitle}>{title}</h2>
-                    {subtitle}
-                    {body}
+                    <h3 className={styles.entrySubtitle}>{subtitle}</h3>
                 </div>
             </div>
         </div>
