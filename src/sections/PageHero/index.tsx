@@ -1,7 +1,5 @@
 import styles from "./index.module.css";
 import React from "react";
-import { Emoji, EmojiProvider } from "react-apple-emojis";
-import emojiData from "react-apple-emojis/lib/data.json";
 import LinkButton from "../../components/LinkButton";
 import ShellHacks from "../../../public/static/ShellHacks_Filled.svg";
 import Stars from "../../../public/static//Stars.svg";
@@ -36,14 +34,11 @@ const PageHero: React.FC = () => {
             </div>
             <div className={styles.pageHeroMiddle}>
                 <div className={styles.detailsDiv}>
-                    {/* prettier-ignore */}
-                    <EmojiProvider data={emojiData}>
-                        <ul>
-                            <li><Emoji className={styles.detailsMarker} name="rocket" />September 9-11, 2022</li>
-                            <li><Emoji className={styles.detailsMarker} name="rocket" />Florida International University</li>
-                            <li><Emoji className={styles.detailsMarker} name="rocket" />Miami, FL ● In-Person & Virtual!</li>
-                        </ul>
-                    </EmojiProvider>
+                    <ul>
+                        <li>September 9-11, 2022</li>
+                        <li>Florida International University</li>
+                        <li>Miami, FL ● In-Person & Virtual!</li>
+                    </ul>
                 </div>
                 <div className={styles.buttonsDiv}>
                     <LinkButton text="Sign Up!" url="/entry" filled={true} />

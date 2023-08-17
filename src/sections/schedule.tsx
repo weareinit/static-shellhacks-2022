@@ -71,71 +71,71 @@ const Badge = (props: { children: string }) => {
 
 const Schedules = [
     <>
-        <h1>Check-In</h1>
-        <p>
+        <h1 className={styles.title}>Check-In</h1>
+        <p className={styles.description}>
             4:00 PM - 7:00 PM EST
             {/* | Location: <a href="/dashboard">Dashboard</a> */}
         </p>
         <Badge>Both</Badge>
         <br />
 
-        <h1>Dinner</h1>
-        <p>7:00 PM - 8:00 PM EST</p>
+        <h1 className={styles.title}>Dinner</h1>
+        <p className={styles.description}>7:00 PM - 8:00 PM EST</p>
         <Badge>In Person</Badge>
         <br />
 
-        <h1>Opening Ceremony</h1>
-        <p>8:00 PM - 9:00 PM EST</p>
+        <h1 className={styles.title}>Opening Ceremony</h1>
+        <p className={styles.description}>8:00 PM - 9:00 PM EST</p>
         <Badge>Both</Badge>
         <br />
 
-        <h1>Sponsor Fair</h1>
-        <p>9:00 PM - 11:00 PM EST</p>
+        <h1 className={styles.title}>Sponsor Fair</h1>
+        <p className={styles.description}>9:00 PM - 11:00 PM EST</p>
         <Badge>In Person</Badge>
         <br />
 
-        <h1>Hacking Begins!</h1>
-        <p>11:00 PM EST</p>
+        <h1 className={styles.title}>Hacking Begins!</h1>
+        <p className={styles.description}>11:00 PM EST</p>
         <Badge>Both</Badge>
         <br />
 
-        <h1>Team Building Activity</h1>
-        <p>11:00 PM EST - 12:00 AM EST</p>
+        <h1 className={styles.title}>Team Building Activity</h1>
+        <p className={styles.description}>11:00 PM EST - 12:00 AM EST</p>
         <Badge>Both</Badge>
         <br />
 
-        <h1>Workshops & Activies</h1>
-        <p>(Specific times on hacker guide)</p>
+        <h1 className={styles.title}>Workshops & Activies</h1>
+        <p className={styles.description}>(Specific times on hacker guide)</p>
         <Badge>Both</Badge>
         <br />
     </>,
     <>
-        <h1>Workshops & Activities</h1>
-        <p>Hosted throughout the day & night. More details coming soon!</p>
+        <h1 className={styles.title}>Workshops & Activities</h1>
+        <p className={styles.description}>Hosted throughout the day & night!</p>
     </>,
     <>
-        <h1>Breakfast</h1>
-        <p>8:00 AM - 9:00 AM EST</p>
+        <h1 className={styles.title}>Breakfast</h1>
+        <p className={styles.description}>8:00 AM - 9:00 AM EST</p>
         <Badge>In Person</Badge>
         <br />
 
-        <h1>Hacking Ends!</h1>
-        <p>11:00 AM EST</p>
+        <h1 className={styles.title}>Hacking Ends!</h1>
+        <p className={styles.description}>11:00 AM EST</p>
         <Badge>Both</Badge>
         <br />
 
-        <h1>Project Submission!</h1>
-        <p>11:00 AM EST - 1:00 PM EST</p>
+        <h1 className={styles.title}>Project Submission!</h1>
+        <p className={styles.description}>11:00 AM EST - 1:00 PM EST</p>
         <Badge>Both</Badge>
         <br />
 
-        <h1>Project Expo & Judging</h1>
-        <p>1:00 PM EST - 5:00 PM EST</p>
+        <h1 className={styles.title}>Project Expo & Judging</h1>
+        <p className={styles.description}>1:00 PM EST - 5:00 PM EST</p>
         <Badge>Both</Badge>
         <br />
 
-        <h1>Closing Ceramony</h1>
-        <p>5:00 PM EST - 6:00 PM EST</p>
+        <h1 className={styles.title}>Closing Ceramony</h1>
+        <p className={styles.description}>5:00 PM EST - 6:00 PM EST</p>
         <Badge>Both</Badge>
         <br />
     </>,

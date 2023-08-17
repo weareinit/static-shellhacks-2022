@@ -1,9 +1,9 @@
 import styles from "./index.module.css";
 import React from "react";
-import { Emoji, EmojiProvider } from "react-apple-emojis";
-import emojiData from "react-apple-emojis/lib/data.json";
 import SocialButton from "../../components/SocialButton";
 import { SocialType } from "../../util/types";
+import YellowHeart from "../../../public/static/yellow_heart_color.svg";
+import Image from "next/image";
 
 const Footer: React.FC = () => {
     return (
@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
             <div className={styles.footerText}>
                 {/* prettier-ignore */}
                 <p>
-                    Made with <EmojiProvider data={emojiData}><Emoji className={styles.yellowHeart} name="yellow-heart"/></EmojiProvider> from Upsilon&nbsp;Pi&nbsp;Epsilon
+                    Made with <YellowHeart className={styles.yellowHeart}/> from Upsilon&nbsp;Pi&nbsp;Epsilon
                 </p>
                 <a
                     href="http://mlh.io/code-of-conduct"

@@ -1,9 +1,6 @@
 import styles from "./index.module.css";
 import React, { useEffect } from "react";
 import CityBackground from "../../components/CityBackground";
-import LoginForm from "../../sections/LoginForm";
-import SignUpForm from "../../sections/SignUpForm";
-import ForgotPasswordForm from "../../sections/ForgotPasswordForm";
 import NavBar, { AccountActionState } from "../../components/NavBar";
 import { useRouter } from "next/router";
 import SEO from "../../components/SEO";
@@ -18,7 +15,6 @@ const EntryPage: React.FC = () => {
     const [entryState, setEntryState] = React.useState(EntryState.SIGNUP);
     let title;
     let subtitle;
-    let body;
 
     const router = useRouter();
     const { state } = router.query;

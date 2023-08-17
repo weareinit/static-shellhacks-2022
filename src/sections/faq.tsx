@@ -36,7 +36,9 @@ const SingleFAQ = (props: {
         >
             <p
                 ref={question}
-                className={styles.question}
+                className={`${styles.question} ${
+                    opened ? styles.flatBorder : ""
+                }`}
                 onClick={() => setOpened((q) => !q)}
             >
                 <span className={styles.questionStatus}>

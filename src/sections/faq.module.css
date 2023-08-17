@@ -46,10 +46,8 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: calc(100% - 50px);
-    margin-block: 25px;
-    margin-inline: 25px;
-    padding-block: 50px;
+    width: 100%;
+    padding: 10%;
 }
 
 .faqlink {
@@ -83,30 +81,36 @@
     overflow: hidden;
     transition: 0.25s max-height;
     height: 100%;
-    border-radius: 30px;
+    border-radius: 20px;
 }
 
 .questionBlock:after {
     content: "";
     z-index: -1;
-    border-radius: 30px;
+    border-radius: 20px;
     background: white;
     top: 0;
     bottom: 0;
-    left: 15px;
-    right: 15px;
+    left: 0;
+    right: 0;
     position: absolute;
 }
 
 .question {
     position: relative;
     background: var(--pink-tan-gradient);
-    border-radius: 30px;
+    border-radius: 20px;
     padding: 16px 32px;
     padding-left: 52px;
     font-size: var(--font-size-medium);
     color: var(--shell-purple);
     cursor: pointer;
+    transition: border-radius 0.1s ease-in-out;
+}
+
+.flatBorder {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 .questionStatus {
@@ -117,7 +121,7 @@
 
 .answer {
     color: black;
-    padding: 16px 32px;
+    padding: 16px 0;
     margin-inline: 20px;
     font-size: var(--font-size-small);
 }
@@ -153,6 +157,7 @@
         margin: 0;
         margin-left: 5%;
         width: 90%;
+        padding: 0%;
     }
 
     .mainContent > div {

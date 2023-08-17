@@ -61,28 +61,25 @@
     border-radius: 12px;
     color: white;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     padding: 4% 2%;
-}
-
-.detailsDiv ul {
-    align-items: flex-start;
-    width: 100%;
-    padding: 0;
+    font-size: var(--font-size-small);
 }
 
 .detailsDiv li {
-    list-style: "";
-    font-size: var(--font-size-small);
-    padding: 1% 0 1% 2%;
+    list-style: none;
     position: relative;
+    padding: 2% 0;
 }
 
-.detailsMarker {
-    display: inline;
-    margin-right: 2%;
-    width: var(--font-size-small);
+.detailsDiv li::before {
+    content: url("../../../public/static/rocket_color.svg");
+    position: absolute;
+    top: 0.5em;
+    left: -1.5em;
+    height: 1.1em;
+    width: 1.1em;
 }
 
 .buttonsDiv {
