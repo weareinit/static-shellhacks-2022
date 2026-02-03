@@ -10,7 +10,7 @@ type ButtonProps = {
 
 const LinkButton: React.FC<ButtonProps> = (props: ButtonProps) => {
     return (
-        <Link href={props.url}>
+        <Link href={props.url} style={{ textDecoration: 'none' }}>
             <div className={styles.linkButton}>
                 <div
                     className={

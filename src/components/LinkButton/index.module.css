@@ -21,6 +21,7 @@
     transition: transform 1s ease;
     user-select: none;
     text-align: center;
+    white-space: nowrap;
 }
 
 .buttonOutlinedBackground {

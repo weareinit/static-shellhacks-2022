@@ -1,7 +1,4 @@
-import { useAuthUser, withAuthUser } from "next-firebase-auth";
 import React, { CSSProperties, useRef, useState } from "react";
-import NavBar, { AccountActionState } from "../components/NavBar";
-import SEO from "../components/SEO";
 import styles from "./schedule.module.css";
 import Stars from "../../public/static/Stars.svg";
 import FAQShell from "../../public/static/FAQ-Shell.png";
@@ -171,10 +168,6 @@ const ScheduleBody: React.FC = () => {
                     <div className={styles.scheduleBox}>
                         <div className={styles.schedule}>
                             {Schedules[selected]}
-                            <p className={styles.moreInfo}>
-                                For more information, please check your hacker
-                                guide on the <a href="/dashboard">Dashboard</a>!
-                            </p>
                         </div>
                     </div>
                 </div>

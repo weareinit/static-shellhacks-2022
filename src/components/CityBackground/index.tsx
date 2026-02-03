@@ -8,9 +8,10 @@ const CityBackground: React.FC = () => {
             <div className={styles.cityDiv}>
                 <Image
                     src={CityPNGA}
+                    alt="Miami City Skyline"
                     loading="eager"
-                    layout="responsive"
                     className={styles.city}
+                    style={{ width: '100%', height: 'auto' }}
                 />
             </div>
         </div>

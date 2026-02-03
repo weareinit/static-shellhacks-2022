@@ -85,6 +85,9 @@
 .buttonsDiv {
     width: 75%;
     margin-top: 6%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .buttonsRow {
@@ -205,6 +208,13 @@
     .buttonsDiv {
         width: 40%;
         margin-top: 0;
+        flex-direction: row;
+        gap: 16px;
+        align-items: stretch;
+    }
+    
+    .buttonsDiv > * {
+        flex: 1;
     }
 
     .buttonsRow {

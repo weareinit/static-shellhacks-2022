@@ -41,17 +41,14 @@ const PageHero: React.FC = () => {
                     </ul>
                 </div>
                 <div className={styles.buttonsDiv}>
-                    <LinkButton text="Sign Up!" url="/entry" filled={true} />
-                    <div className={styles.buttonsRow}>
-                        <LinkButton
-                            text="Discord"
-                            url="https://discord.gg/upefiu"
-                        />
-                        <LinkButton
-                            text="Sponsor Us"
-                            url="mailto:Upe@fiu.edu?subject=We want to sponsor"
-                        />
-                    </div>
+                    <LinkButton
+                        text="Discord"
+                        url="https://discord.gg/upefiu"
+                    />
+                    <LinkButton
+                        text="Sponsor Us"
+                        url="mailto:Upe@fiu.edu?subject=We want to sponsor"
+                    />
                 </div>
             </div>
             <Footer />
@@ -61,14 +58,12 @@ const PageHero: React.FC = () => {
             <Sponsors />
             <Partners />
             <div className={styles.pageHeroCity}>
-                {/* <Image alt="Plane" className="pageHeroPlane" src={Plane} />
-                <div id="spotlight1" className="pageHeroSpotlight" />
-                <div id="spotlight2" className="pageHeroSpotlight" /> */}
                 <Image
                     src={CityPNGA}
+                    alt="Miami City Skyline"
                     loading="eager"
-                    layout="responsive"
                     priority
+                    style={{ width: '100%', height: 'auto' }}
                 />
             </div>
         </section>
