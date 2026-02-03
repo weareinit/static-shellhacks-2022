@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     output: 'export',
-    basePath: '/static-shellhacks-2022',
     images: {
         unoptimized: true,
     },
